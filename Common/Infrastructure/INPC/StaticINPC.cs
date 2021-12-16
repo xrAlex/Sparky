@@ -41,7 +41,7 @@ namespace Common.Infrastructure.INPC
         /// После присвоения создаётся событие <see cref="PropertyChanged"/> вызовом
         /// метода <see cref="RaiseStaticPropertyChanged(string)"/>
         /// с передачей ему параметра <paramref name="propertyName"/>.</remarks>
-        protected static bool StaticSet<T>(ref T propertyField, T newValue, Equality<T>? equality = null, [CallerMemberName] string propertyName = null)
+        protected static bool StaticSet<T>(ref T propertyField, T newValue, Equality<T>? equality = null, [CallerMemberName] string? propertyName = null)
         {
             var isFieldNull = propertyField == null;
             var isValueNull = newValue == null;

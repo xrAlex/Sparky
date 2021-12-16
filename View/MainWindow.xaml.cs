@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Screen;
 
 namespace View
 {
@@ -23,6 +24,11 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
+
+            // TODO: Test, remove later
+            var modelTest = new ScreenModel();
+            var asd = modelTest.GetAllScreens();
+            // TODO: Test, remove later
         }
     }
 }
