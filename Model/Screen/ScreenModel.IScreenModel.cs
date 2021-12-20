@@ -14,18 +14,23 @@ namespace Model.Screen
         private void CollectionChanged(object? sender, ScreensCollectionChangedArgs e)
             => ScreensCollectionChanged?.Invoke(this, e);
 
+        /// <inheritdoc cref="IScreenModel.DeleteScreen"/>
         public bool DeleteScreen(int key)
             => _screenCollection.Remove(key);
 
+        /// <inheritdoc cref="IScreenModel.AddScreen"/>
         public bool AddScreen(ScreenContextDTO screenDTO)
             => _screenCollection.Add(screenDTO);
 
+        /// <inheritdoc cref="IScreenModel.GetScreen"/>
         public IScreenContext? GetScreen(int key)
             => _screenCollection.TryGetValue(key, out var value) ? value : null;
 
+        /// <inheritdoc cref="IScreenModel.GetAllScreens"/>
         public IEnumerable<IScreenContext> GetAllScreens()
             => _screenCollection.Values;
 
+        /// <inheritdoc cref="IScreenModel.SaveSettings"/>
         public void SaveSettings()
         {
             //foreach (var screen in _screenCollection.Values)
@@ -43,6 +48,7 @@ namespace Model.Screen
             //}
         }
 
+        /// <inheritdoc cref="IScreenModel.LoadSettings"/>
         public void LoadSettings()
         {
             //foreach (var screenCode in _settings.Screens.Keys)

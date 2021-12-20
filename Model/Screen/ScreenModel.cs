@@ -13,7 +13,7 @@ using Model.Settings;
 
 namespace Model.Screen
 {
-    public sealed partial class ScreenModel
+    public sealed partial class ScreenModel : IScreenModel
     {
         private readonly ScreenCollection.ScreenCollection _screenCollection = new();
 
