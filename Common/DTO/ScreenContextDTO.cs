@@ -40,5 +40,18 @@ namespace Common.DTO
             SystemName = systemName;
             FriendlyName = friendlyName;
         }
+
+        public ScreenContextDTO(int displayCode, string systemName, string friendlyName, ScreenBounds bounds) : this()
+        {
+            if (string.IsNullOrWhiteSpace(systemName))
+            {
+                throw new ArgumentNullException(nameof(systemName));
+            }
+
+            DisplayCode = displayCode;
+            SystemName = systemName;
+            FriendlyName = friendlyName;
+            Bounds = bounds;
+        }
     }
 }

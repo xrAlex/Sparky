@@ -37,7 +37,7 @@ namespace Model.Settings
 
                 serializer.Serialize(writer, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // ошибка сохранения настроек
             }
@@ -56,7 +56,7 @@ namespace Model.Settings
 
                 serializer.Populate(reader, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // ошибка загрузки настроек
             }
