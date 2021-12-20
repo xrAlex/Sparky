@@ -38,11 +38,6 @@ namespace Common.Interfaces
         IScreenContext? GetScreen(int key);
 
         /// <summary>
-        /// Загружает данные моделей из класса пользовательских настроек.
-        /// </summary>
-        void LoadSettings();
-
-        /// <summary>
         /// Сохраняет данные моделей в класс пользовательских настроек.
         /// </summary>
         void SaveSettings();

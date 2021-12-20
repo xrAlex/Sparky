@@ -7,18 +7,22 @@ using Newtonsoft.Json;
 
 namespace Model.Settings
 {
-    public sealed class AppSettingsModel
+    public sealed class AppSettingsModel : IAppSettingsModel
     {
         [JsonProperty]
         internal Dictionary<int, ScreenSettings> Screens = new();
 
-        private readonly string _filePath = ".\\config.json";
+        private readonly string _filePath;
 
-        public Task SaveAsync() 
+        /// <inheritdoc cref="IAppSettingsModel.SaveAsync"/>
+        public Task SaveAsync()
             => Task.Run(Save);
-        public Task LoadAsync() 
+
+        /// <inheritdoc cref="IAppSettingsModel.LoadAsync"/>
+        public Task LoadAsync()
             => Task.Run(Load);
 
+        /// <inheritdoc cref="IAppSettingsModel.Save"/>
         public void Save()
         {
             try
@@ -39,6 +43,7 @@ namespace Model.Settings
             }
         }
 
+        /// <inheritdoc cref="IAppSettingsModel.Load"/>
         public void Load()
         {
             if (!File.Exists(_filePath)) return;
@@ -57,7 +62,9 @@ namespace Model.Settings
             }
         }
 
-        public AppSettingsModel(string? settingsFilePath = null) 
-            => _filePath = settingsFilePath ?? _filePath;
+        public AppSettingsModel(string configurationFilePath)
+        {
+            _filePath = configurationFilePath;
+        }
     }
 }

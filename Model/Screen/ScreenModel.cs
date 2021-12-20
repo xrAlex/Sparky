@@ -2,7 +2,9 @@
 using Common.DTO;
 using Common.Entities;
 using Common.Extensions.CollectionChanged;
+using Common.Infrastructure;
 using Common.Interfaces;
+using Model.Settings;
 
 namespace Model.Screen
 {
@@ -12,10 +14,31 @@ namespace Model.Screen
 
         public event EventHandler<ScreensCollectionChangedArgs>? ScreensCollectionChanged;
 
-        public ScreenModel()
+        private readonly AppSettingsModel _appSettings;
+
+        public ScreenModel(AppSettingsModel appSettings)
         {
-            ModelTest();
+            _appSettings = appSettings;
             _screenCollection.CollectionChanged += CollectionChanged;
+            LoadSettings();
+        }
+
+        /// <summary>
+        /// Загружает настройки устройств отображения
+        /// </summary>
+        private void LoadSettings()
+        {
+            foreach (var screenCode in _appSettings.Screens.Keys)
+            {
+                if (_screenCollection.TryGetValue(screenCode, out var screen))
+                {
+                    _screenCollection[screenCode].NightColorConfiguration = screen.NightColorConfiguration;
+                    _screenCollection[screenCode].DayColorConfiguration = screen.DayColorConfiguration;
+                    _screenCollection[screenCode].DayStartTime = screen.DayStartTime;
+                    _screenCollection[screenCode].NightStartTime = screen.NightStartTime;
+                    _screenCollection[screenCode].IsActive = screen.IsActive;
+                }
+            }
         }
 
         // TODO: Test, remove later
