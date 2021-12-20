@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Entities;
 using Common.Interfaces;
 
 namespace Common.DTO
 {
     /// <summary>
-    /// Screen Data Transfer Object
+    /// Data Transfer Object устройства отображения
     /// </summary>
     public struct ScreenContextDTO : IScreenContext
     {

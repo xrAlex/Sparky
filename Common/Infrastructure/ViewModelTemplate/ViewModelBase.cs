@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Common.Infrastructure.INPC;
@@ -45,7 +41,7 @@ namespace Common.Infrastructure.ViewModelTemplate
         /// и <see cref="IsInDesignMode"/> заданными при инициализации.</summary>
         protected ViewModelBase() {}
 
-        /// <summary>Конструктор со значением свойства
+        /// <summary>Конструктор со значением свойства.
         /// <see cref="IsInDesignMode"/> заданным при инициализации.</summary>
         /// <param name="dispatcher">Значение для свойства <see cref="Dispatcher"/>.</param>
         protected ViewModelBase(Dispatcher dispatcher)
@@ -53,7 +49,7 @@ namespace Common.Infrastructure.ViewModelTemplate
             Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
         }
 
-        /// <summary>Конструктор со значением свойства
+        /// <summary>Конструктор со значением свойства.
         /// <see cref="Dispatcher"/> заданным при инициализации.</summary>
         /// <param name="isInDesignMode">Значение для свойства <see cref="IsInDesignMode"/>.</param>
         protected ViewModelBase(bool isInDesignMode)

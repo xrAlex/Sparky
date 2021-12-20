@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.DTO;
 using Common.Entities;
 using Common.Extensions.CollectionChanged;
 using Common.Interfaces;
-using Model.Entities;
-using Model.Screen.ScreenCollection;
-using Model.Settings;
 
 namespace Model.Screen
 {

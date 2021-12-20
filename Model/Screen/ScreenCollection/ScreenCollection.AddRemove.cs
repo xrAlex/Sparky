@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.DTO;
+﻿using Common.DTO;
 using Common.Extensions.CollectionChanged;
 using Model.Entities;
 
@@ -12,10 +7,10 @@ namespace Model.Screen.ScreenCollection
     internal sealed partial class ScreenCollection
     {
         /// <summary>
-        /// Создание источника отображения на основе DTO и добавление его в коллекцию
+        /// Создание источника отображения на основе DTO и добавление его в коллекцию.
         /// </summary>
-        /// <param name="screenDTO">Источник данных</param>
-        /// <returns><see langword="true"/>, если добавление произошло успешно</returns>
+        /// <param name="screenDTO">Объект передачи данных устройства отображения.</param>
+        /// <returns><see langword="true"/>, если добавление произошло успешно.</returns>
         public bool Add(ScreenContextDTO screenDTO)
         {
             if (ContainsKey(screenDTO.DisplayCode))
@@ -41,10 +36,10 @@ namespace Model.Screen.ScreenCollection
         }
 
         /// <summary>
-        /// Удаление источника отображения из коллекции
+        /// Удаление источника отображения из коллекции.
         /// </summary>
-        /// <param name="key"> DisplayCode источника отображения</param>
-        /// <returns><see langword="true"/>, если удаление произошло успешно</returns>
+        /// <param name="key">DisplayCode источника отображения.</param>
+        /// <returns><see langword="true"/>, если удаление произошло успешно.</returns>
         public bool Remove(int key)
         {
             if (!TryGetValue(key, out var screen))
