@@ -7,32 +7,61 @@ using System.Threading.Tasks;
 using Common.Entities;
 using Model.Entities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Model.Settings
 {
     public sealed class AppSettingsModel
     {
+        [JsonProperty]
         internal Dictionary<int, ScreenSettings> Screens = new();
 
-        private const string FilePath = ".\\config.json";
+        private readonly string _filePath = ".\\config.json";
+
+        public Task SaveAsync() 
+            => Task.Run(Save);
+        public Task LoadAsync() 
+            => Task.Run(Load);
 
         public void Save()
         {
-            var serializer = new JsonSerializer();
-            using var file = File.CreateText(FilePath);
-            serializer.Formatting = Formatting.Indented;
+            try
+            {
+                var serializer = new JsonSerializer()
+                {
+                    Formatting = Formatting.Indented,
+                };
 
-            serializer.Serialize(file, Screens);
+                using var fs = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+                using var writer = new StreamWriter(fs);
+
+                serializer.Serialize(writer, this);
+            }
+            catch (Exception ex)
+            {
+                // ошибка сохранения настроек
+            }
         }
 
         public void Load()
         {
-            var serializer = new JsonSerializer();
-            using var file = File.OpenText(FilePath);
+            if (!File.Exists(_filePath)) return;
 
-            Screens = serializer
-                          .Deserialize(file, typeof(Dictionary<int, ScreenSettings>)) as Dictionary<int, ScreenSettings> 
-                      ?? throw new InvalidOperationException();
+            try
+            {
+                var serializer = new JsonSerializer();
+                using var fs = File.Open(_filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var reader = new StreamReader(fs);
+
+                serializer.Populate(reader, this);
+            }
+            catch (Exception ex)
+            {
+                // ошибка загрузки настроек
+            }
         }
+
+        public AppSettingsModel(string? settingsFilePath = null) 
+            => _filePath = settingsFilePath ?? _filePath;
     }
 }

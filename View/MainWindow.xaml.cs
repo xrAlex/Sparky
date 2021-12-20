@@ -24,11 +24,6 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-
-            // TODO: Test, remove later
-            var modelTest = new ScreenModel();
-            var asd = modelTest.GetAllScreens();
-            // TODO: Test, remove later
         }
     }
 }
