@@ -12,7 +12,7 @@ using WindowsDisplayAPI.DisplayConfig;
 
 namespace Model.Screen
 {
-    public sealed partial class ScreenModel : IScreenModel
+    internal sealed partial class ScreenModel : IScreenModel
     {
         private readonly ScreenCollection.ScreenCollection _screenCollection = new();
 
@@ -20,9 +20,9 @@ namespace Model.Screen
 
         private readonly AppSettingsModel _appSettings;
 
-        public ScreenModel(AppSettingsModel appSettings)
+        public ScreenModel(IAppSettingsModel appSettings)
         {
-            _appSettings = appSettings;
+            _appSettings = (AppSettingsModel)appSettings;
             _screenCollection.CollectionChanged += CollectionChanged;
 
             Task.Run(LoadScreens).ConfigureAwait(false);

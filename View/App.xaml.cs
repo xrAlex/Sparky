@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows;
 using Common.Infrastructure;
 using Common.Interfaces;
+using Model;
 using Model.Screen;
 using Model.Settings;
 using SimpleInjector;
@@ -36,11 +37,7 @@ namespace View
         private void ConfigureIoC()
         {
             var container = new Container();
-
-            container.Register<IAppSettingsModel> (() => new AppSettingsModel(ConfigurationFilepath), Lifestyle.Singleton);
-            container.RegisterInstance(new AppSettingsModel(ConfigurationFilepath));
-
-            container.Register<IScreenModel, ScreenModel>(Lifestyle.Singleton);
+            ModelRegistrator.Register(container, ConfigurationFilepath);
 
             container.Verify();
             _ = new IoCKernel(container);

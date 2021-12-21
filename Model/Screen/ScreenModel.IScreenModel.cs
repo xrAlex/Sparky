@@ -6,7 +6,7 @@ using Model.Entities;
 
 namespace Model.Screen
 {
-    public sealed partial class ScreenModel
+    internal sealed partial class ScreenModel
     {
         private void CollectionChanged(object? sender, ScreensCollectionChangedArgs e)
             => ScreensCollectionChanged?.Invoke(this, e);

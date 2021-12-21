@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Model.Settings
 {
-    public sealed class AppSettingsModel : IAppSettingsModel
+    internal sealed class AppSettingsModel : IAppSettingsModel
     {
         [JsonProperty]
         internal Dictionary<int, ScreenSettings> Screens = new();
