@@ -8,9 +8,6 @@ namespace Model.Screen
 {
     internal sealed partial class ScreenModel
     {
-        private void CollectionChanged(object? sender, ScreensCollectionChangedArgs e)
-            => ScreensCollectionChanged?.Invoke(this, e);
-
         /// <inheritdoc cref="IScreenModel.DeleteScreen"/>
         public bool DeleteScreen(int key)
             => _screenCollection.Remove(key);

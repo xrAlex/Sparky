@@ -8,8 +8,9 @@ namespace Common.Interfaces
     public interface IScreenModel
     {
         /// <summary>
-        /// Событие оповещения о изменении коллекции.
+        /// Событие оповещающее об изменении внутренней коллекции мониторов.
         /// </summary>
+        /// <remarks>При подписке на событие возвращает все элементы коллекции.</remarks>
         event EventHandler<ScreensCollectionChangedArgs>? ScreensCollectionChanged;
 
         /// <summary>
