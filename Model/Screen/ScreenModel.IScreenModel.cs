@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Common.DTO;
-using Common.Extensions.CollectionChanged;
 using Common.Interfaces;
 using Model.Entities;
 

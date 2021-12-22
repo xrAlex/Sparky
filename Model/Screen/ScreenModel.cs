@@ -1,15 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using Common.DTO;
-using Common.Entities;
-using Common.Extensions.CollectionChanged;
-using Common.Infrastructure;
+﻿using System.Threading.Tasks;
 using Common.Interfaces;
-using Model.Entities;
 using Model.Settings;
-using WindowsDisplayAPI.DisplayConfig;
 
 namespace Model.Screen
 {

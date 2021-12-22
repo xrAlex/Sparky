@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
 using Common.Infrastructure;
-using Common.Interfaces;
 using Model;
-using Model.Screen;
 using Model.Settings;
 using SimpleInjector;
 using ViewModel;
 
 namespace View
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private static readonly string ConfigurationFilepath 

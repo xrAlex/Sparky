@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Infrastructure.INPC;
+﻿using Common.Infrastructure.INPC;
 using Common.Interfaces;
 
 namespace ViewModel.Reflection
