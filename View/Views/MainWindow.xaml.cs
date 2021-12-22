@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace View
+namespace View.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

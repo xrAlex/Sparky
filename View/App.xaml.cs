@@ -7,6 +7,7 @@ using Model;
 using Model.Screen;
 using Model.Settings;
 using SimpleInjector;
+using ViewModel;
 
 namespace View
 {
@@ -38,6 +39,7 @@ namespace View
         {
             var container = new Container();
             ModelRegistrator.Register(container, ConfigurationFilepath);
+            ViewModelRegistrator.Register(container);
 
             container.Verify();
             _ = new IoCKernel(container);
