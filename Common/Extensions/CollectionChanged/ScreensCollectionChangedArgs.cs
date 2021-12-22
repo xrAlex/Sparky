@@ -8,6 +8,9 @@ namespace Common.Extensions.CollectionChanged
         public IScreenContext Screen { get; }
         public CollectionChangedAction Action { get; }
 
+        public override string ToString()
+            => $"Screen: {Screen}, Action: {Action}";
+
         public ScreensCollectionChangedArgs(IScreenContext screen, CollectionChangedAction action)
         {
             Action = action;
