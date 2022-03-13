@@ -6,6 +6,6 @@ namespace ViewModel
     public sealed class ViewModelLocator
     {
         public static MainWindowViewModel MainWindowViewModel
-            => IoCKernel.IoC.GetInstance<MainWindowViewModel>();
+            => IoC.GetInstance<MainWindowViewModel>();
     }
 }
