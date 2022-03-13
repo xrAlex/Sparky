@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="MonitorBlack" UriSource="/View;component/Resources/Images/MonitorBlack.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Process" UriSource="/View;component/Resources/Images/Processes.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Main" UriSource="/View;component/Resources/Images/Main.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Other" UriSource="/View;component/Resources/Images/Other.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="TurnOff" UriSource="/View;component/Resources/Images/turnoff.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Settings" UriSource="/View;component/Resources/Images/Settings.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Day" UriSource="/View;component/Resources/Images/Gamma.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Night" UriSource="/View;component/Resources/Images/BlueReduce.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Refresh" UriSource="/View;component/Resources/Images/refresh-option.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Logo" UriSource="/View;component/Resources/Images/Logo.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="ToTray" UriSource="/View;component/Resources/Images/totray.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Info" UriSource="/View;component/Resources/Images/info.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="BlackLogo" UriSource="/View;component/Resources/Images/SparkyBlack.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Coffe" UriSource="/View;component/Resources/Images/buyacoffe.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Git" UriSource="/View;component/Resources/Images/projgit.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="HowTo" UriSource="/View;component/Resources/Images/howto.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+
+    <BitmapImage x:Key="HowTos" UriSource="/View;component/Resources/Images/howto.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+
+    <!--<BitmapImage x:Key="TrayLogo" UriSource="/View;component/Resources/Images/TrayIcon.ico" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>-->
+
+    <BitmapImage x:Key="Lang" UriSource="/View;component/Resources/Images/Lang.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagRus" UriSource="/View;component/Resources/Images/Flags/russia.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagEng" UriSource="/View;component/Resources/Images/Flags/united-states.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagChn" UriSource="/View;component/Resources/Images/Flags/china.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagFra" UriSource="/View;component/Resources/Images/Flags/france.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagGer" UriSource="/View;component/Resources/Images/Flags/germany.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagSpa" UriSource="/View;component/Resources/Images/Flags/spain.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="FlagUae" UriSource="/View;component/Resources/Images/Flags/united-arab-emirates.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+
+</ResourceDictionary>
