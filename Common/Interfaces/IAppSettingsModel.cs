@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Model.Settings
+namespace Common.Interfaces
 {
     public interface IAppSettingsModel
     {

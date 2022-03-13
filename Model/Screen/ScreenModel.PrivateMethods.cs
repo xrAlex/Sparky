@@ -51,11 +51,11 @@ namespace Model.Screen
         }
 
         /// <summary>
-        /// Проверяет наличие пользовательских настроек для утройства отображения.
+        /// Проверяет наличие пользовательских настроек для уcтройства отображения.
         /// </summary>
         /// <param name="screen"> сформированный DTO контекста монитора.</param>
         /// <returns>В случае обнаружения настроек устройства отображения возвращает <see cref="ScreenContextDTO"/>
-        /// с этими настройками или возвращает неизменней экземпляр.</returns>
+        /// с этими настройками или возвращает неизменный экземпляр.</returns>
         private ScreenContextDTO TryGetUserSettings(ScreenContextDTO screen)
         {
             if (!_appSettings.Screens.TryGetValue(screen.DisplayCode, out var screenSettings))

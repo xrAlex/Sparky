@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Common.Interfaces;
 using Model.Entities;
 using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@ namespace Model.Settings
 {
     internal sealed class AppSettingsModel : IAppSettingsModel
     {
+        // ТАК КАК ЭТО ДРУЖЕСТВЕННАЯ МОДЕЛЬ НАДО БРАТЬ ДАННЫЕ НАПРЯМУЮ ИЗ ДРУГИЪ МОДЕЛЕЙ БЕЗ ПЕРЕКИДЫВАНИЯ СЮДА
         [JsonProperty]
         internal Dictionary<int, ScreenSettings> Screens = new();
 
