@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows;
 using Common.Infrastructure;
+using Common.Interfaces;
 using Model;
 using Model.Settings;
 using SimpleInjector;
+using View.Views;
 using ViewModel;
+using ViewModel.ViewModels;
 
 namespace View
 {
@@ -18,9 +21,9 @@ namespace View
             ConfigureIoC();
             InitializeComponent();
 
-            //Загрузка настроек из файла
-            var settings = IoCKernel.IoC.GetInstance<IAppSettingsModel>();
-            settings.Load();
+            IoC.GetInstance<IAppSettingsModel>().Load();
+            var asd = new MainWindow();
+            asd.Show();
         }
     }
 
@@ -29,14 +32,13 @@ namespace View
         /// <summary>
         /// Конфигурация контейнера инверсии управления
         /// </summary>
-        private void ConfigureIoC()
+        private static void ConfigureIoC()
         {
-            var container = new Container();
+            var container = IoC.Instance;
             ModelRegistrator.Register(container, ConfigurationFilepath);
             ViewModelRegistrator.Register(container);
 
             container.Verify();
-            _ = new IoCKernel(container);
         }
     }
 }

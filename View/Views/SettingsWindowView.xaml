@@ -1,0 +1,143 @@
+﻿<Window x:Class="View.Views.SettingsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="clr-namespace:View.Extension"
+        xmlns:views="clr-namespace:View.Views"
+        xmlns:enm="clr-namespace:Common.Enums;assembly=Common"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="500" Width="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Topmost="True"
+        DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <ext:TemplateSelector x:Key="Selector">
+            <DataTemplate x:Key="{x:Static enm:Pages.MainPage}">
+                <views:SettingsMainPageUserControl />
+            </DataTemplate>
+            <DataTemplate x:Key="{x:Static enm:Pages.ProcessesPage}">
+                <views:ProcessesPageUserControl/>
+            </DataTemplate>
+            <DataTemplate x:Key="{x:Static enm:Pages.OtherSettingsPage}">
+                <views:OtherSettingsPageUserControl />
+            </DataTemplate>
+        </ext:TemplateSelector>
+    </Window.Resources>
+    <Border CornerRadius="10" Background="#FF292929">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*" />
+                <ColumnDefinition Width="77*" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border 
+                Background="White" 
+                CornerRadius="5" 
+                Grid.Column="1" Margin="0,5,0,5">
+                <Grid>
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height="55" Width="355" Margin="0,435,0,0">
+                        <Button
+                            Width="80"
+                            Height="40"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource LightGrayButton}"
+                            Content="{DynamicResource Loc_Reset}" Cursor="Hand">
+                        </Button>
+                        <Button
+                            Width="80"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource LightGrayButton}"
+                            Content="{DynamicResource Loc_Cancel}">
+                        </Button>
+                        <Button
+                            HorizontalAlignment="Right"
+                            Width="80"
+                            Height="40"
+                            Style="{StaticResource LightGrayButton}"
+                            Content="{DynamicResource Loc_Apply}">
+                        </Button>
+                    </Grid>
+                    <ContentControl 
+                        Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" 
+                        ContentTemplateSelector="{DynamicResource Selector}"
+                        Margin="15,15,15,55"/>
+                </Grid>
+            </Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="228*"/>
+                    <RowDefinition Height="45*"/>
+                    <RowDefinition Height="227*"/>
+                </Grid.RowDefinitions>
+                <ComboBox
+                    VerticalAlignment="Top"
+                    Width="45" Height="45"
+                    SelectedIndex="{Binding SelectedLangIndex}"
+                    ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
+                    Style="{StaticResource PictureComboBoxStyle}" Margin="0,7,0,0">
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagEng}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagRus}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagChn}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagSpa}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagUae}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Image Width="41" Height="26" Source="{StaticResource FlagFra}"/>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Button
+                    Width="45" Height="45"
+                    VerticalAlignment="Bottom"
+                    Style="{StaticResource BlackButton}"
+                    Command="{Binding SetPage, Mode=OneWay}" Margin="0,0,0,5"
+                    CommandParameter="{x:Static enm:Pages.MainPage}">
+                    <Image Width="35" Height="35" Source="{StaticResource Main}"/>
+                </Button>
+                <Button
+                    Style="{StaticResource BlackButton}"
+                    Width="45" Height="45"
+                    VerticalAlignment="Center" 
+                    Margin="8,0,7,0" Grid.Row="1"
+                    Command="{Binding SetPage, Mode=OneWay}" 
+                    CommandParameter="{x:Static enm:Pages.ProcessesPage}">
+                    <Image Width="35" Height="35" Source="{StaticResource Process}"/>
+                </Button>
+                <Button
+                    Style="{StaticResource BlackButton}"
+                    Width="45" Height="45"
+                    VerticalAlignment="Top"
+                    Grid.Row="2" 
+                    Margin="0,5,0,0" 
+                    Command="{Binding SetPage, Mode=OneWay}" 
+                    CommandParameter="{x:Static enm:Pages.OtherSettingsPage}">
+                    <Image Width="35" Height="35" Source="{StaticResource Other}"/>
+                </Button>
+                <Button
+                    Style="{StaticResource BlackButton}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Width="45" Height="45"
+                    Command="{Binding OpenInformationWindowCommand, Mode=OneWay}" Grid.Row="2" Margin="0,0,0,7">
+                    <Image Width="35" Height="35" Source="{StaticResource Info}"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
