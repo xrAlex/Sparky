@@ -7,5 +7,8 @@ namespace ViewModel
     {
         public static MainWindowViewModel MainWindowViewModel
             => IoC.GetInstance<MainWindowViewModel>();
+
+        public static SettingsViewModel SettingsViewModel
+            => IoC.GetInstance<SettingsViewModel>();
     }
 }

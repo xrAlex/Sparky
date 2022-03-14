@@ -8,6 +8,7 @@ namespace ViewModel
         public static void Register(Container container)
         {
             container.Register<MainWindowViewModel>(Lifestyle.Transient);
+            container.Register<SettingsViewModel>(Lifestyle.Transient);
         }
     }
 }

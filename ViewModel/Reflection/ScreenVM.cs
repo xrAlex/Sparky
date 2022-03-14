@@ -7,6 +7,7 @@ namespace ViewModel.Reflection
     {
         private IScreenContext _screen = null!;
         private bool _isSelected;
+        private float _imageOpacity = 1.0f;
 
         public IScreenContext Screen
         {
@@ -18,6 +19,12 @@ namespace ViewModel.Reflection
         {
             get => _isSelected;
             set => Set(ref _isSelected, value);
+        }
+
+        public float ImageOpacity
+        {
+            get => _imageOpacity;
+            set => Set(ref _imageOpacity, value);
         }
 
         public override string ToString()
