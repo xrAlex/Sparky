@@ -5,17 +5,10 @@
              xmlns:views="clr-namespace:View.Views"
              xmlns:vmroot="clr-namespace:ViewModel;assembly=ViewModel"
              xmlns:converters="clr-namespace:View.Converters"
-             xmlns:language="clr-namespace:View.Localization">
+             xmlns:language="clr-namespace:View.Localization"
+             Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
-
-            <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
-                <views:MainWindow/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-                <views:SettingsWindowView/>
-            </DataTemplate>
 
             <vmroot:ViewModelLocator x:Key="Locator"/>
 

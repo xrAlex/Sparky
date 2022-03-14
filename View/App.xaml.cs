@@ -1,13 +1,10 @@
-﻿using System;
-using System.Windows;
-using Common.Infrastructure;
+﻿using Common.Infrastructure;
 using Common.Interfaces;
 using Model;
-using Model.Settings;
-using SimpleInjector;
+using System;
+using System.Windows;
 using View.Views;
 using ViewModel;
-using ViewModel.ViewModels;
 
 namespace View
 {
@@ -16,7 +13,7 @@ namespace View
         private static readonly string ConfigurationFilepath 
             = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
-        public App()
+        private void OnStartup(object sender, StartupEventArgs e)
         {
             ConfigureIoC();
             InitializeComponent();
