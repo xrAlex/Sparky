@@ -19,7 +19,6 @@ namespace ViewModel.ViewModels
             _screenModel = screenModel;
 
             screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
-            var asd = Screens;
         }
 
         private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)

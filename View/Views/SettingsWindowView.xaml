@@ -18,11 +18,12 @@
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
-        <views:SettingsMainPageUserControl x:Key="settingsUC"/>
-        <views:ProcessesPageUserControl x:Key="processesUC"/>
-        <views:OtherSettingsPageUserControl x:Key="otherUC"/>
-        <views:SettingsNavigator x:Key="navigator"
-                                 Current="{Binding Mode=OneWay, Source={StaticResource settingsUC}}"/>
+        <views:SettingsMainPageUserControl x:Key="SettingsUC"/>
+        <views:ProcessesPageUserControl x:Key="ProcessesUC"/>
+        <views:OtherSettingsPageUserControl x:Key="OtherUC"/>
+        <ext:PageNavigator 
+            x:Key="Navigator" 
+            Current="{Binding Mode=OneWay, Source={StaticResource SettingsUC}}"/>
     </Window.Resources>
     <Border CornerRadius="10" Background="#FF292929">
         <Grid>
@@ -60,7 +61,7 @@
                         </Button>
                     </Grid>
                     <ContentControl 
-                        Content="{Binding Current, Source={StaticResource navigator}}" 
+                        Content="{Binding Current, Source={StaticResource Navigator}}" 
                         Margin="15,15,15,55"/>
                 </Grid>
             </Border>
@@ -99,8 +100,8 @@
                     Width="45" Height="45"
                     VerticalAlignment="Bottom"
                     Style="{StaticResource BlackButton}"
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource navigator}}" Margin="0,0,0,5"
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource settingsUC}}">
+                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" Margin="0,0,0,5"
+                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource SettingsUC}}">
                     <Image Width="35" Height="35" Source="{StaticResource Main}"/>
                 </Button>
                 <Button
@@ -108,8 +109,8 @@
                     Width="45" Height="45"
                     VerticalAlignment="Center" 
                     Margin="8,0,7,0" Grid.Row="1"
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource navigator}}" 
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource processesUC}}">
+                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" 
+                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource ProcessesUC}}">
                     <Image Width="35" Height="35" Source="{StaticResource Process}"/>
                 </Button>
                 <Button
@@ -118,8 +119,8 @@
                     VerticalAlignment="Top"
                     Grid.Row="2" 
                     Margin="0,5,0,0" 
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource navigator}}" 
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource otherUC}}">
+                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" 
+                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource OtherUC}}">
                     <Image Width="35" Height="35" Source="{StaticResource Other}"/>
                 </Button>
                 <Button

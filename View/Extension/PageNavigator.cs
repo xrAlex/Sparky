@@ -1,18 +1,17 @@
-﻿using Common.Infrastructure.Commands;
-using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using Common.Infrastructure.Commands;
 
-namespace View.Views
+namespace View.Extension
 {
-    public partial class SettingsNavigator : Freezable
+    public partial class PageNavigator : Freezable
     {
         protected override Freezable CreateInstanceCore()
         {
             throw new System.NotImplementedException();
         }
     }
-    public partial class SettingsNavigator
+    public partial class PageNavigator
     {
 
         /// <summary>
@@ -20,17 +19,17 @@ namespace View.Views
         /// </summary>
         public UserControl Current
         {
-            get { return (UserControl)GetValue(CurrentProperty); }
-            set { SetValue(CurrentProperty, value); }
+            get => (UserControl)GetValue(CurrentProperty);
+            set => SetValue(CurrentProperty, value);
         }
 
         /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Current"/>.</summary>
         public static readonly DependencyProperty CurrentProperty =
-            DependencyProperty.Register(nameof(Current), typeof(UserControl), typeof(SettingsNavigator), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(Current), typeof(UserControl), typeof(PageNavigator), new PropertyMetadata(null));
 
         public RelayCommand SetCurrent { get; }
 
-        public SettingsNavigator()
+        public PageNavigator()
         {
             SetCurrent = new RelayCommand(SetCurrentExecute, SetCurrentCanExecute);
         }

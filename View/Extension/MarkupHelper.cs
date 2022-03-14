@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Common.Infrastructure.Commands;
 
 namespace View.Extension
 {
