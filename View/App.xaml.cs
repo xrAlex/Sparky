@@ -16,7 +16,7 @@ namespace View
         private void OnStartup(object sender, StartupEventArgs e)
         {
             ConfigureIoC();
-            InitializeComponent();
+            //InitializeComponent();
 
             IoC.GetInstance<IAppSettingsModel>().Load();
             var asd = new MainWindow();
