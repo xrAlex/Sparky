@@ -11,7 +11,7 @@ namespace View.Converters
         {
             var val = System.Convert.ToDouble(value);
             //return $"{Localization.LangDictionary.GetString("Loc_ColorTemperature")}: {Math.Round(val)} К";
-            return "";
+            return $"Цветовая температура: {Math.Round(val)} K";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -10,10 +10,15 @@ namespace ViewModel.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-
         private readonly IScreenModel _screenModel;
-
+        private ScreenVM _selectedScreen;
         public ObservableCollection<ScreenVM> Screens { get; } = new();
+
+        public ScreenVM SelectedScreen
+        {
+            get => _selectedScreen;
+            set => Set(ref _selectedScreen, value);
+        }
 
         public SettingsViewModel(IScreenModel screenModel)
         {
@@ -34,7 +39,6 @@ namespace ViewModel.ViewModels
                 default:
                     throw new ArgumentOutOfRangeException(args.ToString());
             }
-
         }
     }
 }
