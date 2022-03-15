@@ -106,7 +106,7 @@
                         Grid.RowSpan="7" Grid.ColumnSpan="4" Grid.Column="2">
                     </Image>
                     <TextBox
-                        Text="{Binding .Screen.DayStartTime.Hour, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
+                        Text="{Binding SelectedScreen.DayStartHour, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
                         MaxLength="2"
                         IsReadOnly="False"
                         Focusable="True"
@@ -119,7 +119,7 @@
                         Grid.Column="3" Grid.Row="1">
                     </TextBox>
                     <TextBox
-                        Text="{Binding .Screen.DayStartTime.Minute, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
+                        Text="{Binding SelectedScreen.DayStartMin, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
                         MaxLength="2"
                         TextWrapping="Wrap"
                         IsReadOnly="False"
@@ -158,7 +158,7 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding  SelectedScreen.DayBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding SelectedScreen.DayBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay}"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1" Cursor="Arrow">
                     </TextBox>
                     <Slider
@@ -224,7 +224,7 @@
                         Opacity="0.03" 
                         Grid.RowSpan="6" Grid.ColumnSpan="4" Grid.Column="2" Width="126"/>
                     <TextBox
-                        Text="{Binding NightStartHour, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
+                        Text="{Binding SelectedScreen.NightStartHour, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
                         MaxLength="2"
                         IsReadOnly="False"
                         Focusable="True"
@@ -237,7 +237,7 @@
                         Grid.Column="3" Grid.Row="1">
                     </TextBox>
                     <TextBox
-                        Text="{Binding NightStartMinute, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
+                        Text="{Binding SelectedScreen.NightStartMin, Converter= {StaticResource MinConverter}, Mode=TwoWay}"
                         MaxLength="2"
                         TextWrapping="Wrap"
                         IsReadOnly="False"
@@ -256,8 +256,8 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding .Screen.NightColorConfiguration.ColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay}"
-                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1">
+                        Text="{Binding SelectedScreen.NightColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay}"
+                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" Cursor="Arrow">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -275,7 +275,7 @@
                         FontSize="12"
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
-                        Text="{Binding .Screen.NightColorConfiguration.Brightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged }"
+                        Text="{Binding SelectedScreen.NightBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged }"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1">
                     </TextBox>
                     <Slider
@@ -285,7 +285,7 @@
                         IsSnapToTickEnabled="True"
                         Cursor="Hand"
                         IsDirectionReversed="True"
-                        Value="{Binding .Screen.NightColorConfiguration.ColorTemperature, Mode=TwoWay}"
+                        Value="{Binding SelectedScreen.NightColorTemperature, Mode=TwoWay}"
                         Grid.Row="3" Grid.ColumnSpan="6" Grid.Column="1">
                     </Slider>
                     <Slider
@@ -293,7 +293,7 @@
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
                         IsDirectionReversed="True"
-                        Value="{Binding .Screen.NightColorConfiguration.NightBrightness, Converter= {StaticResource BrightnessToDouble} ,Mode=TwoWay}"
+                        Value="{Binding SelectedScreen.NightBrightness, Converter= {StaticResource BrightnessToDouble}, Mode=TwoWay}"
                         Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1">
                     </Slider>
                 </Grid>

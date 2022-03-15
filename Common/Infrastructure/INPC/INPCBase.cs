@@ -93,6 +93,6 @@ namespace Common.Infrastructure.INPC
         /// реакции на изменение значения свойства.<br/>
         /// Рекомендуется в переопределённом методе первым оператором вызывать базовый метод.<br/>
         /// Если в переопределённом методе не будет вызова базового, то возможно нежелательное изменение логики базового класса.</remarks>
-        protected virtual void OnPropertyChanged(in string? propertyName, in object? oldValue, in object? newValue) { }
+        protected virtual void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue) { }
     }
 }

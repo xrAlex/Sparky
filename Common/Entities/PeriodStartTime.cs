@@ -2,10 +2,10 @@
 {
     public readonly struct PeriodStartTime
     {
-        public int Hour { get; }
-        public int Minute { get; }
+        public byte Hour { get; }
+        public byte Minute { get; }
 
-        public PeriodStartTime(int hour, int minute)
+        public PeriodStartTime(byte hour, byte minute)
         {
             Hour = hour;
             Minute = minute;

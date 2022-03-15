@@ -10,8 +10,7 @@ namespace View.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            //return $"{Localization.LangDictionary.GetString("Loc_Brightness")}: {Math.Round(val * 100)} %";
-            return "";
+            return $"{Localization.LangDictionary.GetString("Loc_Brightness")}: {Math.Round(val * 100)} %";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

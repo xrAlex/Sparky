@@ -10,7 +10,7 @@ namespace View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var min = (int)value;
+            var min = (byte)value;
             var result = System.Convert.ToString(min);
             if (result.Length < 2) result = $"0{result}";
 
@@ -19,7 +19,7 @@ namespace View.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var valid = int.TryParse((string)value, out var min);
+            var valid = byte.TryParse((string)value, out var min);
             if (!valid) return DependencyProperty.UnsetValue;
             if (min is > 60 or < 0) min = 60;
 
