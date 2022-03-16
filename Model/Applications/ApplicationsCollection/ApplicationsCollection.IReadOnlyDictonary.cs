@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Entities;
 
 namespace Model.Applications.ApplicationsCollection
@@ -19,6 +15,9 @@ namespace Model.Applications.ApplicationsCollection
         public int Count 
             => _applications.Count;
 
+        /// <summary>
+        /// Очистка коллекции с уведомлением о удалении элементов.
+        /// </summary>
         public void Clear()
         {
             foreach (var applicationName in _applications.Keys)

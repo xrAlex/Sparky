@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Common.DTO;
 using Common.Extensions.CollectionChanged;
 using Common.WinApi;
@@ -13,6 +12,11 @@ namespace Model.Applications
         private void CollectionChanged(object? sender, ApplicationCollectionChangedArgs e)
             => InternalCollectionChanged?.Invoke(this, e);
 
+        /// <summary>
+        /// Получает все обработчики видимых окон в системе
+        /// и создает на их основе <see cref="SystemWindow"/>
+        /// </summary>
+        /// <returns>Коллекцию окон <see cref="SystemWindow"/> </returns>
         private static List<SystemWindow> GetAllVisibleWindows()
         {
             var windows = new List<SystemWindow>();
@@ -30,6 +34,9 @@ namespace Model.Applications
             return windows;
         }
 
+        /// <summary>
+        /// Собирает информацию о всех окнах в системе и добавляет их в коллекцию.
+        /// </summary>
         private void FillApplicationsCollection()
         {
             var windows = GetAllVisibleWindows();

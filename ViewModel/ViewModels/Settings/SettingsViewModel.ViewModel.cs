@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Enums;
 using Common.Extensions;
 using Common.Extensions.CollectionChanged;
-using Common.Interfaces;
 using ViewModel.SubViewModels;
 
 namespace ViewModel.ViewModels.Settings

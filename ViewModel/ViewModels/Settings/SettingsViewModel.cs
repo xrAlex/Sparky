@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Common.Enums;
-using Common.Extensions;
-using Common.Extensions.CollectionChanged;
-using Common.Infrastructure.Commands;
+﻿using Common.Infrastructure.Commands;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
-using ViewModel.SubViewModels;
 
 namespace ViewModel.ViewModels.Settings
 {

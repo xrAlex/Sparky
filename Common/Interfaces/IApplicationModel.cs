@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Extensions.CollectionChanged;
 
 namespace Common.Interfaces
 {
     public interface IApplicationModel
     {
-        void MoveToIgnored(List<string> applicationsName);
+
+        /// <summary>
+        /// Обновляет внутреннию коллекцию приложений.
+        /// </summary>
         void RefreshApplications();
+
+        /// <returns>Коллекцию имен приложений</returns>
         List<string> GetAllNames();
+
+        /// <summary>
+        /// Событие оповещающее об изменении внутренней коллекции приложений.
+        /// </summary>
+        /// <remarks>При подписке на событие возвращает все элементы коллекции.</remarks>
         event EventHandler<ApplicationCollectionChangedArgs>? ApplicationCollectionChanged;
     }
 }
