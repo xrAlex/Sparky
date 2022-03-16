@@ -1,5 +1,6 @@
 ﻿using SimpleInjector;
 using ViewModel.ViewModels;
+using ViewModel.ViewModels.Settings;
 
 namespace ViewModel
 {

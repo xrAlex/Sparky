@@ -1,5 +1,6 @@
 ﻿using Common.Infrastructure;
 using ViewModel.ViewModels;
+using ViewModel.ViewModels.Settings;
 
 namespace ViewModel
 {
