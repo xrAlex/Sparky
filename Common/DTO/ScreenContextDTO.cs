@@ -7,7 +7,7 @@ namespace Common.DTO
     /// <summary>
     /// Data Transfer Object устройства отображения
     /// </summary>
-    public struct ScreenContextDTO : IScreenContext
+    public class ScreenContextDTO : IScreenContext
     {
         public string SystemName { get; }
 
@@ -29,7 +29,7 @@ namespace Common.DTO
 
         public ScreenBounds Bounds { get; set; }
 
-        public ScreenContextDTO(int displayCode, string systemName, string friendlyName) : this()
+        public ScreenContextDTO(int displayCode, string systemName, string friendlyName)
         {
             if (string.IsNullOrWhiteSpace(systemName))
             {
@@ -41,7 +41,7 @@ namespace Common.DTO
             FriendlyName = friendlyName;
         }
 
-        public ScreenContextDTO(int displayCode, string systemName, string friendlyName, ScreenBounds bounds) : this()
+        public ScreenContextDTO(int displayCode, string systemName, string friendlyName, ScreenBounds bounds)
         {
             if (string.IsNullOrWhiteSpace(systemName))
             {

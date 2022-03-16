@@ -2,9 +2,9 @@
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
 
-namespace ViewModel.Reflection
+namespace ViewModel.SubViewModels
 {
-    public class ScreenVM : INPCBase
+    public class ScreenViewModel : INPCBase
     {
         private IScreenContext _screen = null!;
         private bool _isSelected;
@@ -112,7 +112,7 @@ namespace ViewModel.Reflection
         public override string ToString() 
             => _screen.FriendlyName;
 
-        public ScreenVM(IScreenContext screen)
+        public ScreenViewModel(IScreenContext screen)
         {
             Screen = screen;
         }

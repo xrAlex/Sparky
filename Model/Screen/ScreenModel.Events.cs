@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Model.Entities;
 

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Common.Enums;
 using Common.Extensions;
 using Common.Extensions.CollectionChanged;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
-using ViewModel.Reflection;
+using ViewModel.SubViewModels;
 
 namespace ViewModel.ViewModels
 {
@@ -12,7 +13,7 @@ namespace ViewModel.ViewModels
     {
         private readonly IScreenModel _screenModel;
 
-        public ObservableCollection<ScreenVM> Screens { get; } = new();
+        public ObservableCollection<ScreenViewModel> Screens { get; } = new();
 
         public MainWindowViewModel(IScreenModel screenModel)
         {
@@ -26,7 +27,7 @@ namespace ViewModel.ViewModels
             switch (args.Action)
             {
                 case CollectionChangedAction.Added:
-                    Screens.Add(new ScreenVM(args.Screen));
+                    Screens.Add(new ScreenViewModel(args.Screen));
                     break;
                 case CollectionChangedAction.Removed:
                     Screens.RemoveFirst(screen => screen.Screen.DisplayCode == args.Screen.DisplayCode);

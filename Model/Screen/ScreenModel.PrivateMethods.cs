@@ -22,7 +22,7 @@ namespace Model.Screen
                 var screen = TryFormScreenContext(display);
                 if (screen == null) continue;
 
-                var screenContext = TryGetUserSettings(screen.Value);
+                var screenContext = TryGetUserSettings(screen);
                 _screenCollection.Add(screenContext);
             }
         }
@@ -31,7 +31,7 @@ namespace Model.Screen
         /// Создает контекст устройства отображения.
         /// </summary>
         /// <returns><see cref="ScreenContextDTO"/>, в случае успешного получения данных монитора.</returns>
-        private ScreenContextDTO? TryFormScreenContext(PathDisplayTarget display)
+        private static ScreenContextDTO? TryFormScreenContext(PathDisplayTarget display)
         {
             try
             {
