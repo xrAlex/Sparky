@@ -16,9 +16,9 @@ namespace Model.Applications
 
                 lock (_eventLocker)
                 {
-                    foreach (var application in _applications.Values)
+                    foreach (var app in _applications.Values)
                     {
-                        value(this, new ApplicationCollectionChangedArgs(application.Name, CollectionChangedAction.Added));
+                        value(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Added));
                     }
                     InternalCollectionChanged += value;
                 }

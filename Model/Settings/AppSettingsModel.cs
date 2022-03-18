@@ -14,7 +14,7 @@ namespace Model.Settings
     {
         private readonly string _filePath;
         public ScreenRepository ScreenRepository { get; } = new();
-        public List<string>? IgnoredApplications { get; set; }
+        public List<string> IgnoredApplications { get; } = new();
 
         public AppSettingsModel(string configurationFilePath)
         {

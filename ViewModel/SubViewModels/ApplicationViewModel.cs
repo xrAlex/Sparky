@@ -1,21 +1,33 @@
 ﻿using Common.Infrastructure.INPC;
+using Common.Interfaces;
 
 namespace ViewModel.SubViewModels
 {
     public class ApplicationViewModel : INPCBase
     {
-        private bool _isSelected;
-        public string Name { get; }
+        public IApplication App { get; }
 
-        public bool IsSelected
+        private bool _isIgnored;
+
+        public bool IsIgnored
         {
-            get => _isSelected;
-            set => Set(ref _isSelected, value);
+            get => _isIgnored;
+            set => Set(ref _isIgnored, value);
         }
 
-        public ApplicationViewModel(string name)
+        protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
         {
-            Name = name;
+            base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
+            if (propertyName == nameof(IsIgnored))
+            {
+                App.IsIgnored = IsIgnored;
+            }
+        }
+
+        public ApplicationViewModel(IApplication app)
+        {
+            App = app;
+            _isIgnored = app.IsIgnored;
         }
     }
 }

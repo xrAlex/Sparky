@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Common.Interfaces
 {
     public interface IAppSettingsModel
     {
+        /// <summary>
+        /// Список имен приложений которые игнорируются в полноэкранном режиме
+        /// </summary>
+         List<string> IgnoredApplications { get; }
+
         /// <summary>
         /// Загружает настройки приложения из файла
         /// </summary>

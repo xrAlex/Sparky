@@ -24,14 +24,16 @@ namespace Model.Applications.ApplicationsCollection
             //    return false;
             //}
 
-            var application = new Application(applicationDTO.Name)
+            var app = new Application(applicationDTO.Name)
             {
-                ExecutableFilePath = applicationDTO.ExecutableFilePath
+                ExecutableFilePath = applicationDTO.ExecutableFilePath,
+                OnFullScreen = applicationDTO.OnFullScreen,
+                IsIgnored = applicationDTO.IsIgnored
             };
 
-            _applications.Add(application.Name, application);
+            _applications.Add(app.Name, app);
 
-            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(application.Name, CollectionChangedAction.Added));
+            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Added));
             return true;
         }
         /// <summary>
@@ -41,14 +43,14 @@ namespace Model.Applications.ApplicationsCollection
         /// <returns>Результат выполнения операции.</returns>
         public bool Remove(string key)
         {
-            if (!TryGetValue(key, out var application))
+            if (!TryGetValue(key, out var app))
             {
                 return false;
             }
 
             _applications.Remove(key);
 
-            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(application.Name, CollectionChangedAction.Removed));
+            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Removed));
             return true;
         }
     }

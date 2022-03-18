@@ -25,14 +25,14 @@
             Cursor="Arrow"/>
         <ListBox
             BorderThickness="0"
-            IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
+            
             SelectionMode="Multiple"
             ItemsSource="{Binding Applications, Mode=OneWay}" 
             d:ItemsSource="{d:SampleData ItemCount=5}" 
             Margin="0,5,0,0">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource ProcessListBoxItem}">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsIgnored, Mode=TwoWay}" />
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
@@ -40,8 +40,8 @@
                     <CheckBox
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                        IsChecked="{Binding IsSelected}"
-                        Content="{Binding Name, Mode=OneWay}">
+                        IsChecked="{Binding IsIgnored, Mode=TwoWay}"
+                        Content="{Binding App.Name, Mode=OneWay}">
                     </CheckBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>

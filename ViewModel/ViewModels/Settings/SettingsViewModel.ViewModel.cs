@@ -31,10 +31,10 @@ namespace ViewModel.ViewModels.Settings
             switch (args.Action)
             {
                 case CollectionChangedAction.Added:
-                    Applications.Add(new ApplicationViewModel(args.Name));
+                    Applications.Add(new ApplicationViewModel(args.App));
                     break;
                 case CollectionChangedAction.Removed:
-                    Applications.RemoveFirst(app => app.Name == args.Name);
+                    Applications.RemoveFirst(app => app.App.Name == args.App.Name);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(args.ToString());

@@ -60,8 +60,6 @@ namespace Model.Settings
         /// <inheritdoc cref="IAppSettingsModel.Load"/>
         public void Load()
         {
-            if (!File.Exists(_filePath)) return;
-
             try
             {
                 var serializer = new JsonSerializer();

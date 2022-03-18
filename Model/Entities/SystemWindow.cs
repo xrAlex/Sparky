@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Common.Interfaces;
 using Common.WinApi;
 
 namespace Model.Entities
@@ -21,7 +22,7 @@ namespace Model.Entities
         /// Checks if the window works in full screen, given a task bar
         /// </summary>
         /// <returns> <see cref="bool"/> true, when window expanded on full screen</returns>
-        public bool IsWindowOnFullScreen(ScreenContext screen)
+        public bool IsWindowOnFullScreen(IScreenContext screen)
         {
             Native.GetWindowRect(new HandleRef(null, Handler), out var rect);
             return screen.Bounds.Width == rect.Right + rect.Left && screen.Bounds.Height == rect.Bottom + rect.Top;

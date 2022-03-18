@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Common.DTO;
 using Common.Extensions.CollectionChanged;
+using Common.Interfaces;
 using Common.WinApi;
 using Model.Entities;
 
@@ -52,17 +54,17 @@ namespace Model.Applications
                     _applications.Add(new ApplicationDTO(procFileName)
                     {
                         ExecutableFilePath = executablePath,
-                        OnFullScreen = false // TODO: надо поправить
+                        OnFullScreen = IsApplicationWindowOnFullScreen(window),
+                        IsIgnored = IsApplicationIgnored(executablePath)
                     });
                 }
             }
         }
 
-        //private bool IsFullScreenProcess(nint handle)
-        //{
-        //    return _settingsService.Screens
-        //        .Select(screen => SystemWindow.IsWindowOnFullScreen(screen, handle))
-        //        .FirstOrDefault();
-        //}
+        private bool IsApplicationWindowOnFullScreen(SystemWindow window) 
+            => _screenModel.GetAllScreens().Any(window.IsWindowOnFullScreen);
+
+        private bool IsApplicationIgnored(string executablePath)
+            => _appSettings.IgnoredApplications.Contains(executablePath);
     }
 }
