@@ -37,10 +37,5 @@ namespace Common.Interfaces
         /// </summary>
         /// <param name="key">DisplayCode источника отображения.</param>
         IScreenContext? GetScreen(int key);
-
-        /// <summary>
-        /// Сохраняет данные моделей в класс пользовательских настроек.
-        /// </summary>
-        void SaveSettings();
     }
 }

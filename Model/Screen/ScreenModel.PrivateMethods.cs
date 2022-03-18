@@ -1,16 +1,36 @@
 ﻿using System;
 using Common.DTO;
 using Common.Entities;
+using Common.Enums;
 using Common.Extensions.CollectionChanged;
+using Model.Entities;
 using WindowsDisplayAPI.DisplayConfig;
 
 namespace Model.Screen
 {
     internal sealed partial class ScreenModel
     {
-
-        private void CollectionChanged(object? sender, ScreensCollectionChangedArgs e)
-            => InternalCollectionChanged?.Invoke(this, e);
+        /// <summary>
+        /// Событие изменения внутренней коллекции модели.
+        /// </summary>
+        private void ScreenCollectionChanged(object? sender, ScreensCollectionChangedArgs args)
+        {
+            switch (args.Action)
+            {
+                case CollectionChangedAction.Added:
+                    _appSettings.ScreenRepository.TryAdd(args.Screen.DisplayCode, (ScreenContext)args.Screen);
+                    break;
+                case CollectionChangedAction.Removed:
+                    _appSettings.ScreenRepository.Delete(args.Screen.DisplayCode);
+                    break;
+                case CollectionChangedAction.Updated:
+                    _appSettings.ScreenRepository.TryUpdate(args.Screen.DisplayCode, (ScreenContext)args.Screen);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(args.ToString());
+            }
+            InternalCollectionChanged?.Invoke(this, args);
+        }
 
         /// <summary>
         /// Формирует коллекцию устройств отображения.
@@ -58,7 +78,7 @@ namespace Model.Screen
         /// с этими настройками или возвращает неизменный экземпляр.</returns>
         private ScreenContextDTO TryGetUserSettings(ScreenContextDTO screen)
         {
-            if (!_appSettings.Screens.TryGetValue(screen.DisplayCode, out var screenSettings))
+            if (!_appSettings.ScreenRepository.TryGetValue(screen.DisplayCode, out var screenSettings))
             {
                 return screen;
             }

@@ -3,6 +3,7 @@
     public enum CollectionChangedAction
     {
         Added,
-        Removed
+        Removed,
+        Updated
     }
 }

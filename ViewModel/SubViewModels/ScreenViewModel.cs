@@ -38,13 +38,13 @@ namespace ViewModel.SubViewModels
 
         public float DayBrightness
         {
-            get => _dayBrightness; 
+            get => _dayBrightness;
             set => Set(ref _dayBrightness, value);
         }
 
-        public float DayColorTemperature 
-        { 
-            get => _dayColorTemperature; 
+        public float DayColorTemperature
+        {
+            get => _dayColorTemperature;
             set => Set(ref _dayColorTemperature, value);
         }
 
@@ -109,12 +109,21 @@ namespace ViewModel.SubViewModels
             }
         }
 
-        public override string ToString() 
+        public override string ToString()
             => _screen.FriendlyName;
 
         public ScreenViewModel(IScreenContext screen)
         {
             Screen = screen;
+
+            _dayBrightness = screen.DayColorConfiguration.Brightness;
+            _dayColorTemperature = screen.DayColorConfiguration.ColorTemperature;
+            _nightBrightness = screen.NightColorConfiguration.Brightness;
+            _nightColorTemperature = screen.NightColorConfiguration.ColorTemperature;
+            _nightStartHour = screen.NightStartTime.Hour;
+            _nightStartMinute = screen.NightStartTime.Minute;
+            _dayStartHour = screen.DayStartTime.Hour;
+            _dayStartMinute = screen.DayStartTime.Minute;
         }
     }
 }

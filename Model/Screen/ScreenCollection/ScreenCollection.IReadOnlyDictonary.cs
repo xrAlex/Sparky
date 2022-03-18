@@ -13,6 +13,14 @@ namespace Model.Screen.ScreenCollection
         public IEnumerable<int> Keys 
             => _screens.Keys;
 
+        public void Clear()
+        {
+            foreach (var screen in _screens)
+            {
+                Remove(screen.Key);
+            }
+        }
+
         public IEnumerable<IScreenContext> Values 
             => _screens.Values;
 

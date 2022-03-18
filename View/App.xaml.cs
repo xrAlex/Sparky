@@ -35,7 +35,7 @@ namespace View
             ModelRegistrator.Register(container, ConfigurationFilepath);
             ViewModelRegistrator.Register(container);
 
-            container.Verify();
+            //container.Verify();
         }
     }
 }

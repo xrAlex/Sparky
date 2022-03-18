@@ -42,6 +42,7 @@
                             Width="80"
                             Height="40"
                             HorizontalAlignment="Left"
+                            Command="{Binding ResetSettings}"
                             Style="{StaticResource LightGrayButton}"
                             Content="{DynamicResource Loc_Reset}" Cursor="Hand">
                         </Button>
@@ -49,14 +50,18 @@
                             Width="80"
                             Height="40"
                             HorizontalAlignment="Center"
+                            Command="{Binding ResetSettings}"
                             Style="{StaticResource LightGrayButton}"
-                            Content="{DynamicResource Loc_Cancel}">
+                            Click="{ext:CloseWindow}"
+                            Content="{DynamicResource Loc_Cancel}" Cursor="Hand">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"
                             Width="80"
                             Height="40"
+                            Command="{Binding SaveSettings}"
                             Style="{StaticResource LightGrayButton}"
+                            Click="{ext:CloseWindow}"
                             Content="{DynamicResource Loc_Apply}">
                         </Button>
                     </Grid>

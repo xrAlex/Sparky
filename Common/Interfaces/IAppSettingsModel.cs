@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Common.Interfaces
 {
@@ -20,8 +21,33 @@ namespace Common.Interfaces
         void Save();
 
         /// <summary>
+        /// Очищает данные и заново подгружает настройки приложения из файла
+        /// </summary>
+        void Reset();
+
+        /// <summary>
+        /// Асинхронно очищает данные и заново подгружает настройки приложения из файла
+        /// </summary>
+        Task ResetAsync();
+
+        /// <summary>
         /// Асинхронно сохраняет настройки настройки приложения в файл
         /// </summary>
         Task SaveAsync();
+
+        /// <summary>
+        /// Событие сброса настроек
+        /// </summary>
+        event EventHandler? SettingsReset;
+
+        /// <summary>
+        /// Событие сохранения настроек
+        /// </summary>
+        event EventHandler? SettingsSaved;
+
+        /// <summary>
+        /// Событие загрузки настроек
+        /// </summary>
+        event EventHandler? SettingsLoaded;
     }
 }

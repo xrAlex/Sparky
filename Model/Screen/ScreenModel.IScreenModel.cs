@@ -22,23 +22,5 @@ namespace Model.Screen
         /// <inheritdoc cref="IScreenModel.GetAllScreens"/>
         public IEnumerable<IScreenContext> GetAllScreens()
             => _screenCollection.Values;
-
-        /// <inheritdoc cref="IScreenModel.SaveSettings"/>
-        public void SaveSettings()
-        {
-            foreach (var screen in _screenCollection.Values)
-            {
-                if (!_appSettings.Screens.ContainsKey(screen.DisplayCode))
-                {
-                    _appSettings.Screens.Add(screen.DisplayCode, new ScreenSettings
-                    {
-                        DayColorConfiguration = screen.DayColorConfiguration,
-                        NightColorConfiguration = screen.NightColorConfiguration,
-                        DayStartTime = screen.DayStartTime,
-                        NightStartTime = screen.NightStartTime
-                    });
-                }
-            }
-        }
     }
 }

@@ -18,7 +18,6 @@ namespace ViewModel.ViewModels
         public MainWindowViewModel(IScreenModel screenModel)
         {
             _screenModel = screenModel;
-
             screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
         }
 
@@ -32,10 +31,11 @@ namespace ViewModel.ViewModels
                 case CollectionChangedAction.Removed:
                     Screens.RemoveFirst(screen => screen.Screen.DisplayCode == args.Screen.DisplayCode);
                     break;
+                case CollectionChangedAction.Updated:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(args.ToString());
             }
-
         }
     }
 }

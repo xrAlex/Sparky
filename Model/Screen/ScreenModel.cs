@@ -1,5 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Common.Interfaces;
+using Model.Entities;
 using Model.Settings;
 
 namespace Model.Screen
@@ -15,9 +19,16 @@ namespace Model.Screen
         public ScreenModel(IAppSettingsModel appSettings)
         {
             _appSettings = (AppSettingsModel)appSettings;
-            _screenCollection.CollectionChanged += CollectionChanged;
 
-            Task.Run(LoadScreens).ConfigureAwait(false);
+            _screenCollection.CollectionChanged += ScreenCollectionChanged;
+            _appSettings.SettingsLoaded += SettingsLoaded;
+            _appSettings.SettingsReset += SettingsReset;
         }
+
+        private void SettingsReset(object? sender, System.EventArgs e) 
+            => _screenCollection.Clear();
+
+        private void SettingsLoaded(object? sender, System.EventArgs e) 
+            => LoadScreens();
     }
 }

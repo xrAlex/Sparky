@@ -1,4 +1,5 @@
-﻿using Common.DTO;
+﻿using System.Collections.Generic;
+using Common.DTO;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Model.Entities;
@@ -32,6 +33,7 @@ namespace Model.Screen.ScreenCollection
 
             _screens.Add(screen.DisplayCode, screen);
 
+            screen.PropertyChanged += ScreenEntityChanged;
             CollectionChanged?.Invoke(this, new ScreensCollectionChangedArgs(screen, CollectionChangedAction.Added));
             return true;
         }
