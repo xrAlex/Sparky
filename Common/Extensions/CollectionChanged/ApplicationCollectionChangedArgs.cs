@@ -8,6 +8,16 @@ namespace Common.Extensions.CollectionChanged
     {
         public IApplication App { get; }
         public CollectionChangedAction Action { get; }
+        public string? PropertyName { get; }
+        public object? NewValue { get; }
+
+        public ApplicationCollectionChangedArgs(IApplication app, CollectionChangedAction action, string propertyName, object newValue)
+        {
+            App = app;
+            Action = action;
+            PropertyName = propertyName;
+            NewValue = newValue;
+        }
 
         public ApplicationCollectionChangedArgs(IApplication app, CollectionChangedAction action)
         {

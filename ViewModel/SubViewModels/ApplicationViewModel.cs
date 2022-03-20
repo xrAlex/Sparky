@@ -18,6 +18,7 @@ namespace ViewModel.SubViewModels
         protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
         {
             base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
+
             if (propertyName == nameof(IsIgnored))
             {
                 App.IsIgnored = IsIgnored;

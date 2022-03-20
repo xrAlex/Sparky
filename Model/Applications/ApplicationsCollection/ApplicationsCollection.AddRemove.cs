@@ -1,6 +1,8 @@
-﻿using Common.DTO;
+﻿using System.ComponentModel;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
+using Common.Infrastructure.INPC;
+using Common.Interfaces;
 using Model.Entities;
 
 namespace Model.Applications.ApplicationsCollection
@@ -10,32 +12,23 @@ namespace Model.Applications.ApplicationsCollection
         /// <summary>
         /// Создание источника отображения на основе DTO и добавление его в коллекцию.
         /// </summary>
-        /// <param name="applicationDTO">Data Transfer Object класа приложенияю</param>
+        /// <param name="application">Сформированная сущность приложения.</param>
         /// <returns>Результат выполнения операции.</returns>
-        public bool Add(ApplicationDTO applicationDTO)
+        public bool Add(Application application)
         {
-            if (ContainsKey(applicationDTO.Name))
+            if (ContainsKey(application.Name))
             {
                 return false;
             }
 
-            //if (_applications.All(app => app.Value.ExecutableFilePath != applicationDTO.ExecutableFilePath))
-            //{
-            //    return false;
-            //}
+            _applications.Add(application.Name, application);
 
-            var app = new Application(applicationDTO.Name)
-            {
-                ExecutableFilePath = applicationDTO.ExecutableFilePath,
-                OnFullScreen = applicationDTO.OnFullScreen,
-                IsIgnored = applicationDTO.IsIgnored
-            };
+            application.PropertyChanged += EntityPropertyChanged;
 
-            _applications.Add(app.Name, app);
-
-            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Added));
+            CollectionChanged?.Invoke(this, new ApplicationCollectionChangedArgs(application, CollectionChangedAction.Added));
             return true;
         }
+
         /// <summary>
         /// Удаление приложения из коллекции.
         /// </summary>

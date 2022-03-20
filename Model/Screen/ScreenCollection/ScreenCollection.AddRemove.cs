@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common.DTO;
+using System.ComponentModel;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Model.Entities;
@@ -11,29 +11,19 @@ namespace Model.Screen.ScreenCollection
         /// <summary>
         /// Создание источника отображения на основе DTO и добавление его в коллекцию.
         /// </summary>
-        /// <param name="screenDTO">Объект передачи данных устройства отображения.</param>
+        /// <param name="screen">Сформирвоанный объект класса ScreenContext.</param>
         /// <returns><see langword="true"/>, если добавление произошло успешно.</returns>
-        public bool Add(ScreenContextDTO screenDTO)
+        public bool Add(ScreenContext screen)
         {
-            if (ContainsKey(screenDTO.DisplayCode))
+            if (ContainsKey(screen.DisplayCode))
             {
                 return false;
             }
 
-            var screen = new ScreenContext(screenDTO.DisplayCode, screenDTO.SystemName, screenDTO.FriendlyName)
-            {
-                IsActive = screenDTO.IsActive,
-                Bounds = screenDTO.Bounds,
-                CurrentColorConfiguration = screenDTO.CurrentColorConfiguration,
-                DayColorConfiguration = screenDTO.DayColorConfiguration,
-                DayStartTime = screenDTO.DayStartTime,
-                NightColorConfiguration = screenDTO.NightColorConfiguration,
-                NightStartTime = screenDTO.NightStartTime
-            };
-
             _screens.Add(screen.DisplayCode, screen);
 
             screen.PropertyChanged += ScreenEntityChanged;
+
             CollectionChanged?.Invoke(this, new ScreensCollectionChangedArgs(screen, CollectionChangedAction.Added));
             return true;
         }

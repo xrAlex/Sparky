@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.InteropServices.ComTypes;
 using Common.Entities;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
+using Model.GammaRegulator;
 
 namespace Model.Entities
 {
@@ -78,6 +80,25 @@ namespace Model.Entities
 
         public override string ToString()
             => FriendlyName;
+
+        protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
+        {
+            base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
+
+            // TODO: надо бы это уюрать отсюда
+            switch (propertyName)
+            {
+                case nameof(CurrentColorConfiguration):
+                    SystemGamma.ApplyColorConfiguration(CurrentColorConfiguration, SystemName);
+                    break;
+                case nameof(NightColorConfiguration):
+                    SystemGamma.ApplyColorConfiguration(NightColorConfiguration, SystemName);
+                    break;
+                case nameof(DayColorConfiguration):
+                    SystemGamma.ApplyColorConfiguration(DayColorConfiguration, SystemName);
+                    break;
+            }
+        }
 
         public ScreenContext(int displayCode, string systemName, string friendlyName)
         {

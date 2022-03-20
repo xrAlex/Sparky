@@ -14,6 +14,12 @@ namespace ViewModel.ViewModels.Settings
         private bool _checkFullScreensApps;
         private ScreenViewModel _selectedScreen;
 
+        //public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
+        //public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
+
+        public int MinGammaRange => 4200;
+        public int MinBrightnessRange => 70;
+
         public bool CheckFullScreensApps
         {
             get => _checkFullScreensApps;
@@ -35,6 +41,8 @@ namespace ViewModel.ViewModels.Settings
                     break;
                 case CollectionChangedAction.Removed:
                     Applications.RemoveFirst(app => app.App.Name == args.App.Name);
+                    break;
+                case CollectionChangedAction.Updated:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(args.ToString());

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
+using Common.Infrastructure.INPC;
 using Common.Interfaces;
 using Model.Entities;
 
@@ -13,11 +15,15 @@ namespace Model.Screen.ScreenCollection
 
         public event EventHandler<ScreensCollectionChangedArgs>? CollectionChanged;
 
-        private void ScreenEntityChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ScreenEntityChanged(object? sender, PropertyChangedEventArgs args)
         {
             if (sender is ScreenContext screen)
             {
-                CollectionChanged?.Invoke(this, new ScreensCollectionChangedArgs(screen, CollectionChangedAction.Updated));
+                CollectionChanged?.Invoke(this,
+                    new ScreensCollectionChangedArgs(screen,
+                        CollectionChangedAction.Updated,
+                        args.PropertyName,
+                        ((PropertyChangedValueEventArgs) args).NewValue));
             }
         }
     }
