@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Common.Interfaces;
-using Model.Entities;
 
 namespace Model.Screen
 {

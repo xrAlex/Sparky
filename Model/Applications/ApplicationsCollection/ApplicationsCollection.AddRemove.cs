@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.Extensions.CollectionChanged;
-using Common.Infrastructure.INPC;
-using Common.Interfaces;
 using Model.Entities;
 
 namespace Model.Applications.ApplicationsCollection

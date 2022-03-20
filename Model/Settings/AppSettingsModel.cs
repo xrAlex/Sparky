@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Common.Interfaces;
-using Model.Entities;
 using Model.Repository;
-using Model.Screen.ScreenCollection;
-using Newtonsoft.Json;
 
 namespace Model.Settings
 {

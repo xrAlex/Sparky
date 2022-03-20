@@ -1,5 +1,4 @@
-﻿using System.Windows.Markup;
-using Common.Infrastructure.INPC;
+﻿using Common.Infrastructure.INPC;
 using Common.Interfaces;
 
 namespace Model.Entities

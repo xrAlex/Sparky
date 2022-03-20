@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Common.Interfaces;
-using Model.Entities;
+﻿using Common.Interfaces;
 using Model.Settings;
 
 namespace Model.Screen

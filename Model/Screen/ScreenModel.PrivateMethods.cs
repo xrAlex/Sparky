@@ -69,7 +69,7 @@ namespace Model.Screen
 
                 return screen;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

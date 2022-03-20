@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Model.Entities;
 
