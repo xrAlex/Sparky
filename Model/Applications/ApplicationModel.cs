@@ -1,4 +1,5 @@
 ﻿using Common.Interfaces;
+using Model.Settings;
 
 namespace Model.Applications
 {
@@ -7,12 +8,12 @@ namespace Model.Applications
         private readonly ApplicationsCollection.ApplicationsCollection _applications = new();
         private readonly object _eventLocker = new();
         private readonly IScreenModel _screenModel;
-        private readonly IAppSettingsModel _appSettings;
+        private readonly AppSettingsModel _appSettings;
 
         public ApplicationModel(IScreenModel screenModel, IAppSettingsModel appSettings)
         {
             _screenModel = screenModel;
-            _appSettings = appSettings;
+            _appSettings = (AppSettingsModel) appSettings;
             _appSettings.SettingsLoaded += SettingsLoaded;
             _appSettings.SettingsReset += SettingsReset;
             _applications.CollectionChanged += CollectionChanged;

@@ -4,29 +4,29 @@ using Common.Entities;
 
 namespace Common.WinApi
 {
-    public static partial class Native
+    public static partial class WinApiWrapper
     {
         public delegate bool EnumWindowsProc(nint hWnd, nint lParam);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetWindowRect(HandleRef hWnd, out Rect lpRect);
+        private static extern bool GetWindowRect(HandleRef hWnd, out Rect lpRect);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern nint GetForegroundWindow();
+        private static extern nint GetForegroundWindow();
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern uint GetWindowThreadProcessId(nint hWnd, out uint pId);
+        private static extern uint GetWindowThreadProcessId(nint hWnd, out uint pId);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern int GetWindowText(nint hWnd, StringBuilder strText, int maxCount);
+        private static extern int GetWindowText(nint hWnd, StringBuilder strText, int maxCount);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern int GetWindowTextLength(nint hWnd);
+        private static extern int GetWindowTextLength(nint hWnd);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, nint lParam);
+        private static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, nint lParam);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool IsWindowVisible(nint hWnd);
+        private static extern bool IsWindowVisible(nint hWnd);
     }
 }

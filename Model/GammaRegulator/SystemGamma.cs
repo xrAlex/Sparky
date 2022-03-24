@@ -11,7 +11,7 @@ namespace Model.GammaRegulator
         /// </summary>
         public static void ApplyColorConfiguration(ColorConfiguration colorConfiguration, string screenName)
         {
-            var dc = Native.CreateDC(screenName, null, null, 0);
+            var dc = WinApiWrapper.CreateScreenDeviceContext(screenName);
             const int maxChannelValue = 256;
             const int channelMult = 255;
 
@@ -31,7 +31,7 @@ namespace Model.GammaRegulator
                 channels.Blue[i] = (ushort)(i * channelMult * RGBmask.Blue * colorConfiguration.Brightness);
             }
 
-            var successfully = Native.SetDeviceGammaRamp(dc, ref channels);
+            var successfully = WinApiWrapper.SetScreenGamma(dc, ref channels);
             if (!successfully)
             {
                 // TODO: Обработать
@@ -41,7 +41,7 @@ namespace Model.GammaRegulator
                     $"Brightness: {colorConfiguration.Brightness}]");
             }
 
-            Native.DeleteDC(dc);
+            WinApiWrapper.DeleteScreenDeviceContext(dc);
         }
 
         /// <summary>

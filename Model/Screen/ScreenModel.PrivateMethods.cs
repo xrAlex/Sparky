@@ -49,7 +49,7 @@ namespace Model.Screen
         /// <summary>
         /// Создает контекст устройства отображения.
         /// </summary>
-        /// <returns><see cref="ScreenContextDTO"/>, в случае успешного получения данных монитора.</returns>
+        /// <returns><see cref="ScreenContext"/>, в случае успешного получения данных монитора.</returns>
         private static ScreenContext? TryFormScreenContext(PathDisplayTarget display)
         {
             try
@@ -78,7 +78,7 @@ namespace Model.Screen
         /// <summary>
         /// Проверяет наличие пользовательских настроек для уcтройства отображения.
         /// </summary>
-        /// <param name="screen"> сформированный DTO контекста монитора.</param>
+        /// <param name="screen"> сформированный объект контекста монитора.</param>
         /// <returns>В случае обнаружения настроек устройства отображения возвращает <see cref="ScreenContext"/>
         /// с этими настройками или возвращает неизменный экземпляр.</returns>
         private ScreenContext TryGetUserSettings(ScreenContext screen)

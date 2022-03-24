@@ -22,21 +22,21 @@ namespace Common.WinApi
         Synchronize = 0x00100000
     }
 
-    public static partial class Native
+    public static partial class WinApiWrapper
     {
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
+        private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern int WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
+        private static extern int WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
 
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern nint OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, uint processId);
+        private static extern nint OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, uint processId);
 
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern bool QueryFullProcessImageName(nint hPrc, uint dwFlags, StringBuilder lpExeName, ref uint lpdwSize);
+        private static extern bool QueryFullProcessImageName(nint hPrc, uint dwFlags, StringBuilder lpExeName, ref uint lpdwSize);
 
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern bool CloseHandle(nint hObj);
+        private static extern bool CloseHandle(nint hObj);
     }
 }

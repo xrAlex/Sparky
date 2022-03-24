@@ -21,6 +21,7 @@ namespace ViewModel.ViewModels.Settings
             SaveSettings = new RelayCommand(SaveSettingsExecute);
             ResetSettings = new RelayCommand(ResetSettingsExecute);
 
+            // TODO: отписываемся при Dispose
             screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
             applicationModel.ApplicationCollectionChanged += ApplicationCollectionChanged;
         }
