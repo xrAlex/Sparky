@@ -20,18 +20,18 @@ namespace Model.Applications
                 case CollectionChangedAction.Removed:
                     break;
                 case CollectionChangedAction.Updated:
-                    if (args.PropertyName == "isIgnored")
+                    if (args.PropertyName == nameof(args.App.IsIgnored))
                     {
                         if (args.NewValue != null)
                         {
                             var val = (bool)args.NewValue;
                             if (val)
                             {
-                                _appSettings.IgnoredApplications.Add(args.App.ExecutableFilePath);
+                                _appSettings.IgnoredAppRepository.Add(args.App.ExecutableFilePath);
                             }
                             else
                             {
-                                _appSettings.IgnoredApplications.Remove(args.App.ExecutableFilePath);
+                                _appSettings.IgnoredAppRepository.Delete(args.App.ExecutableFilePath);
                             }
                         }
                     }
@@ -74,6 +74,6 @@ namespace Model.Applications
                 .FirstOrDefault();
 
         private bool IsApplicationIgnored(string executablePath)
-            => _appSettings.IgnoredApplications.Contains(executablePath);
+            => _appSettings.IgnoredAppRepository.Contains(executablePath);
     }
 }

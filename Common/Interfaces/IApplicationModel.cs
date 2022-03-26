@@ -6,7 +6,6 @@ namespace Common.Interfaces
 {
     public interface IApplicationModel
     {
-
         /// <summary>
         /// Обновляет внутреннию коллекцию приложений.
         /// </summary>

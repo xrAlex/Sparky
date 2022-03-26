@@ -77,6 +77,7 @@ namespace Common.Extensions
                 }, true);
             }
         }
+
         private static (string hiveName, string relativePath) DeconstructPath(string entryName)
         {
             var separatorIndex = entryName.IndexOf('\\');
@@ -116,7 +117,9 @@ namespace Common.Extensions
             var processInfo = new ProcessStartInfo("reg");
 
             foreach (var arg in arguments)
+            {
                 processInfo.ArgumentList.Add(arg);
+            }
 
             if (asAdmin)
             {

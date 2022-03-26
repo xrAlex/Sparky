@@ -8,7 +8,8 @@ namespace Model.Settings
     {
         private readonly string _filePath;
         public ScreenRepository ScreenRepository { get; } = new();
-        public List<string> IgnoredApplications { get; } = new();
+        public ApplicationRepository IgnoredAppRepository { get; } = new();
+        public bool IsFullScreenAppCheckEnabled { get; set; }
 
         public AppSettingsModel(string configurationFilePath)
         {

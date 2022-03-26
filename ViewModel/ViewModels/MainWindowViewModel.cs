@@ -9,7 +9,7 @@ using ViewModel.SubViewModels;
 
 namespace ViewModel.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public sealed class MainWindowViewModel : ViewModelBase
     {
         private readonly IScreenModel _screenModel;
 
@@ -18,7 +18,17 @@ namespace ViewModel.ViewModels
         public MainWindowViewModel(IScreenModel screenModel)
         {
             _screenModel = screenModel;
-            screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
         }
 
         private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)

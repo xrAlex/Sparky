@@ -24,7 +24,7 @@ namespace Model.Settings
         {
             SettingsReset?.Invoke(this, EventArgs.Empty);
             ScreenRepository.Clear();
-            IgnoredApplications?.Clear();
+            IgnoredAppRepository.Clear();
             Load();
         }
 
@@ -45,7 +45,6 @@ namespace Model.Settings
             }
             catch (Exception ex)
             {
-                var asd = ex;
                 // TODO: ошибка сохранения настроек
             }
             finally

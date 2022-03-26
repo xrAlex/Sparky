@@ -25,7 +25,7 @@
             Cursor="Arrow"/>
         <ListBox
             BorderThickness="0"
-            
+            IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
             SelectionMode="Multiple"
             ItemsSource="{Binding Applications, Mode=OneWay}" 
             d:ItemsSource="{d:SampleData ItemCount=5}" 

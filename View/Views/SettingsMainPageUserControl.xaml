@@ -20,6 +20,7 @@
                 <ListBox
                     BorderThickness="0"
                     SelectionMode="Single"
+                    SelectedIndex="1"
                     SelectedItem="{Binding SelectedScreen, Mode=TwoWay}"
                     ItemsSource="{Binding Screens, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     ItemContainerStyle="{StaticResource MonitorListBox}" 

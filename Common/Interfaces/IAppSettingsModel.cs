@@ -7,9 +7,10 @@ namespace Common.Interfaces
     public interface IAppSettingsModel
     {
         /// <summary>
-        /// Список имен приложений которые игнорируются в полноэкранном режиме
+        /// Если  <see langword="true"/>, то приложение будет проверять другие
+        /// запущенные приложения на наличие окна развернутого в полноэкранный режим
         /// </summary>
-         List<string> IgnoredApplications { get; }
+        bool IsFullScreenAppCheckEnabled { get; set; }
 
         /// <summary>
         /// Загружает настройки приложения из файла

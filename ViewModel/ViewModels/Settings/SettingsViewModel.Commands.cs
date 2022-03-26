@@ -13,32 +13,14 @@ namespace ViewModel.ViewModels.Settings
 
         private void SaveSettingsExecute()
         {
-            foreach (var appVm in Applications)
-            {
-                var exePath = appVm.App.ExecutableFilePath;
-                if (exePath != null)
-                {
-                    if (appVm.App.IsIgnored)
-                    {
-                        if (!_settings.IgnoredApplications.Contains(exePath))
-                        {
-                            _settings.IgnoredApplications.Add(exePath);
-                        }
-                    }
-                    else
-                    {
-                        if (_settings.IgnoredApplications.Contains(exePath))
-                        {
-                            _settings.IgnoredApplications.Remove(exePath);
-                        }
-                    }
-                }
-            }
+            UnsubscribeEvents();
             _settings.SaveAsync();
         }
 
-
         private void ResetSettingsExecute()
-            => _settings.Reset();
+        {
+            UnsubscribeEvents();
+            _settings.Reset();
+        }
     }
 }

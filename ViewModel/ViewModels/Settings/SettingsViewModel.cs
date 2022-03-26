@@ -1,10 +1,11 @@
-﻿using Common.Infrastructure.Commands;
+﻿using System;
+using Common.Infrastructure.Commands;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
 
 namespace ViewModel.ViewModels.Settings
 {
-    public partial class SettingsViewModel : ViewModelBase
+    public sealed partial class SettingsViewModel : ViewModelBase
     {
         private readonly IScreenModel _screenModel;
         private readonly IApplicationModel _applicationModel;
@@ -17,13 +18,23 @@ namespace ViewModel.ViewModels.Settings
             _screenModel = screenModel;
             _applicationModel = applicationModel;
             _settings = settings;
+            _checkFullScreensApps = _settings.IsFullScreenAppCheckEnabled;
             RefreshApplicationsList = new RelayCommand(RefreshApplicationsListExecute);
             SaveSettings = new RelayCommand(SaveSettingsExecute);
             ResetSettings = new RelayCommand(ResetSettingsExecute);
+            SubscribeEvents();
+        }
 
-            // TODO: отписываемся при Dispose
-            screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
-            applicationModel.ApplicationCollectionChanged += ApplicationCollectionChanged;
+        private void SubscribeEvents()
+        {
+            _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+            _applicationModel.ApplicationCollectionChanged += ApplicationCollectionChanged;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
+            _applicationModel.ApplicationCollectionChanged -= ApplicationCollectionChanged;
         }
     }
 }

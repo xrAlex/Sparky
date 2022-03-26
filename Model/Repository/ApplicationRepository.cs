@@ -11,7 +11,7 @@ namespace Model.Repository
 
         public void Add(string value)
         {
-            if (!_ignoredAppPaths.Contains(value))
+            if (!Contains(value))
             {
                 _ignoredAppPaths.Add(value);
             }
@@ -27,6 +27,10 @@ namespace Model.Repository
                 _ignoredAppPaths.Remove(value);
             }
         }
+
+        public void Clear()
+            => _ignoredAppPaths.Clear();
+        
 
         public IReadOnlyList<string> GetData()
             => _ignoredAppPaths.ToList().AsReadOnly();
