@@ -13,6 +13,11 @@ namespace Common.Interfaces
         bool IsFullScreenAppCheckEnabled { get; set; }
 
         /// <summary>
+        /// Если  <see langword="true"/>, то гамма и яркость между периода будет менятся плавно
+        /// </summary>
+        bool IsGammaSmoothingEnabled { get; set; }
+
+        /// <summary>
         /// Загружает настройки приложения из файла
         /// </summary>
         void Load();

@@ -10,18 +10,25 @@ namespace ViewModel.ViewModels.Settings
         private readonly IScreenModel _screenModel;
         private readonly IApplicationModel _applicationModel;
         private readonly IAppSettingsModel _settings;
+        private readonly IRegistryModel _registryModel;
 
         public SettingsViewModel(IScreenModel screenModel,
             IApplicationModel applicationModel,
-            IAppSettingsModel settings)
+            IAppSettingsModel settings, IRegistryModel registryModel)
         {
             _screenModel = screenModel;
             _applicationModel = applicationModel;
             _settings = settings;
+            _registryModel = registryModel;
             _checkFullScreensApps = _settings.IsFullScreenAppCheckEnabled;
+            _autoLaunchOnStartup = registryModel.IsAppStartupKeyFounded();
+            _extendedGammaRangeEnabled = registryModel.IsExtendedGammaRangeActive();
+            _gammaSmoothingEnabled = settings.IsGammaSmoothingEnabled;
+ 
             RefreshApplicationsList = new RelayCommand(RefreshApplicationsListExecute);
             SaveSettings = new RelayCommand(SaveSettingsExecute);
             ResetSettings = new RelayCommand(ResetSettingsExecute);
+
             SubscribeEvents();
         }
 

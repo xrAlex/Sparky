@@ -11,20 +11,15 @@ namespace ViewModel.ViewModels.Settings
     {
         public ObservableCollection<ScreenViewModel> Screens { get; } = new();
         public ObservableCollection<ApplicationViewModel> Applications { get; } = new();
+
         private bool _checkFullScreensApps;
         private ScreenViewModel? _selectedScreen;
+        private bool _autoLaunchOnStartup;
+        private bool _extendedGammaRangeEnabled;
+        private bool _gammaSmoothingEnabled;
 
-        //public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
-        //public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
-
-        public int MinGammaRange => 4200;
-        public int MinBrightnessRange => 70;
-
-        public bool CheckFullScreensApps
-        {
-            get => _checkFullScreensApps;
-            set => Set(ref _checkFullScreensApps, value);
-        }
+        public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
+        public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
 
         public ScreenViewModel? SelectedScreen
         {
@@ -32,13 +27,54 @@ namespace ViewModel.ViewModels.Settings
             set => Set(ref _selectedScreen, value);
         }
 
+        public bool CheckFullScreensApps
+        {
+            get => _checkFullScreensApps;
+            set => Set(ref _checkFullScreensApps, value);
+        }
+
+        public bool AutoLaunchOnStartup
+        {
+            get => _autoLaunchOnStartup;
+            set => Set(ref _autoLaunchOnStartup, value);
+        }
+
+        public bool IsExtendedGammaRangeEnabled
+        {
+            get => _extendedGammaRangeEnabled;
+            set => Set(ref _extendedGammaRangeEnabled, value);
+        }
+
+        public bool IsGammaSmoothingEnabled
+        {
+            get => _gammaSmoothingEnabled;
+            set => Set(ref _gammaSmoothingEnabled, value);
+        }
+
         protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
         {
             base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
 
-            if (propertyName == nameof(CheckFullScreensApps))
+            switch (propertyName)
             {
-                _settings.IsFullScreenAppCheckEnabled = (bool)newValue;
+                case nameof(CheckFullScreensApps):
+                    _settings.IsFullScreenAppCheckEnabled = (bool)newValue;
+                    break;
+                case nameof(AutoLaunchOnStartup) when (bool) newValue:
+                    _registryModel.AddAppStartupKey();
+                    break;
+                case nameof(AutoLaunchOnStartup):
+                    _registryModel.DeleteAppStartupKey();
+                    break;
+                case nameof(IsExtendedGammaRangeEnabled) when (bool)newValue:
+                    _registryModel.SetExtendedGammaRangeKey();
+                    break;
+                case nameof(IsExtendedGammaRangeEnabled):
+                    _registryModel.SetDefaultGammaRangeKey();
+                    break;
+                case nameof(IsGammaSmoothingEnabled):
+                    _settings.IsGammaSmoothingEnabled = (bool)newValue;
+                    break;
             }
         }
 

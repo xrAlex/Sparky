@@ -1,90 +1,65 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
+using Common.Extensions;
+using Common.Interfaces;
 
-namespace Sparky.Models
+namespace Model.Registry
 {
     /// <summary>
     /// A model for working with register entries
     /// </summary>
-    internal sealed class RegistryModel
+    internal sealed class RegistryModel : IRegistryModel
     {
-        // TODO: Заменить HKLM на HKCU
-        private const string StartupPath = "\"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" ";
-        private static readonly string AppNameKey = $"/v {AppDomain.CurrentDomain.FriendlyName} ";
-        private static readonly string AppNameParam = $"/t REG_SZ /d \"{Assembly.GetExecutingAssembly().Location} -silent\" /f";
-
-        private const string AddCommand = "REG ADD ";
-        private const string CheckCommand = "REG QUERY ";
-        private const string DeleteCommand = "REG DELETE ";
-
-        private const string GammaRangePath = "\"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM\" ";
-        private const string GammaRangeKey = "/v GdiICMGammaRange ";
-        private const string GammaRangeDefaultParam = "/t REG_DWORD /d 0 /f";
-        private const string GammaRangeExtendedParam = "/t REG_DWORD /d 256 /f";
-
-        public bool IsAppStartupKeyFounded()
-        {
-            var output = ExecuteFromCMD(CheckCommand + StartupPath + AppNameKey, false, true);
-            return output.Contains(AppDomain.CurrentDomain.FriendlyName);
-        }
+        private const string ICMPath = "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\ICM";
+        private const string RunPath = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+        private const string GammaParamName = "GdiICMGammaRange";
+        private const string SilentLaunchKey = "-silent";
 
         public bool IsExtendedGammaRangeActive()
         {
-            var output = ExecuteFromCMD(CheckCommand + GammaRangePath + GammaRangeKey, false, true);
-            return output.Contains("0x100");
+            var value = RegistryEx.TryGetRegistryValue(ICMPath, GammaParamName);
+
+            if (value != null)
+            {
+                return (int)value == 256;
+            }
+
+            return true;
+        }
+
+        public void SetDefaultGammaRangeKey()
+            => RegistryEx.SetRegistryValue(ICMPath, GammaParamName, 0);
+
+        public void SetExtendedGammaRangeKey()
+            => RegistryEx.SetRegistryValue(ICMPath, GammaParamName, 256);
+
+        public bool IsAppStartupKeyFounded()
+        {
+            var value = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
+            return value != null;
         }
 
         public void AddAppStartupKey()
         {
-            ExecuteFromCMD(AddCommand + StartupPath + AppNameKey + AppNameParam, true, false);
-        }
+            var value = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
 
-        public void DeleteAppStartupKey()
-        {
-            ExecuteFromCMD(DeleteCommand + StartupPath + AppNameKey + "/f", true, false);
-        }
-
-        public void SetDefaultGammaRangeKey()
-        {
-            ExecuteFromCMD(AddCommand + GammaRangePath + GammaRangeKey + GammaRangeDefaultParam, true, false);
-        }
-        public void SetExtendedGammaRangeKey()
-        {
-            ExecuteFromCMD(AddCommand + GammaRangePath + GammaRangeKey + GammaRangeExtendedParam, true, false);
-        }
-
-        /// <summary>
-        /// Executes the command using CMD
-        /// </summary>
-        /// <remarks> It is used in order not to request administrator rights when starting the program </remarks>
-        /// <returns> If redirectOutput = true, returns result of executing command </returns>
-        ///
-        /// TODO: Переменстить в инфрастуктуру
-        private string? ExecuteFromCMD(string command, bool shellExecute, bool redirectOutput)
-        {
-            string? output = "";
-
-            var processStartInfo = new ProcessStartInfo
+            if (value == null)
             {
-                UseShellExecute = shellExecute,
-                FileName = "CMD.exe",
-                Arguments = "/C " + command,
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                Verb = "runas",
-                RedirectStandardOutput = !shellExecute && redirectOutput
-            };
+                var path = Path.GetDirectoryName(Environment.ProcessPath);
+                var pat2h = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-            using var cmdProcess = Process.Start(processStartInfo);
-            if (redirectOutput)
-            {
-                using var reader = cmdProcess?.StandardOutput;
-                output = reader?.ReadToEnd();
+
+
+                RegistryEx.SetRegistryValue(
+                    RunPath,
+                    AppDomain.CurrentDomain.FriendlyName,
+                    $"{Environment.ProcessPath} {SilentLaunchKey}");
             }
-            cmdProcess?.WaitForExit(3000);
-
-            return output;
         }
+
+        public void DeleteAppStartupKey() 
+            => RegistryEx.DeleteRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
     }
 }
