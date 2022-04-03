@@ -11,23 +11,26 @@ namespace ViewModel.ViewModels.Settings
         private readonly IApplicationModel _applicationModel;
         private readonly IAppSettingsModel _settings;
         private readonly IRegistryModel _registryModel;
+        private readonly IPeriodObserverModel _periodObserverModel;
 
         public SettingsViewModel(IScreenModel screenModel,
             IApplicationModel applicationModel,
-            IAppSettingsModel settings, IRegistryModel registryModel)
+            IAppSettingsModel settings, IRegistryModel registryModel,
+            IPeriodObserverModel periodObserver)
         {
             _screenModel = screenModel;
             _applicationModel = applicationModel;
             _settings = settings;
             _registryModel = registryModel;
+            _periodObserverModel = periodObserver;
             _checkFullScreensApps = _settings.IsFullScreenAppCheckEnabled;
             _autoLaunchOnStartup = registryModel.IsAppStartupKeyFounded();
             _extendedGammaRangeEnabled = registryModel.IsExtendedGammaRangeActive();
             _gammaSmoothingEnabled = settings.IsGammaSmoothingEnabled;
  
             RefreshApplicationsList = new RelayCommand(RefreshApplicationsListExecute);
-            SaveSettings = new RelayCommand(SaveSettingsExecute);
-            ResetSettings = new RelayCommand(ResetSettingsExecute);
+            ApplyValues = new RelayCommand(ApplyValuesExecute);
+            ResetValues = new RelayCommand(ResetValuesExecute);
 
             SubscribeEvents();
         }

@@ -42,7 +42,7 @@
                             Width="80"
                             Height="40"
                             HorizontalAlignment="Left"
-                            Command="{Binding ResetSettings}"
+                            Command="{Binding ResetValues}"
                             Style="{StaticResource LightGrayButton}"
                             Content="{DynamicResource Loc_Reset}" Cursor="Hand">
                         </Button>
@@ -50,7 +50,7 @@
                             Width="80"
                             Height="40"
                             HorizontalAlignment="Center"
-                            Command="{Binding ResetSettings}"
+                            Command="{Binding ResetValues}"
                             Style="{StaticResource LightGrayButton}"
                             Click="{ext:CloseWindow}"
                             Content="{DynamicResource Loc_Cancel}" Cursor="Hand">
@@ -59,10 +59,10 @@
                             HorizontalAlignment="Right"
                             Width="80"
                             Height="40"
-                            Command="{Binding SaveSettings}"
+                            Command="{Binding ApplyValues}"
                             Style="{StaticResource LightGrayButton}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource Loc_Apply}">
+                            Content="{DynamicResource Loc_Apply}" Cursor="Hand">
                         </Button>
                     </Grid>
                     <ContentControl 

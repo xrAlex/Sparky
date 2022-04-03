@@ -1,7 +1,7 @@
 ﻿using Common.Infrastructure.INPC;
 using Common.Interfaces;
 
-namespace Model.Entities
+namespace Model.Entities.Domain
 {
     internal sealed class Application : INPCBase, IApplication
     {

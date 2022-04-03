@@ -1,6 +1,8 @@
 ﻿using Common.Enums;
 using Common.Extensions.CollectionChanged;
+using Common.WinApi;
 using Model.Entities;
+using Model.Entities.Domain;
 
 namespace Model.Screen.ScreenCollection
 {
@@ -37,6 +39,8 @@ namespace Model.Screen.ScreenCollection
             {
                 return false;
             }
+
+            WinApiWrapper.DeleteScreenDeviceContext(screen.SystemHandle);
 
             _screens.Remove(key);
 

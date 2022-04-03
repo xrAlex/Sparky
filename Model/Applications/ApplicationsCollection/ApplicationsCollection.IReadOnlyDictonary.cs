@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Model.Entities;
+using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection
 {

@@ -1,11 +1,13 @@
 ﻿using Common.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Interfaces;
 
 namespace Common.WinApi
 {
@@ -88,11 +90,12 @@ namespace Common.WinApi
         /// Проверяет есть ли на указанном источнике отображения полноэкранное окно переднего плана.
         /// </summary>
         /// <returns> <see langword="true"/>, если найдено окно развернутое во весь экран.</returns>
-        public static bool IsForegroundWindowOnFullScreen(ScreenBounds screenBounds)
+        public static bool IsForegroundWindowOnFullScreen(ScreenBounds screenBounds, out nint windowHandle)
         {
-            var windowHandle = GetForegroundWindow();
+            windowHandle = GetForegroundWindow();
             return IsWindowValid(windowHandle) && IsWindowOnFullScreen(windowHandle, screenBounds);
         }
+
 
         /// <summary>
         /// Проверяет развернуто ли указанное окно на весь экран, включая панель задач

@@ -6,6 +6,7 @@ using Common.Extensions.CollectionChanged;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
 using Model.Entities;
+using Model.Entities.Domain;
 
 namespace Model.Screen.ScreenCollection
 {

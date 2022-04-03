@@ -41,6 +41,11 @@ namespace Common.Interfaces
         bool IsActive { get; set; }
 
         /// <summary>
+        /// Дескриптор контекста монитора
+        /// </summary>
+        nint SystemHandle { get; }
+
+        /// <summary>
         ///  Конфигурация цветов ночного периода
         /// </summary>
         ColorConfiguration NightColorConfiguration { get; set; }

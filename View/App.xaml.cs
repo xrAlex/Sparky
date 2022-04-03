@@ -16,11 +16,19 @@ namespace View
         private void OnStartup(object sender, StartupEventArgs e)
         {
             ConfigureIoC();
-            //InitializeComponent();
 
             IoC.GetInstance<IAppSettingsModel>().Load();
-            var asd = new MainWindow();
-            asd.Show();
+            //IoC.GetInstance<IScreenModel>().DataLoaded += ScreensDataLoaded;
+
+            IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
+            IoC.GetInstance<IPeriodObserverModel>().StartWatch();
+            new MainWindow().Show();
+        }
+
+        private void ScreensDataLoaded(object? sender, EventArgs e)
+        {
+            IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
+            IoC.GetInstance<IPeriodObserverModel>().StartWatch();
         }
     }
 
@@ -34,8 +42,6 @@ namespace View
             var container = IoC.Instance;
             ModelRegistrator.Register(container, ConfigurationFilepath);
             ViewModelRegistrator.Register(container);
-
-            //container.Verify();
         }
     }
 }

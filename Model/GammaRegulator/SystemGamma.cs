@@ -9,9 +9,8 @@ namespace Model.GammaRegulator
         /// <summary>
         /// Converts color configuration to RGB colors for work with WinApi
         /// </summary>
-        public static void ApplyColorConfiguration(ColorConfiguration colorConfiguration, string screenName)
+        public static void ApplyColorConfiguration(ColorConfiguration colorConfiguration, nint deviceContext)
         {
-            var dc = WinApiWrapper.CreateScreenDeviceContext(screenName);
             const int maxChannelValue = 256;
             const int channelMult = 255;
 
@@ -31,17 +30,15 @@ namespace Model.GammaRegulator
                 channels.Blue[i] = (ushort)(i * channelMult * RGBmask.Blue * colorConfiguration.Brightness);
             }
 
-            var successfully = WinApiWrapper.SetScreenGamma(dc, ref channels);
+            var successfully = WinApiWrapper.SetScreenGamma(deviceContext, ref channels);
             if (!successfully)
             {
                 // TODO: Обработать
                 Console.WriteLine(
-                    $"Could not set gamma for screen : {screenName}" +
-                    $" [DC: {dc} Color Temperature: {colorConfiguration.ColorTemperature} " +
+                    $"Could not set gamma for screen : {deviceContext}" +
+                    $" [DC: {deviceContext} Color Temperature: {colorConfiguration.ColorTemperature} " +
                     $"Brightness: {colorConfiguration.Brightness}]");
             }
-
-            WinApiWrapper.DeleteScreenDeviceContext(dc);
         }
 
         /// <summary>

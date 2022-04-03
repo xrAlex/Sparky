@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Model.Repository
 {
-    internal class ApplicationRepository
+    internal sealed class ApplicationRepository
     {
         [JsonProperty]
         private readonly List<string> _ignoredAppPaths = new();
@@ -32,7 +32,7 @@ namespace Model.Repository
             => _ignoredAppPaths.Clear();
         
 
-        public IReadOnlyList<string> GetData()
-            => _ignoredAppPaths.ToList().AsReadOnly();
+        public IEnumerable<string> GetData()
+            => _ignoredAppPaths.AsReadOnly();
     }
 }

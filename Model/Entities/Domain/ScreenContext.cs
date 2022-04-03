@@ -2,21 +2,24 @@
 using Common.Entities;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
+using Common.WinApi;
 using Model.GammaRegulator;
+using Newtonsoft.Json;
+using WindowsDisplayAPI.Native.Structures;
 
-namespace Model.Entities
+namespace Model.Entities.Domain
 {
     /// <summary>
     /// Контекст данных источника отображения
     /// </summary>
     internal sealed class ScreenContext : INPCBase, IScreenContext
     {
-        private bool _isActive;
-        private ColorConfiguration _dayColorConfiguration;
-        private ColorConfiguration _nightColorConfiguration;
-        private ColorConfiguration _currentColorConfiguration;
-        private PeriodStartTime _dayStartTime;
-        private PeriodStartTime _nightStartTime;
+        private bool _isActive = true;
+        private ColorConfiguration _dayColorConfiguration = new (6600f, 1f);
+        private ColorConfiguration _nightColorConfiguration = new (5400f, 0.8f);
+        private PeriodStartTime _dayStartTime = new (7,0);
+        private PeriodStartTime _nightStartTime = new (23,0);
+        private ColorConfiguration _currentColorConfiguration = new(6600f, 1f);
         private ScreenBounds _bounds;
 
         /// <inheritdoc cref="IScreenContext.SystemName"/>
@@ -27,6 +30,9 @@ namespace Model.Entities
 
         /// <inheritdoc cref="IScreenContext.DisplayCode"/>
         public int DisplayCode { get; }
+
+        /// <inheritdoc cref="IScreenContext.SystemHandle"/>
+        public nint SystemHandle { get; }
 
         /// <inheritdoc cref="IScreenContext.IsActive"/>
         public bool IsActive
@@ -84,31 +90,51 @@ namespace Model.Entities
         {
             base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
 
-            // TODO: надо бы это уюрать отсюда
             switch (propertyName)
             {
-                case nameof(CurrentColorConfiguration):
-                    SystemGamma.ApplyColorConfiguration(CurrentColorConfiguration, SystemName);
-                    break;
                 case nameof(NightColorConfiguration):
-                    SystemGamma.ApplyColorConfiguration(NightColorConfiguration, SystemName);
+                    CurrentColorConfiguration = NightColorConfiguration;
                     break;
                 case nameof(DayColorConfiguration):
-                    SystemGamma.ApplyColorConfiguration(DayColorConfiguration, SystemName);
+                    CurrentColorConfiguration = DayColorConfiguration;
+                    break;
+                case nameof(CurrentColorConfiguration):
+                    if (IsActive)
+                    {
+                        SystemGamma.ApplyColorConfiguration((ColorConfiguration)newValue, SystemHandle);
+                    }
                     break;
             }
         }
 
-        public ScreenContext(int displayCode, string systemName, string friendlyName)
+        /// <summary>
+        /// Создает контекст устрйоства отображения на основе пользовательских настроек.
+        /// </summary>
+        public ScreenContext(ScreenSystemParams systemParams, ScreenUserSettings screenSettings)
         {
-            if (string.IsNullOrWhiteSpace(systemName))
-            {
-                throw new ArgumentNullException(nameof(systemName));
-            }
+            DisplayCode = screenSettings.DisplayCode;
+            IsActive = screenSettings.IsActive;
+            SystemName = systemParams.SystemName;
+            FriendlyName = systemParams.FriendlyName;
+            Bounds = systemParams.Bounds;
+            SystemHandle = systemParams.Handle;
+            _dayColorConfiguration = screenSettings.DayColorConfiguration;
+            _nightColorConfiguration = screenSettings.NightColorConfiguration;
+            _isActive = screenSettings.IsActive;
+            _dayStartTime = screenSettings.DayStartTime;
+            _nightStartTime = screenSettings.NightStartTime;
+        }
 
-            DisplayCode = displayCode;
-            SystemName = systemName;
-            FriendlyName = friendlyName;
+        /// <summary>
+        /// Создает контекст устроqства отображения.
+        /// </summary>
+        public ScreenContext(ScreenSystemParams systemParams)
+        {
+            DisplayCode = systemParams.DisplayCode;
+            SystemName = systemParams.SystemName;
+            FriendlyName = systemParams.FriendlyName;
+            Bounds = systemParams.Bounds;
+            SystemHandle = systemParams.Handle;
         }
     }
 }

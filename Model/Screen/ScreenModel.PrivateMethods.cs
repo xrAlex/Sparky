@@ -2,8 +2,12 @@
 using Common.Entities;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
+using Common.WinApi;
 using Model.Entities;
+using Model.Entities.Domain;
+using WindowsDisplayAPI;
 using WindowsDisplayAPI.DisplayConfig;
+using WindowsDisplayAPI.Native.DisplayConfig;
 
 namespace Model.Screen
 {
@@ -23,7 +27,7 @@ namespace Model.Screen
                     _appSettings.ScreenRepository.Delete(args.Screen.DisplayCode);
                     break;
                 case CollectionChangedAction.Updated:
-                    _appSettings.ScreenRepository.TryUpdate(args.Screen.DisplayCode, (ScreenContext)args.Screen);
+                    _appSettings.ScreenRepository.TryUpdate(args.Screen.DisplayCode, args.PropertyName, args.NewValue);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(args.ToString());
@@ -36,13 +40,13 @@ namespace Model.Screen
         /// </summary>
         private void LoadScreens()
         {
-            foreach (var display in PathDisplayTarget.GetDisplayTargets())
+            foreach (var display in Display.GetDisplays())
             {
-                var screen = TryFormScreenContext(display);
-                if (screen == null) continue;
-
-                var screenContext = TryGetUserSettings(screen);
-                _screenCollection.Add(screenContext);
+                var screenContext = TryFormScreenContext(display);
+                if (screenContext != null)
+                {
+                    _screenCollection.Add(screenContext);
+                }
             }
         }
 
@@ -50,24 +54,20 @@ namespace Model.Screen
         /// Создает контекст устройства отображения.
         /// </summary>
         /// <returns><see cref="ScreenContext"/>, в случае успешного получения данных монитора.</returns>
-        private static ScreenContext? TryFormScreenContext(PathDisplayTarget display)
+        private ScreenContext? TryFormScreenContext(Display display)
         {
             try
             {
-                var device = display.ToDisplayDevice();
-                var settings = device.GetPreferredSetting();
-                var screen = new ScreenContext(display.EDIDProductCode, device.DisplayName, display.FriendlyName)
+                var screenCode = (int)display.ToPathDisplayTarget().TargetId;
+                var screenSystemSettings = TryGetSystemScreenSettings(display);
+                var screenUserSettings = TryGetUserSettings(screenCode);
+                if (screenSystemSettings != null)
                 {
-                    IsActive = true,
-                    CurrentColorConfiguration = new ColorConfiguration(6600f, 1f),
-                    DayColorConfiguration = new ColorConfiguration(6600f, 1f),
-                    NightColorConfiguration = new ColorConfiguration(5200f, 0.7f),
-                    DayStartTime = new PeriodStartTime(7, 0),
-                    NightStartTime = new PeriodStartTime(22, 0),
-                    Bounds = new ScreenBounds(settings.Resolution.Width, settings.Resolution.Height)
-                };
-
-                return screen;
+                    return screenUserSettings != null 
+                        ? new ScreenContext(screenSystemSettings.Value, screenUserSettings) 
+                        : new ScreenContext(screenSystemSettings.Value);
+                }
+                return null;
             }
             catch (Exception ex)
             {
@@ -79,22 +79,38 @@ namespace Model.Screen
         /// Проверяет наличие пользовательских настроек для уcтройства отображения.
         /// </summary>
         /// <param name="screen"> сформированный объект контекста монитора.</param>
+        /// <param name="displayCode"></param>
         /// <returns>В случае обнаружения настроек устройства отображения возвращает <see cref="ScreenContext"/>
         /// с этими настройками или возвращает неизменный экземпляр.</returns>
-        private ScreenContext TryGetUserSettings(ScreenContext screen)
+        private ScreenUserSettings? TryGetUserSettings(int displayCode)
         {
-            if (!_appSettings.ScreenRepository.TryGetValue(screen.DisplayCode, out var screenSettings))
+            if (!_appSettings.ScreenRepository.TryGetValue(displayCode, out var screenSettings))
             {
-                return screen;
+                return null;
             }
 
-            screen.NightColorConfiguration = screenSettings.NightColorConfiguration;
-            screen.DayColorConfiguration = screenSettings.DayColorConfiguration;
-            screen.DayStartTime = screenSettings.DayStartTime;
-            screen.NightStartTime = screenSettings.NightStartTime;
-            screen.IsActive = screenSettings.IsActive;
+            return screenSettings;
+        }
+        private ScreenSystemParams? TryGetSystemScreenSettings(Display display)
+        {
+            if (!display.IsAvailable)
+            {
+                return null;
+            }
 
-            return screen;
+            var displayResolution = display.CurrentSetting.Resolution;
+            var displayTarget = display.ToPathDisplayTarget();
+
+            var sysParams = new ScreenSystemParams
+            (
+                (int)displayTarget.TargetId,
+                displayTarget.FriendlyName,
+                display.DisplayName,
+                new ScreenBounds(displayResolution.Width, displayResolution.Height),
+                WinApiWrapper.CreateScreenDeviceContext(display.DisplayName)
+            );
+
+            return sysParams;
         }
     }
 }

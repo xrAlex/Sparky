@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Common.Enums;
 using Common.Extensions;
 using Common.Extensions.CollectionChanged;
+using Common.Infrastructure.Commands;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
 using ViewModel.SubViewModels;
@@ -12,12 +13,23 @@ namespace ViewModel.ViewModels
     public sealed class MainWindowViewModel : ViewModelBase
     {
         private readonly IScreenModel _screenModel;
-
+        private readonly IPeriodObserverModel _periodObserverModel;
         public ObservableCollection<ScreenViewModel> Screens { get; } = new();
 
-        public MainWindowViewModel(IScreenModel screenModel)
+        public RelayCommand StopObserver { get; }
+
+        private void StopObserverExecute()
+        {
+            _periodObserverModel.StopWatch();
+        }
+
+        public MainWindowViewModel(IScreenModel screenModel, IPeriodObserverModel periodObserverModel)
         {
             _screenModel = screenModel;
+            _periodObserverModel = periodObserverModel;
+
+            StopObserver = new RelayCommand(StopObserverExecute);
+
             SubscribeEvents();
         }
 

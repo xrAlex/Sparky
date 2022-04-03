@@ -5,22 +5,24 @@ namespace ViewModel.ViewModels.Settings
     public partial class SettingsViewModel
     {
         public RelayCommand RefreshApplicationsList { get; }
-        public RelayCommand SaveSettings { get; }
-        public RelayCommand ResetSettings { get; }
+        public RelayCommand ApplyValues { get; }
+        public RelayCommand ResetValues { get; }
 
         private void RefreshApplicationsListExecute()
             => _applicationModel.RefreshApplications();
 
-        private void SaveSettingsExecute()
+        private void ApplyValuesExecute()
         {
             UnsubscribeEvents();
             _settings.SaveAsync();
+            _periodObserverModel.StartWatch();
         }
 
-        private void ResetSettingsExecute()
+        private void ResetValuesExecute()
         {
             UnsubscribeEvents();
             _settings.Reset();
+            _periodObserverModel.StartWatch();
         }
     }
 }
