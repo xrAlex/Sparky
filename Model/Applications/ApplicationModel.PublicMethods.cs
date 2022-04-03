@@ -17,15 +17,5 @@ namespace Model.Applications
         public List<string> GetAllNames() 
             => _applications.Select(application => application.Value.Name).ToList();
 
-        public void SetIgnored(string appName, bool value)
-        {
-            if (_applications.ContainsKey(appName))
-            {
-                _applications[appName].IsIgnored = value;
-            }
-        }
-
-        public bool IsAppIgnored(string appName) 
-            => _applications.ContainsKey(appName) && _applications[appName].IsIgnored;
     }
 }

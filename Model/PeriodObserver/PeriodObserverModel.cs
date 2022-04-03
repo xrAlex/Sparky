@@ -29,23 +29,34 @@ namespace Model.PeriodObserver
             _screenModel = (ScreenModel)screenModel;
         }
 
-        /// <summary>
-        /// Starts current period watcher cycle
-        /// </summary>
+        /// <inheritdoc cref="IPeriodObserverModel.StartWatch()"/>
         public void StartWatch()
         {
             _cts = new CancellationTokenSource();
             Task.Run(() => Cycle(_cts.Token), _cts.Token).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Stops current period watcher cycle
-        /// </summary>
+        /// <inheritdoc cref="IPeriodObserverModel.StopWatch"/>
         public void StopWatch() 
             => _cts?.Cancel();
 
+        /// <inheritdoc cref="IPeriodObserverModel.RefreshAllScreensColorConfiguration"/>
+        public void RefreshAllScreensColorConfiguration()
+        {
+            foreach (var screen in _screenModel.GetAllScreens().ToArray())
+            {
+                if (screen.IsActive)
+                {
+                    var (currentPeriod, _) = GetCurrentPeriod(screen);
+                    screen.CurrentColorConfiguration = currentPeriod == Period.Day
+                        ? screen.DayColorConfiguration
+                        : screen.NightColorConfiguration;
+                }
+            }
+        }
+
         /// <summary>
-        /// Checks in cycle which color configuration should be set
+        /// Циклично проверяет настройки отображения устройств
         /// </summary>
         private void Cycle(CancellationToken token)
         {
@@ -62,32 +73,29 @@ namespace Model.PeriodObserver
             }
         }
 
-        public void RefreshAllScreensColorConfiguration()
-        {
-            foreach (var screen in _screenModel.GetAllScreens().ToArray())
-            {
-                if (screen.IsActive)
-                {
-                    var (currentPeriod, _) = GetCurrentPeriod(screen);
-                    screen.CurrentColorConfiguration = currentPeriod == Period.Day 
-                        ? screen.DayColorConfiguration 
-                        : screen.NightColorConfiguration;
-                }
-            }
-        }
-
+        /// <summary>
+        /// Получает цветовую конфигурацию для текущего периода времени
+        /// </summary>
         private ColorConfiguration GetCurrentColorConfiguration(IScreenContext screen)
         {
             var (currentPeriod, remainingTime) = GetCurrentPeriod(screen);
             return CalculateCurrentConfiguration(currentPeriod, screen, (float) remainingTime);
         }
 
+        /// <summary>
+        /// Устанавливает цветовую конфигурацию для текущего периода времени
+        /// </summary>
+        /// <param name="screen"></param>
+        /// <param name="newColorConfiguration"></param>
         private static void SetColorConfiguration(IScreenContext screen, ColorConfiguration newColorConfiguration)
         {
             var configuration = SmoothOutColorTransition(screen.CurrentColorConfiguration, newColorConfiguration);
             screen.CurrentColorConfiguration = configuration;
         }
 
+        /// <summary>
+        /// Подсчитывает значения цветовой конфигурации для текщуего период времени или переходного периода
+        /// </summary>
         private ColorConfiguration CalculateCurrentConfiguration(Period currentPeriod, IScreenContext screen, float remainingTime)
         {
             var screenDayConfig = screen.DayColorConfiguration;
@@ -111,6 +119,9 @@ namespace Model.PeriodObserver
             return currentPeriod == Period.Day ? screenDayConfig : screenNightConfig;
         }
 
+        /// <summary>
+        /// Сглаживает переход цветовой конфигурации от периода к периоду
+        /// </summary>
         private static ColorConfiguration SmoothOutColorTransition(ColorConfiguration currentConfiguration, ColorConfiguration targetConfiguration)
         {
             var temperature = currentConfiguration.ColorTemperature;
@@ -151,6 +162,10 @@ namespace Model.PeriodObserver
             return new ColorConfiguration(temperature, brightness);
         }
 
+        /// <summary>
+        /// Получает текущее значение цветовой конфигурации
+        /// в зависимоти от оставшегося времени до смены периода
+        /// </summary>
         private static ColorConfiguration GetTransientColorConfiguration(ColorConfiguration targetValues, ColorConfiguration startValues, float remainingTime)
         {
             if (startValues.ColorTemperature.IsCloseTo(targetValues.ColorTemperature) && startValues.Brightness.IsCloseTo(targetValues.Brightness))
@@ -167,6 +182,9 @@ namespace Model.PeriodObserver
             );
         }
 
+        /// <summary>
+        /// Возвращает текущий период со временем до его кончания
+        /// </summary>
         private static (Period period, double remainingTime) GetCurrentPeriod(IScreenContext screen)
         {
             var dayStart = screen.DayStartTime;
@@ -208,10 +226,17 @@ namespace Model.PeriodObserver
             return (Period.Night, remainingTime);
         }
 
+        /// <summary>
+        /// Проверяет есть ли в системе окно развернутое на полный экран
+        /// </summary>
         private bool IsFullScreenAppFounded(IScreenContext screen) 
             => WinApiWrapper.IsForegroundWindowOnFullScreen(screen.Bounds, out var windowHandle) 
                && !IsAppExePathInIgnored(WinApiWrapper.TryGetExecutablePath(windowHandle));
 
+        /// <summary>
+        /// Проверяет есть в в игрнориемых пользователем приложениях
+        /// путь указанного приложения
+        /// </summary>
         private bool IsAppExePathInIgnored(string? processExePath) 
             => _settings.IgnoredAppRepository.GetData().Contains(processExePath);
     }

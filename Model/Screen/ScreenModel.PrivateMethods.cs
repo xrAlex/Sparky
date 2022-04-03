@@ -78,8 +78,8 @@ namespace Model.Screen
         /// </summary>
         /// <param name="screen"> сформированный объект контекста монитора.</param>
         /// <param name="displayCode"></param>
-        /// <returns>В случае обнаружения настроек устройства отображения возвращает <see cref="ScreenContext"/>
-        /// с этими настройками или возвращает неизменный экземпляр.</returns>
+        /// <returns>При обнаружении настроек устройства отображения возвращает
+        /// <see cref="ScreenUserSettings"/></returns>
         private ScreenUserSettings? TryGetUserSettings(int displayCode)
         {
             if (!_appSettings.ScreenRepository.TryGetValue(displayCode, out var screenSettings))
@@ -89,6 +89,12 @@ namespace Model.Screen
 
             return screenSettings;
         }
+
+        /// <summary>
+        /// Получает системные параметры устройства отображения
+        /// </summary>
+        /// <param name="display">Системное устройство отображения</param>
+        /// <returns><see cref="ScreenUserSettings"/> систменые параметры устройства отображения </returns>
         private static ScreenSystemParams? TryGetSystemScreenSettings(Display display)
         {
             if (!display.IsAvailable)

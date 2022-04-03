@@ -3,14 +3,17 @@
     public interface IPeriodObserverModel
     {
         /// <summary>
-        /// Starts current period watcher cycle
+        /// Запускает цикл обновления настроек гаммы для всех устройств отображения
         /// </summary>
         void StartWatch();
 
+        /// <summary>
+        /// Принудительно обновляет гамму на устройства отображения в соответсвии с их настрйоками
+        /// </summary>
         public void RefreshAllScreensColorConfiguration();
 
         /// <summary>
-        /// Stops current period watcher cycle
+        /// Останавливает цикл обновления гаммы для устройств отображения
         /// </summary>
         void StopWatch();
     }

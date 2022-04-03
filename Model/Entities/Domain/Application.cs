@@ -9,20 +9,24 @@ namespace Model.Entities.Domain
         private bool _onFullScreen;
         private string _executableFilePath;
 
+        /// <inheritdoc cref="IApplication.Name"/>
         public string Name { get; }
 
+        /// <inheritdoc cref="IApplication.ExecutableFilePath"/>
         public string ExecutableFilePath
         {
             get => _executableFilePath;
             set => Set(ref _executableFilePath!, value);
         }
 
+        /// <inheritdoc cref="IApplication.OnFullScreen"/>
         public bool OnFullScreen
         {
             get => _onFullScreen;
             set => Set(ref _onFullScreen, value);
         }
 
+        /// <inheritdoc cref="IApplication.IsIgnored"/>
         public bool IsIgnored
         {
             get => _isIgnored;

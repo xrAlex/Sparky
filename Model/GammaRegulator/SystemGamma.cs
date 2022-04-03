@@ -7,7 +7,7 @@ namespace Model.GammaRegulator
     internal static class SystemGamma
     {
         /// <summary>
-        /// Converts color configuration to RGB colors for work with WinApi
+        /// Применяет параметры цветовой гаммы для устройства
         /// </summary>
         public static void ApplyColorConfiguration(ColorConfiguration colorConfiguration, nint deviceContext)
         {
@@ -34,18 +34,18 @@ namespace Model.GammaRegulator
             if (!successfully)
             {
                 // TODO: Обработать
-                Console.WriteLine(
-                    $"Could not set gamma for screen : {deviceContext}" +
-                    $" [DC: {deviceContext} Color Temperature: {colorConfiguration.ColorTemperature} " +
-                    $"Brightness: {colorConfiguration.Brightness}]");
+                //Console.WriteLine(
+                //    $"Could not set gamma for screen : {deviceContext}" +
+                //    $" [DC: {deviceContext} Color Temperature: {colorConfiguration.ColorTemperature} " +
+                //    $"Brightness: {colorConfiguration.Brightness}]");
             }
         }
 
         /// <summary>
-        /// Converts color temperature (Kelvin) to RGB format
+        /// Конвертирует цветовую температуру (Kelvin) в RGB формат
         /// </summary>
-        /// <remarks> <see href="http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code">Algorithm source</see> </remarks>
-        /// <returns> <see cref="RGBMask"/> color mask </returns>
+        /// <remarks> <see href="http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code">Источник алгоритма</see> </remarks>
+        /// <returns> Цветовая маска <see cref="RGBMask"/></returns>
         private static RGBMask ConvertKelvinsToRGB(double kelvins)
         {
             RGBMask mask = new

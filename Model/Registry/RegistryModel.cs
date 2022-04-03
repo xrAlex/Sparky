@@ -16,6 +16,7 @@ namespace Model.Registry
         private const string GammaParamName = "GdiICMGammaRange";
         private const string SilentLaunchKey = "-silent";
 
+        /// <inheritdoc cref="IRegistryModel.IsExtendedGammaRangeActive"/>
         public bool IsExtendedGammaRangeActive()
         {
             var value = RegistryEx.TryGetRegistryValue(ICMPath, GammaParamName);
@@ -28,18 +29,22 @@ namespace Model.Registry
             return true;
         }
 
+        /// <inheritdoc cref="IRegistryModel.SetDefaultGammaRangeKey"/>
         public void SetDefaultGammaRangeKey()
             => RegistryEx.SetRegistryValue(ICMPath, GammaParamName, 0);
 
+        /// <inheritdoc cref="IRegistryModel.SetExtendedGammaRangeKey"/>
         public void SetExtendedGammaRangeKey()
             => RegistryEx.SetRegistryValue(ICMPath, GammaParamName, 256);
 
+        /// <inheritdoc cref="IRegistryModel.IsAppStartupKeyFounded"/>
         public bool IsAppStartupKeyFounded()
         {
             var value = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
             return value != null;
         }
 
+        /// <inheritdoc cref="IRegistryModel.AddAppStartupKey"/>
         public void AddAppStartupKey()
         {
             var value = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
@@ -53,6 +58,7 @@ namespace Model.Registry
             }
         }
 
+        /// <inheritdoc cref="IRegistryModel.DeleteAppStartupKey"/>
         public void DeleteAppStartupKey() 
             => RegistryEx.DeleteRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
     }

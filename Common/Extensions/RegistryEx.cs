@@ -9,11 +9,11 @@ namespace Common.Extensions
     public static class RegistryEx
     {
         /// <summary>
-        /// Получает значение из реестра
+        /// Получает значение из реестра.
         /// </summary>
-        /// <param name="path">Путь значения</param>
-        /// <param name="entryName">Имя значения</param>
-        /// <returns> <see cref="object"/>, содержущий значение реестра или null </returns>
+        /// <param name="path">Путь значения.</param>
+        /// <param name="entryName">Имя значения.</param>
+        /// <returns> <see cref="object"/>, содержущий значение реестра или null.</returns>
         public static object? TryGetRegistryValue(string path, string entryName)
         {
             var (hiveName, relativePath) = DeconstructPath(path);
@@ -75,12 +75,18 @@ namespace Common.Extensions
             }
         }
 
+        /// <summary>
+        /// Разбивает путь реестра для использования в <see cref="Registry"/>
+        /// </summary>
         private static (string hiveName, string relativePath) DeconstructPath(string entryName)
         {
             var separatorIndex = entryName.IndexOf('\\');
             return (entryName[..separatorIndex], entryName[(separatorIndex + 1)..]);
         }
 
+        /// <summary>
+        /// Получает ключ <see cref="Registry"/> из строки пути реестра.
+        /// </summary>
         private static RegistryKey GetRegistryKeyFromHiveName(string hiveName)
         {
             if (string.Equals(hiveName, "HKLM", StringComparison.OrdinalIgnoreCase) ||
@@ -98,6 +104,9 @@ namespace Common.Extensions
             throw new NotSupportedException($"Unsupported or invalid hive '{hiveName}'.");
         }
 
+        /// <summary>
+        /// Получает тип значения параметра реестра.
+        /// </summary>
         private static string GetRegistryValueType(Type type)
         {
             if (type == typeof(int))
@@ -109,6 +118,9 @@ namespace Common.Extensions
             throw new NotSupportedException($"Unsupported registry value type '{type}'.");
         }
 
+        /// <summary>
+        /// Запускает системный компонент REG.exe с указанными параметрами.
+        /// </summary>
         private static void RunRegistryCli(IEnumerable<string> arguments, bool asAdmin = false)
         {
             var processInfo = new ProcessStartInfo("reg");
