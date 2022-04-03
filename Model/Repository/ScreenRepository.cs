@@ -1,5 +1,4 @@
-﻿using Common.Interfaces;
-using Model.Entities;
+﻿using Model.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -39,7 +38,7 @@ namespace Model.Repository
         }
 
         
-        public bool TryGetValue(int key, out ScreenUserSettings value)
+        public bool TryGetValue(int key, [MaybeNullWhen(false)] out ScreenUserSettings value)
             => _screens.TryGetValue(key, out value);
 
         public bool TryUpdate(int key, string? property, object? newValue)

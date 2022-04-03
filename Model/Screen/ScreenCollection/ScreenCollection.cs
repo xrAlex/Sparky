@@ -5,7 +5,6 @@ using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
-using Model.Entities;
 using Model.Entities.Domain;
 
 namespace Model.Screen.ScreenCollection
@@ -23,7 +22,7 @@ namespace Model.Screen.ScreenCollection
                 CollectionChanged?.Invoke(this,
                     new ScreensCollectionChangedArgs(screen,
                         CollectionChangedAction.Updated,
-                        args.PropertyName,
+                        args.PropertyName!,
                         ((PropertyChangedValueEventArgs) args).NewValue));
             }
         }

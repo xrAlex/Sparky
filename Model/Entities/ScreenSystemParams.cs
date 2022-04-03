@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Entities;
-using Common.Interfaces;
+﻿using Common.Entities;
 
 namespace Model.Entities
 {

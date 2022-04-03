@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Interfaces;
+﻿using Common.Interfaces;
 using Model.Repository;
 
 namespace Model.Settings

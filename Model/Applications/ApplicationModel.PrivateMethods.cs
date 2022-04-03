@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Common.WinApi;
-using Model.Entities;
 using Model.Entities.Domain;
 
 namespace Model.Applications
@@ -38,7 +36,7 @@ namespace Model.Applications
                     }
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException($"Application collection unknown action {args.Action}");
             }
 
             InternalCollectionChanged?.Invoke(this, args);

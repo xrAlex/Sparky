@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Model.Entities;
+using System.Diagnostics.CodeAnalysis;
 using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection
@@ -30,7 +30,7 @@ namespace Model.Applications.ApplicationsCollection
         public bool ContainsKey(string key) 
             => _applications.ContainsKey(key);
 
-        public bool TryGetValue(string key, out Application value) 
+        public bool TryGetValue(string key, [MaybeNullWhen(false)] out Application value) 
             => _applications.TryGetValue(key, out value);
 
         public Application this[string key] 

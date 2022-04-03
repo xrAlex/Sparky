@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using Common.Extensions;
 using Common.Interfaces;
 
@@ -47,11 +46,6 @@ namespace Model.Registry
 
             if (value == null)
             {
-                var path = Path.GetDirectoryName(Environment.ProcessPath);
-                var pat2h = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-
-
-
                 RegistryEx.SetRegistryValue(
                     RunPath,
                     AppDomain.CurrentDomain.FriendlyName,

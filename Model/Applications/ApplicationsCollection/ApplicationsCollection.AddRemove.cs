@@ -1,6 +1,5 @@
 ﻿using Common.Enums;
 using Common.Extensions.CollectionChanged;
-using Model.Entities;
 using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection

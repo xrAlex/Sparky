@@ -6,8 +6,6 @@ using Common.WinApi;
 using Model.Entities;
 using Model.Entities.Domain;
 using WindowsDisplayAPI;
-using WindowsDisplayAPI.DisplayConfig;
-using WindowsDisplayAPI.Native.DisplayConfig;
 
 namespace Model.Screen
 {
@@ -69,7 +67,7 @@ namespace Model.Screen
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -91,7 +89,7 @@ namespace Model.Screen
 
             return screenSettings;
         }
-        private ScreenSystemParams? TryGetSystemScreenSettings(Display display)
+        private static ScreenSystemParams? TryGetSystemScreenSettings(Display display)
         {
             if (!display.IsAvailable)
             {

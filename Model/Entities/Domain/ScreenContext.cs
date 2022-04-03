@@ -1,11 +1,7 @@
-﻿using System;
-using Common.Entities;
+﻿using Common.Entities;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
-using Common.WinApi;
 using Model.GammaRegulator;
-using Newtonsoft.Json;
-using WindowsDisplayAPI.Native.Structures;
 
 namespace Model.Entities.Domain
 {

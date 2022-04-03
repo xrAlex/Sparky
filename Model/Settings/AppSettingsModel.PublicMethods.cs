@@ -43,7 +43,7 @@ namespace Model.Settings
 
                 serializer.Serialize(writer, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO: ошибка сохранения настроек
             }
@@ -64,9 +64,8 @@ namespace Model.Settings
 
                 serializer.Populate(reader, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var asd = ex;
                 // TODO: ошибка загрузки настроек
             }
             finally

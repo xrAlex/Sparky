@@ -56,7 +56,7 @@ namespace ViewModel.ViewModels
                 case CollectionChangedAction.Updated:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(args.ToString());
+                    throw new ArgumentOutOfRangeException($"Screens collection unknown action {args.Action}");
             }
         }
     }

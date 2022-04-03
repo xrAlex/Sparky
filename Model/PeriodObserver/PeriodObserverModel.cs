@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Entities;
 using Common.Extensions;
 using Common.Interfaces;
 using Common.WinApi;
-using Model.Entities;
-using Model.GammaRegulator;
 using Model.Screen;
 using Model.Settings;
 

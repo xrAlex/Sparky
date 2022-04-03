@@ -18,17 +18,9 @@ namespace View
             ConfigureIoC();
 
             IoC.GetInstance<IAppSettingsModel>().Load();
-            //IoC.GetInstance<IScreenModel>().DataLoaded += ScreensDataLoaded;
-
             IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
             IoC.GetInstance<IPeriodObserverModel>().StartWatch();
             new MainWindow().Show();
-        }
-
-        private void ScreensDataLoaded(object? sender, EventArgs e)
-        {
-            IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
-            IoC.GetInstance<IPeriodObserverModel>().StartWatch();
         }
     }
 

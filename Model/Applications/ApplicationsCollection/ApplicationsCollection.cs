@@ -4,7 +4,6 @@ using System.ComponentModel;
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Common.Infrastructure.INPC;
-using Model.Entities;
 using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection
@@ -23,7 +22,7 @@ namespace Model.Applications.ApplicationsCollection
                 CollectionChanged?.Invoke(this,
                     new ApplicationCollectionChangedArgs(app,
                         CollectionChangedAction.Updated,
-                        args.PropertyName,
+                        args.PropertyName!,
                         ((PropertyChangedValueEventArgs)args).NewValue));
             }
         }

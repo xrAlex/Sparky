@@ -1,5 +1,4 @@
 ﻿using Common.Entities;
-using WindowsDisplayAPI.Native.Structures;
 
 namespace Model.Entities
 {

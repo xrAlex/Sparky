@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Infrastructure.Commands;
+﻿using Common.Infrastructure.Commands;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
 
