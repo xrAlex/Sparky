@@ -21,7 +21,7 @@ namespace View
 
             ConfigureIoC();
 
-            var asd = (ResourceDictionary) FindResource("EngDictionary");
+            //var asd = (ResourceDictionary) FindResource("EngDictionary");
 
             IoC.GetInstance<IAppSettingsModel>().Load();
             IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();

@@ -21,12 +21,16 @@
             <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
 
-            <locl:LocalizationProvider x:Key="localizationProvider"
-                                       Localization="Rus">
-                <locl:LocalizationResource Source="Localization/RusDictionary.xaml" x:Key="Rus"/>
-                <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
+            <locl:LocalizationProvider
+                x:Key="localizationProvider"
+                Localization="Rus"
+                App="{Binding}">
+                <locl:LocalizationProvider.Localizations>
+                    <locl:LocalizationResource Source="/Localization/RusDictionary.xaml" x:Key="Rus"/>
+                    <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
+                </locl:LocalizationProvider.Localizations>
             </locl:LocalizationProvider>
-
+            
             <ResourceDictionary.MergedDictionaries>
                 <locl:LocalizationResource Source="Localization/RusDictionary.xaml"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
