@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -103,6 +100,11 @@ namespace View.Localization
                 {
                     app.Resources.MergedDictionaries.Add(localization);
                 }
+            }
+            else
+            {
+                // Действия на случай если с таким ключом ресур не найден.
+                // Можно добавить свойство для лоализации по умолчанию и устанавливать её.
             }
         }
 
