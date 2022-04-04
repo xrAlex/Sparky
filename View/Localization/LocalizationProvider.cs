@@ -5,7 +5,7 @@ using System.Windows.Markup;
 
 namespace View.Localization
 {
-    [ContentProperty(nameof(Localizations))]
+    [ContentProperty(nameof(LocalizationsDictionary))]
     public class LocalizationProvider : Freezable
     {
         protected override Freezable CreateInstanceCore()
@@ -13,19 +13,19 @@ namespace View.Localization
             throw new NotImplementedException();
         }
 
-        public object Localization
+        public object CurrentLocalization
         {
-            get => GetValue(LocalizationDictionary);
-            set => SetValue(LocalizationDictionary, value);
+            get => GetValue(CurrentLocalizationProperty);
+            set => SetValue(CurrentLocalizationProperty, value);
         }
 
         /// <summary>
         /// Коллекция словарей локализации.
         /// </summary>
-        public Dictionary<object, LocalizationResource> Localizations
+        public Dictionary<object, LocalizationResource> LocalizationsDictionary
         {
-            get => (Dictionary<object, LocalizationResource>)GetValue(LocalizationsProperty);
-            set => SetValue(LocalizationsProperty, value);
+            get => (Dictionary<object, LocalizationResource>)GetValue(LocalizationsDictionaryProperty);
+            set => SetValue(LocalizationsDictionaryProperty, value);
         }
 
         /// <summary>
@@ -37,16 +37,16 @@ namespace View.Localization
             set => SetValue(AppProperty, value);
         }
 
-        public static readonly DependencyProperty LocalizationDictionary =
+        public static readonly DependencyProperty CurrentLocalizationProperty =
             DependencyProperty.Register(
-                nameof(Localization),
+                nameof(CurrentLocalization),
                 typeof(object),
                 typeof(LocalizationProvider));
 
-        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Localizations"/>.</summary>
-        public static readonly DependencyProperty LocalizationsProperty =
+        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="LocalizationsDictionary"/>.</summary>
+        public static readonly DependencyProperty LocalizationsDictionaryProperty =
             DependencyProperty.Register(
-                nameof(Localizations), 
+                nameof(LocalizationsDictionary), 
                 typeof(Dictionary<object, LocalizationResource>),
                 typeof(LocalizationProvider),
                 new PropertyMetadata(null,
@@ -63,14 +63,13 @@ namespace View.Localization
 
         public LocalizationProvider()
         {
-            Localizations = new Dictionary<object, LocalizationResource>();
+            LocalizationsDictionary = new Dictionary<object, LocalizationResource>();
         }
 
         public string GetLocalizedString(string param)
         {
-            var localizationDict = Localizations["Rus"];
-            var localizedString = localizationDict[param].ToString();
-            return localizedString;
+            var localizationDict = LocalizationsDictionary[CurrentLocalization];
+            return localizationDict.Contains(param) ? localizationDict[param].ToString()! : "ERROR";
         }
 
         private void LocalizationChange()
@@ -78,10 +77,10 @@ namespace View.Localization
             var app = App;
             if (app == null)
                 return;
-            var locs = Localizations;
+            var locs = LocalizationsDictionary;
             if (locs == null)
                 return;
-            var loc = Localization;
+            var loc = CurrentLocalization;
             if (loc == null)
                 return;
 

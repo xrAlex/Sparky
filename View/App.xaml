@@ -23,12 +23,12 @@
 
             <locl:LocalizationProvider
                 x:Key="LocalizationProvider"
-                Localization="Rus"
+                CurrentLocalization="Rus"
                 App="{Binding}">
-                <locl:LocalizationProvider.Localizations>
+                <locl:LocalizationProvider.LocalizationsDictionary>
                     <locl:LocalizationResource Source="/Localization/RusDictionary.xaml" x:Key="Rus"/>
                     <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
-                </locl:LocalizationProvider.Localizations>
+                </locl:LocalizationProvider.LocalizationsDictionary>
             </locl:LocalizationProvider>
             
             <ResourceDictionary.MergedDictionaries>
