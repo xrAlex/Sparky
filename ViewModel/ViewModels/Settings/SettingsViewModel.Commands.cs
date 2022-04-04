@@ -15,6 +15,7 @@ namespace ViewModel.ViewModels.Settings
         {
             UnsubscribeEvents();
             _settings.SaveAsync();
+            _periodObserverModel.RefreshAllScreensColorConfiguration();
             _periodObserverModel.StartWatch();
         }
 
@@ -22,6 +23,7 @@ namespace ViewModel.ViewModels.Settings
         {
             UnsubscribeEvents();
             _settings.Reset();
+            _periodObserverModel.RefreshAllScreensColorConfiguration();
             _periodObserverModel.StartWatch();
         }
     }
