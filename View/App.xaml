@@ -8,6 +8,7 @@
              xmlns:language="clr-namespace:View.Localization"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:extension="clr-namespace:View.Extension"
+             xmlns:locl="clr-namespace:View.Localization"
              Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
@@ -20,8 +21,14 @@
             <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
 
+            <locl:LocalizationProvider x:Key="localizationProvider"
+                                       Localization="Rus">
+                <locl:LocalizationResource Source="Localization/RusDictionary.xaml" x:Key="Rus"/>
+                <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
+            </locl:LocalizationProvider>
+
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Localization/RusDictionary.xaml" />
+                <locl:LocalizationResource Source="Localization/RusDictionary.xaml"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />

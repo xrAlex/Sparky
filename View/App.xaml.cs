@@ -3,6 +3,7 @@ using Common.Interfaces;
 using Model;
 using System;
 using System.Windows;
+using View.Localization;
 using View.Views;
 using ViewModel;
 
@@ -15,6 +16,9 @@ namespace View
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            LocalizationProvider localizationProvider = (LocalizationProvider) FindResource(nameof(localizationProvider));
+            localizationProvider.App = this;
+
             ConfigureIoC();
 
             var asd = (ResourceDictionary) FindResource("EngDictionary");
