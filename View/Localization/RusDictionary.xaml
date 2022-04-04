@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="Apply">
+        Применить
+    </system:String>
+    <system:String x:Key="AutoLaunch">
+        Запускаться вместе с Windows
+    </system:String>
+    <system:String x:Key="Brightness">
+        Яркость
+    </system:String>
+    <system:String x:Key="Cancel">
+        Отменить
+    </system:String>
+    <system:String x:Key="Day">
+        День
+    </system:String>
+    <system:String x:Key="ColorTemperature">
+        Цветовая температура
+    </system:String>
+    <system:String x:Key="DontWorkInFullScreen">
+        Не работать в полноэкранных приложениях
+    </system:String>
+    <system:String x:Key="ExtendedGammaRange">
+        Расширенный диапозон гаммы
+    </system:String>
+    <system:String x:Key="Monitors">
+        Мониторы
+    </system:String>
+    <system:String x:Key="Night">
+        Ночь
+    </system:String>
+    <system:String x:Key="ApplicationsWhiteList">
+        Список исключений
+    </system:String>
+    <system:String x:Key="Reset">
+        Сбросить
+    </system:String>
+    <system:String x:Key="SmoothBrightnessChange">
+        Плавное изменение яркости
+    </system:String>
+    <system:String x:Key="Restart">
+        Для применения параметров требуется перезагрузка
+    </system:String>
+    <system:String x:Key="Sunrise">
+        Восход
+    </system:String>
+    <system:String x:Key="Sunset">
+        Закат
+    </system:String>
+    <system:String x:Key="ToTrayNotification">
+        Приложение продолжит работу в свернутом состоянии
+    </system:String>
+    <system:String x:Key="TrayClose">
+        Закрыть
+    </system:String>
+    <system:String x:Key="TrayPause">
+        Приостановить
+    </system:String>
+    <system:String x:Key="TrayUnPause">
+        Продолжить
+    </system:String>
+</ResourceDictionary>

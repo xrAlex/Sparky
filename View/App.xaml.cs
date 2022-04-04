@@ -17,6 +17,8 @@ namespace View
         {
             ConfigureIoC();
 
+            var asd = (ResourceDictionary) FindResource("EngDictionary");
+
             IoC.GetInstance<IAppSettingsModel>().Load();
             IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
             IoC.GetInstance<IPeriodObserverModel>().StartWatch();

@@ -6,12 +6,13 @@
              xmlns:vmroot="clr-namespace:ViewModel;assembly=ViewModel"
              xmlns:converters="clr-namespace:View.Converters"
              xmlns:language="clr-namespace:View.Localization"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:extension="clr-namespace:View.Extension"
              Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
-
             <vmroot:ViewModelLocator x:Key="Locator"/>
-
+ 
             <converters:MinConverter x:Key="MinConverter"></converters:MinConverter>
             <converters:HourConverter x:Key="HourConverter"></converters:HourConverter>
             <converters:BrightnessToDouble x:Key="BrightnessToDouble"></converters:BrightnessToDouble>
@@ -20,7 +21,7 @@
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
 
             <ResourceDictionary.MergedDictionaries>
-                <x:Static Member="language:LangDictionary.Instance"/>
+                <ResourceDictionary Source="Localization/RusDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />
