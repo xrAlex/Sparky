@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:localization="clr-namespace:View.Localization"
              mc:Ignorable="d"
              d:DesignHeight="410" d:DesignWidth="350"
              DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
@@ -100,7 +101,8 @@
                         Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
                     </Ellipse>
                     <Image
-                        Source="{StaticResource Day}" Height="124"
+                        Source="{StaticResource Day}" 
+                        Height="124"
                         Opacity="0.03" 
                         HorizontalAlignment="Stretch"
                         Margin="0,0,0,5"
@@ -140,7 +142,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding SelectedScreen.DayColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=TwoWay}"
-                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" Cursor="Arrow">
+                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
+                        Cursor="Arrow">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -149,9 +152,9 @@
                         Background="Transparent"
                         Text="{DynamicResource Loc_Sunrise}" 
                         Grid.ColumnSpan="2" Grid.Column="3" 
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" 
-                        Padding="0,-4,0,0" Cursor="Arrow">
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                        Padding="0,-4,0,0" 
+                        Cursor="Arrow">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -160,7 +163,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding SelectedScreen.DayBrightness, Converter={StaticResource BrightnessToPercent}, Mode=OneWay}"
-                        Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1" Cursor="Arrow">
+                        Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1" 
+                        Cursor="Arrow">
                     </TextBox>
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
@@ -223,7 +227,8 @@
                     <Image
                         Source="{StaticResource Night}"
                         Opacity="0.03" 
-                        Grid.RowSpan="6" Grid.ColumnSpan="4" Grid.Column="2" Width="126"/>
+                        Grid.RowSpan="6" Grid.ColumnSpan="4" Grid.Column="2" 
+                        Width="126"/>
                     <TextBox
                         Text="{Binding SelectedScreen.NightStartHour, Converter= {StaticResource HourConverter}, Mode=TwoWay}"
                         MaxLength="2"
@@ -258,7 +263,8 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         Text="{Binding SelectedScreen.NightColorTemperature, Converter={StaticResource TemperatureToKelvin}, Mode=OneWay}"
-                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" Cursor="Arrow">
+                        Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
+                        Cursor="Arrow">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"
@@ -268,7 +274,8 @@
                         Text="{DynamicResource Loc_Sunset}" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Padding="0,-4,0,0"
-                        Grid.ColumnSpan="2" Grid.Column="3" Cursor="Arrow">
+                        Grid.ColumnSpan="2" Grid.Column="3" 
+                        Cursor="Arrow">
                     </TextBox>
                     <TextBox
                         BorderThickness="0"

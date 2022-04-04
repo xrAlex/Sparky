@@ -16,11 +16,13 @@
             <CheckBox
                 Style="{StaticResource SliderCheckBox}"
                 IsChecked="{Binding  IsExtendedGammaRangeEnabled, Mode=TwoWay}"
-                Content="{DynamicResource Loc_ExtendedGammaRange}" Margin="0,10,0,0"/>
+                Content="{DynamicResource Loc_ExtendedGammaRange}" 
+                Margin="0,10,0,0"/>
             <CheckBox
                 Style="{StaticResource SliderCheckBox}"
                 IsChecked="{Binding IsGammaSmoothingEnabled, Mode=TwoWay}"
-                Content="{DynamicResource Loc_SmoothBrightnessChange}" Margin="0,10,0,0"/>
+                Content="{DynamicResource Loc_SmoothBrightnessChange}" 
+                Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>
