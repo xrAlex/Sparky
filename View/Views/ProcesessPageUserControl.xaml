@@ -12,7 +12,7 @@
             Height="25"
             Style="{StaticResource SliderCheckBox}"
             x:Name="FullScreenCheckBox"
-            Content="{DynamicResource Loc_DontWorkInFullScreen}" 
+            Content="{DynamicResource LocDontWorkInFullScreen}" 
             VerticalContentAlignment="Center"
             VerticalAlignment="Top"
             IsChecked="{Binding CheckFullScreensApps, Mode=TwoWay}"/>
@@ -21,7 +21,7 @@
             FontSize="14"
             VerticalAlignment="Top"
             Margin="0,20,0,0"
-            Text="{DynamicResource Loc_ProcessesWhiteList}"
+            Text="{DynamicResource LocApplicationsWhiteList}"
             Cursor="Arrow"/>
         <Button 
             Style="{DynamicResource RotaryButton}" 

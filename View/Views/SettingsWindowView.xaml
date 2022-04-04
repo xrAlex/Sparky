@@ -47,7 +47,7 @@
                             Command="{Binding ResetValues}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource Loc_Reset}" Cursor="Hand">
+                            Content="{DynamicResource LocReset}" Cursor="Hand">
                         </Button>
                         <Button
                             Width="80" Height="40"
@@ -56,7 +56,7 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource Loc_Cancel}" Cursor="Hand">
+                            Content="{DynamicResource LocCancel}" Cursor="Hand">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"
@@ -65,7 +65,7 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource Loc_Apply}">
+                            Content="{DynamicResource LocApply}" Cursor="Hand">
                         </Button>
                     </Grid>
                     <ContentControl 

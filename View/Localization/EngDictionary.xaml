@@ -2,64 +2,64 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
-    <system:String x:Key="Apply">
+    <system:String x:Key="LocApply">
         Apply
     </system:String>
-    <system:String x:Key="AutoLaunch">
+    <system:String x:Key="LocAutoLaunch">
         Start with Windows
     </system:String>
-    <system:String x:Key="Brightness">
+    <system:String x:Key="LocBrightness">
         Brightness
     </system:String>
-    <system:String x:Key="Cancel">
+    <system:String x:Key="LocCancel">
         Cancel
     </system:String>
-    <system:String x:Key="Day">
+    <system:String x:Key="LocDay">
         Day
     </system:String>
-    <system:String x:Key="ColorTemperature">
+    <system:String x:Key="LocColorTemperature">
         Color temperature
     </system:String>
-    <system:String x:Key="DontWorkInFullScreen">
+    <system:String x:Key="LocDontWorkInFullScreen">
         Dont work in full screen apllications
     </system:String>
-    <system:String x:Key="ExtendedGammaRange">
+    <system:String x:Key="LocExtendedGammaRange">
         Extended gamma range
     </system:String>
-    <system:String x:Key="Monitors">
+    <system:String x:Key="LocMonitors">
         Monitors
     </system:String>
-    <system:String x:Key="Night">
+    <system:String x:Key="LocNight">
         Night
     </system:String>
-    <system:String x:Key="ApplicationsWhiteList">
+    <system:String x:Key="LocApplicationsWhiteList">
         Applications whitelist
     </system:String>
-    <system:String x:Key="Reset">
+    <system:String x:Key="LocReset">
         Reset
     </system:String>
-    <system:String x:Key="SmoothBrightnessChange">
+    <system:String x:Key="LocSmoothBrightnessChange">
         Smooth brightness change
     </system:String>
-    <system:String x:Key="Restart">
+    <system:String x:Key="LocRestart">
         Restart required to apply parameters
     </system:String>
-    <system:String x:Key="Sunrise">
+    <system:String x:Key="LocSunrise">
         Sunrise
     </system:String>
-    <system:String x:Key="Sunset">
+    <system:String x:Key="LocSunset">
         Sunset
     </system:String>
-    <system:String x:Key="ToTrayNotification">
+    <system:String x:Key="LocToTrayNotification">
         Application will continue to work in a collapsed state
     </system:String>
-    <system:String x:Key="TrayClose">
+    <system:String x:Key="LocTrayClose">
         Close
     </system:String>
-    <system:String x:Key="TrayPause">
+    <system:String x:Key="LocTrayPause">
         Pause
     </system:String>
-    <system:String x:Key="TrayUnPause">
+    <system:String x:Key="LocTrayUnPause">
         Unpause
     </system:String>
 </ResourceDictionary>

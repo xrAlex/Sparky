@@ -13,15 +13,28 @@ namespace View.Localization
             throw new NotImplementedException();
         }
 
-        public static void SetLocalizationDictionary()
-        {
-
-        }
-
         public object Localization
         {
             get => GetValue(LocalizationDictionary);
             set => SetValue(LocalizationDictionary, value);
+        }
+
+        /// <summary>
+        /// Коллекция словарей локализации.
+        /// </summary>
+        public Dictionary<object, LocalizationResource> Localizations
+        {
+            get => (Dictionary<object, LocalizationResource>)GetValue(LocalizationsProperty);
+            set => SetValue(LocalizationsProperty, value);
+        }
+
+        /// <summary>
+        /// Локализуемое приложение.
+        /// </summary>
+        public Application App
+        {
+            get => (Application)GetValue(AppProperty);
+            set => SetValue(AppProperty, value);
         }
 
         public static readonly DependencyProperty LocalizationDictionary =
@@ -30,49 +43,35 @@ namespace View.Localization
                 typeof(object),
                 typeof(LocalizationProvider));
 
+        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Localizations"/>.</summary>
+        public static readonly DependencyProperty LocalizationsProperty =
+            DependencyProperty.Register(
+                nameof(Localizations), 
+                typeof(Dictionary<object, LocalizationResource>),
+                typeof(LocalizationProvider),
+                new PropertyMetadata(null,
+                    (d, _) => ((LocalizationProvider)d).LocalizationChange()));
+
+        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="App"/>.</summary>
+        public static readonly DependencyProperty AppProperty =
+            DependencyProperty.Register(
+                nameof(App),
+                typeof(Application),
+                typeof(LocalizationProvider),
+                new PropertyMetadata(null,
+                    (d, _e) => ((LocalizationProvider)d).LocalizationChange()));
 
         public LocalizationProvider()
         {
             Localizations = new Dictionary<object, LocalizationResource>();
         }
 
-        public static string GetLocalizedString(string param)
+        public string GetLocalizedString(string param)
         {
-
-            return "Localization error";
+            var localizationDict = Localizations["Rus"];
+            var localizedString = localizationDict[param].ToString();
+            return localizedString;
         }
-
-
-        /// <summary>
-        /// Коллекция словарей локализации.
-        /// </summary>
-        public Dictionary<object, LocalizationResource> Localizations
-        {
-            get { return (Dictionary<object, LocalizationResource>)GetValue(LocalizationsProperty); }
-            set { SetValue(LocalizationsProperty, value); }
-        }
-
-        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Localizations"/>.</summary>
-        public static readonly DependencyProperty LocalizationsProperty =
-            DependencyProperty.Register(nameof(Localizations), typeof(Dictionary<object, LocalizationResource>), typeof(LocalizationProvider),
-                new PropertyMetadata(null, (d, e) => ((LocalizationProvider)d).LocalizationChange()));
-
-
-
-        /// <summary>
-        /// Локализуемое приложение.
-        /// </summary>
-        public Application App
-        {
-            get { return (Application)GetValue(AppProperty); }
-            set { SetValue(AppProperty, value); }
-        }
-
-        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="App"/>.</summary>
-        public static readonly DependencyProperty AppProperty =
-            DependencyProperty.Register(nameof(App), typeof(Application), typeof(LocalizationProvider),
-                new PropertyMetadata(null, (d, e) => ((LocalizationProvider)d).LocalizationChange()));
-
 
         private void LocalizationChange()
         {
@@ -104,7 +103,7 @@ namespace View.Localization
             else
             {
                 // Действия на случай если с таким ключом ресур не найден.
-                // Можно добавить свойство для лоализации по умолчанию и устанавливать её.
+                // Можно добавить свойство для локализации по умолчанию и устанавливать её.
             }
         }
 

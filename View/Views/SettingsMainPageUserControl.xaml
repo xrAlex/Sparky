@@ -15,7 +15,7 @@
             <RowDefinition Height="153"/>
         </Grid.RowDefinitions>
         <GroupBox
-            Header="{DynamicResource Loc_Monitors}"
+            Header="{DynamicResource LocMonitors}"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <Grid>
                 <ListBox
@@ -64,7 +64,7 @@
             </Grid>
         </GroupBox>
         <GroupBox
-            Header="{DynamicResource Loc_Day}"
+            Header="{DynamicResource LocDay}"
             FontSize="14" Grid.Row="1" Height="153" VerticalAlignment="Top">
             <StackPanel>
                 <Grid Height="129">
@@ -150,7 +150,7 @@
                         IsReadOnly="True"
                         FontSize="15"
                         Background="Transparent"
-                        Text="{DynamicResource Loc_Sunrise}" 
+                        Text="{DynamicResource LocSunrise}" 
                         Grid.ColumnSpan="2" Grid.Column="3" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Padding="0,-4,0,0" 
@@ -188,7 +188,7 @@
             </StackPanel>
         </GroupBox>
         <GroupBox
-            Header="{DynamicResource Loc_Night}"
+            Header="{DynamicResource LocNight}"
             FontSize="14" Grid.Row="2">
             <StackPanel>
                 <Grid Height="129">
@@ -271,7 +271,7 @@
                         IsReadOnly="True"
                         FontSize="15"
                         Background="Transparent"
-                        Text="{DynamicResource Loc_Sunset}" 
+                        Text="{DynamicResource LocSunset}" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Padding="0,-4,0,0"
                         Grid.ColumnSpan="2" Grid.Column="3" 

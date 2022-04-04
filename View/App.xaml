@@ -22,7 +22,7 @@
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
 
             <locl:LocalizationProvider
-                x:Key="localizationProvider"
+                x:Key="LocalizationProvider"
                 Localization="Rus"
                 App="{Binding}">
                 <locl:LocalizationProvider.Localizations>

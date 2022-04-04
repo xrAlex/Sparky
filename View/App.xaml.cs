@@ -14,14 +14,13 @@ namespace View
         private static readonly string ConfigurationFilepath 
             = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
+        public static LocalizationProvider LocalizationProvider { get; private set; }
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            LocalizationProvider localizationProvider = (LocalizationProvider) FindResource(nameof(localizationProvider));
-            localizationProvider.App = this;
+            LocalizationProvider = (LocalizationProvider) FindResource(nameof(LocalizationProvider));
+            LocalizationProvider.App = this;
 
             ConfigureIoC();
-
-            //var asd = (ResourceDictionary) FindResource("EngDictionary");
 
             IoC.GetInstance<IAppSettingsModel>().Load();
             IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();

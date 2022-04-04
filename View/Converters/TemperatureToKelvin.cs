@@ -10,7 +10,7 @@ namespace View.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
-            return $"{Localization.LocalizationProvider.GetLocalizedString("ColorTemperature")}: {Math.Round(val)} К";
+            return $"{App.LocalizationProvider.GetLocalizedString("LocColorTemperature")}: {Math.Round(val)} К";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
