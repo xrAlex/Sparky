@@ -43,24 +43,27 @@
                             Height="40"
                             HorizontalAlignment="Left"
                             Command="{Binding ResetValues}"
-                            Style="{StaticResource LightGrayButton}"
-                            Content="{DynamicResource Loc_Reset}" Cursor="Hand">
+                            Style="{StaticResource ButtonAnimatedBackground}"
+                            Background="{StaticResource TLightGray}"
+                            Content="{DynamicResource Loc_Reset}">
                         </Button>
                         <Button
                             Width="80"
                             Height="40"
                             HorizontalAlignment="Center"
                             Command="{Binding ResetValues}"
-                            Style="{StaticResource LightGrayButton}"
+                            Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource Loc_Cancel}" Cursor="Hand">
+                            Background="{StaticResource TLightGray}"
+                            Content="{DynamicResource Loc_Cancel}">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"
                             Width="80"
                             Height="40"
                             Command="{Binding ApplyValues}"
-                            Style="{StaticResource LightGrayButton}"
+                            Style="{StaticResource ButtonAnimatedBackground}"
+                            Background="{StaticResource TLightGray}"
                             Click="{ext:CloseWindow}"
                             Content="{DynamicResource Loc_Apply}" Cursor="Hand">
                         </Button>
@@ -81,7 +84,7 @@
                     Width="45" Height="45"
                     SelectedIndex="{Binding SelectedLangIndex}"
                     ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
-                    Style="{StaticResource PictureComboBoxStyle}" Margin="0,7,0,0">
+                    Style="{StaticResource PictureComboBox}" Margin="0,7,0,0">
                     <ComboBoxItem>
                         <Image Width="41" Height="26" Source="{StaticResource FlagEng}"/>
                     </ComboBoxItem>
@@ -104,13 +107,15 @@
                 <Button
                     Width="45" Height="45"
                     VerticalAlignment="Bottom"
-                    Style="{StaticResource BlackButton}"
+                    Style="{StaticResource ButtonAnimatedBackground}"
+                    Background="{StaticResource TBlack}"
                     Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" Margin="0,0,0,5"
                     CommandParameter="{Binding Mode=OneWay, Source={StaticResource SettingsUC}}">
                     <Image Width="35" Height="35" Source="{StaticResource Main}"/>
                 </Button>
                 <Button
-                    Style="{StaticResource BlackButton}"
+                    Style="{StaticResource ButtonAnimatedBackground}"
+                    Background="{StaticResource TBlack}"
                     Width="45" Height="45"
                     VerticalAlignment="Center" 
                     Margin="8,0,7,0" Grid.Row="1"
@@ -119,7 +124,8 @@
                     <Image Width="35" Height="35" Source="{StaticResource Process}"/>
                 </Button>
                 <Button
-                    Style="{StaticResource BlackButton}"
+                    Style="{StaticResource ButtonAnimatedBackground}"
+                    Background="{StaticResource TBlack}"
                     Width="45" Height="45"
                     VerticalAlignment="Top"
                     Grid.Row="2" 
@@ -129,11 +135,12 @@
                     <Image Width="35" Height="35" Source="{StaticResource Other}"/>
                 </Button>
                 <Button
-                    Style="{StaticResource BlackButton}"
+                    Style="{StaticResource ButtonAnimatedBackground}"
+                    Background="{StaticResource TBlack}"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"
                     Width="45" Height="45"
-                    Command="{Binding OpenInformationWindowCommand, Mode=OneWay}" Grid.Row="2" Margin="0,0,0,7">
+                    Command="{Binding OpenInformationWindowCommand, Mode=OneWay}" Grid.Row="2" Margin="0,0,0,7" Cursor="Hand">
                     <Image Width="35" Height="35" Source="{StaticResource Info}"/>
                 </Button>
             </Grid>

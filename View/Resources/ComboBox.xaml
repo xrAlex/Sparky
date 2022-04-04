@@ -73,7 +73,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PictureComboBoxStyle" TargetType="{x:Type ComboBox}">
+    <Style x:Key="PictureComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
