@@ -94,6 +94,7 @@ namespace View.Localization
                     if (app.Resources.MergedDictionaries[i] is LocalizationResource)
                     {
                         app.Resources.MergedDictionaries[i] = localization;
+                        break;
                     }
                 }
                 if (i >= app.Resources.MergedDictionaries.Count)
