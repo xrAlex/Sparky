@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace View.Localization
@@ -64,6 +65,7 @@ namespace View.Localization
         public LocalizationProvider()
         {
             LocalizationsDictionary = new Dictionary<object, LocalizationResource>();
+            BindingOperations.SetBinding(this, AppProperty, new Binding());
         }
 
         public string GetLocalizedString(string param)

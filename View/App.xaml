@@ -23,8 +23,7 @@
 
             <locl:LocalizationProvider
                 x:Key="LocalizationProvider"
-                CurrentLocalization="Rus"
-                App="{Binding}">
+                CurrentLocalization="Rus">
                 <locl:LocalizationProvider.LocalizationsDictionary>
                     <locl:LocalizationResource Source="/Localization/RusDictionary.xaml" x:Key="Rus"/>
                     <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
