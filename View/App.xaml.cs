@@ -17,8 +17,11 @@ public partial class App : Application
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
     private IAppSettingsModel? _settings;
     private IPeriodObserverModel? _observer;
+}
 
-    private void OnStartup(object sender, StartupEventArgs e)
+public partial class App
+{
+    protected override void OnStartup(StartupEventArgs e)
     {
         ConfigureIoC();
         _settings = IoC.GetInstance<IAppSettingsModel>();
@@ -28,7 +31,7 @@ public partial class App : Application
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
 
-        LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider 
+        LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
                                ?? throw new InvalidOperationException("Localization provider not founded");
         LocalizationProvider.App = this;
         LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey;
@@ -39,8 +42,20 @@ public partial class App : Application
         };
 
         new MainWindow().Show();
-    }
 
+        base.OnStartup(e);
+    }
+}
+
+public partial class App
+{ 
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _observer?.StopWatch();
+        _observer?.ForceDefaultColorConfiguration();
+
+        base.OnExit(e);
+    }
 }
 
 public partial class App

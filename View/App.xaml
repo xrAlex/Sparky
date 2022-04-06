@@ -8,8 +8,7 @@
              xmlns:language="clr-namespace:View.Localization"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:extension="clr-namespace:View.Extension"
-             xmlns:locl="clr-namespace:View.Localization"
-             Startup="OnStartup">
+             xmlns:locl="clr-namespace:View.Localization">
     <Application.Resources>
         <ResourceDictionary>
             <vmroot:ViewModelLocator x:Key="Locator"/>

@@ -55,6 +55,18 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
         }
     }
 
+    /// <inheritdoc cref="IPeriodObserverModel.ForceDefaultColorConfiguration"/>
+    public void ForceDefaultColorConfiguration()
+    {
+        foreach (var screen in _screenModel.GetAllScreens().ToArray())
+        {
+            if (screen.IsActive)
+            {
+                screen.CurrentColorConfiguration = new ColorConfiguration(6000f, 1f);
+            }
+        }
+    }
+
     /// <summary>
     /// Циклично проверяет настройки отображения устройств
     /// </summary>
