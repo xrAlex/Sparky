@@ -3,33 +3,32 @@ using Common.Enums;
 using Common.Extensions.CollectionChanged;
 using Model.Entities.Domain;
 
-namespace Model.Screen
+namespace Model.Screen;
+
+internal sealed partial class ScreenModel
 {
-    internal sealed partial class ScreenModel
+    private event EventHandler<ScreensCollectionChangedArgs>? InternalCollectionChanged;
+
+    public event EventHandler<ScreensCollectionChangedArgs>? ScreensCollectionChanged
     {
-        private event EventHandler<ScreensCollectionChangedArgs>? InternalCollectionChanged;
-
-        public event EventHandler<ScreensCollectionChangedArgs>? ScreensCollectionChanged
+        add
         {
-            add
-            {
-                if (value == null) return;
+            if (value == null) return;
 
-                lock (_eventLocker)
-                {
-                    foreach (var screenContext in _screenCollection.Values)
-                    {
-                        value(this, new ScreensCollectionChangedArgs((ScreenContext)screenContext, CollectionChangedAction.Added));
-                    }
-                    InternalCollectionChanged += value;
-                }
-            }
-            remove
+            lock (_eventLocker)
             {
-                lock (_eventLocker)
+                foreach (var screenContext in _screenCollection.Values)
                 {
-                    InternalCollectionChanged -= value;
+                    value(this, new ScreensCollectionChangedArgs((ScreenContext)screenContext, CollectionChangedAction.Added));
                 }
+                InternalCollectionChanged += value;
+            }
+        }
+        remove
+        {
+            lock (_eventLocker)
+            {
+                InternalCollectionChanged -= value;
             }
         }
     }

@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace View.Views
+namespace View.Views;
+
+public partial class ProcessesPageUserControl : UserControl
 {
-    public partial class ProcessesPageUserControl : UserControl
-    {
-        public ProcessesPageUserControl() => InitializeComponent();
-    }
+    public ProcessesPageUserControl() => InitializeComponent();
 }

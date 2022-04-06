@@ -3,43 +3,42 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Model.Entities.Domain;
 
-namespace Model.Applications.ApplicationsCollection
+namespace Model.Applications.ApplicationsCollection;
+
+internal partial class ApplicationsCollection
 {
-    internal partial class ApplicationsCollection
+    public IEnumerator<KeyValuePair<string, Application>> GetEnumerator() 
+        => _applications.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() 
+        => ((IEnumerable) _applications).GetEnumerator();
+
+    public int Count 
+        => _applications.Count;
+
+    /// <summary>
+    /// Очистка коллекции с уведомлением о удалении элементов.
+    /// </summary>
+    public void Clear()
     {
-        public IEnumerator<KeyValuePair<string, Application>> GetEnumerator() 
-            => _applications.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() 
-            => ((IEnumerable) _applications).GetEnumerator();
-
-        public int Count 
-            => _applications.Count;
-
-        /// <summary>
-        /// Очистка коллекции с уведомлением о удалении элементов.
-        /// </summary>
-        public void Clear()
+        foreach (var applicationName in _applications.Keys)
         {
-            foreach (var applicationName in _applications.Keys)
-            {
-                Remove(applicationName);
-            }
+            Remove(applicationName);
         }
-
-        public bool ContainsKey(string key) 
-            => _applications.ContainsKey(key);
-
-        public bool TryGetValue(string key, [MaybeNullWhen(false)] out Application value) 
-            => _applications.TryGetValue(key, out value);
-
-        public Application this[string key] 
-            => _applications[key];
-
-        public IEnumerable<string> Keys 
-            => ((IReadOnlyDictionary<string, Application>) _applications).Keys;
-
-        public IEnumerable<Application> Values 
-            => ((IReadOnlyDictionary<string, Application>) _applications).Values;
     }
+
+    public bool ContainsKey(string key) 
+        => _applications.ContainsKey(key);
+
+    public bool TryGetValue(string key, [MaybeNullWhen(false)] out Application value) 
+        => _applications.TryGetValue(key, out value);
+
+    public Application this[string key] 
+        => _applications[key];
+
+    public IEnumerable<string> Keys 
+        => ((IReadOnlyDictionary<string, Application>) _applications).Keys;
+
+    public IEnumerable<Application> Values 
+        => ((IReadOnlyDictionary<string, Application>) _applications).Values;
 }

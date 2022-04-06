@@ -8,56 +8,55 @@ using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
 using ViewModel.SubViewModels;
 
-namespace ViewModel.ViewModels
+namespace ViewModel.ViewModels;
+
+public sealed class MainWindowViewModel : ViewModelBase
 {
-    public sealed class MainWindowViewModel : ViewModelBase
+    private readonly IScreenModel _screenModel;
+    private readonly IPeriodObserverModel _periodObserverModel;
+    public ObservableCollection<ScreenViewModel> Screens { get; } = new();
+
+    public RelayCommand StopObserver { get; }
+
+    private void StopObserverExecute()
     {
-        private readonly IScreenModel _screenModel;
-        private readonly IPeriodObserverModel _periodObserverModel;
-        public ObservableCollection<ScreenViewModel> Screens { get; } = new();
+        _periodObserverModel.StopWatch();
+    }
 
-        public RelayCommand StopObserver { get; }
+    public MainWindowViewModel(IScreenModel screenModel, IPeriodObserverModel periodObserverModel)
+    {
+        _screenModel = screenModel;
+        _periodObserverModel = periodObserverModel;
 
-        private void StopObserverExecute()
+        StopObserver = new RelayCommand(StopObserverExecute);
+
+        SubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
+    }
+
+    private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)
+    {
+        switch (args.Action)
         {
-            _periodObserverModel.StopWatch();
-        }
-
-        public MainWindowViewModel(IScreenModel screenModel, IPeriodObserverModel periodObserverModel)
-        {
-            _screenModel = screenModel;
-            _periodObserverModel = periodObserverModel;
-
-            StopObserver = new RelayCommand(StopObserverExecute);
-
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
-        }
-
-        private void UnsubscribeEvents()
-        {
-            _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
-        }
-
-        private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)
-        {
-            switch (args.Action)
-            {
-                case CollectionChangedAction.Added:
-                    Screens.Add(new ScreenViewModel(args.Screen));
-                    break;
-                case CollectionChangedAction.Removed:
-                    Screens.RemoveFirst(screen => screen.Screen.DisplayCode == args.Screen.DisplayCode);
-                    break;
-                case CollectionChangedAction.Updated:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException($"Screens collection unknown action {args.Action}");
-            }
+            case CollectionChangedAction.Added:
+                Screens.Add(new ScreenViewModel(args.Screen));
+                break;
+            case CollectionChangedAction.Removed:
+                Screens.RemoveFirst(screen => screen.Screen.DisplayCode == args.Screen.DisplayCode);
+                break;
+            case CollectionChangedAction.Updated:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException($"Screens collection unknown action {args.Action}");
         }
     }
 }

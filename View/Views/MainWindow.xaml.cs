@@ -1,12 +1,11 @@
 ﻿using System.Windows;
 
-namespace View.Views
+namespace View.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

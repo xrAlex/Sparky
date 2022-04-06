@@ -1,16 +1,15 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Common.WinApi.Entities
+namespace Common.WinApi.Entities;
+
+[StructLayout(LayoutKind.Sequential)]
+public readonly struct Rect
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct Rect
-    {
-        public int Left { get; }
+    public int Left { get; }
 
-        public int Top { get; }
+    public int Top { get; }
 
-        public int Right { get; }
+    public int Right { get; }
 
-        public int Bottom { get; }
-    }
+    public int Bottom { get; }
 }

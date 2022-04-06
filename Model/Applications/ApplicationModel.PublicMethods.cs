@@ -2,23 +2,22 @@
 using System.Linq;
 using Common.Interfaces;
 
-namespace Model.Applications
+namespace Model.Applications;
+
+internal partial class ApplicationModel
 {
-    internal partial class ApplicationModel
+    /// <inheritdoc cref="IApplicationModel.RefreshApplications"/>
+    public void RefreshApplications()
     {
-        /// <inheritdoc cref="IApplicationModel.RefreshApplications"/>
-        public void RefreshApplications()
-        {
-            _applications.Clear();
-            FillApplicationsCollection();
-        }
-
-        /// <inheritdoc cref="IApplicationModel.GetAllNames"/>
-        public IReadOnlyList<string> GetAllNames() 
-            => _applications
-                .Select(application => application.Value.Name)
-                .ToList()
-                .AsReadOnly();
-
+        _applications.Clear();
+        FillApplicationsCollection();
     }
+
+    /// <inheritdoc cref="IApplicationModel.GetAllNames"/>
+    public IReadOnlyList<string> GetAllNames() 
+        => _applications
+            .Select(application => application.Value.Name)
+            .ToList()
+            .AsReadOnly();
+
 }

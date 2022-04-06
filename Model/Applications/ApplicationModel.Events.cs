@@ -2,33 +2,32 @@
 using Common.Enums;
 using Common.Extensions.CollectionChanged;
 
-namespace Model.Applications
+namespace Model.Applications;
+
+internal partial class ApplicationModel
 {
-    internal partial class ApplicationModel
+    private event EventHandler<ApplicationCollectionChangedArgs>? InternalCollectionChanged;
+
+    public event EventHandler<ApplicationCollectionChangedArgs>? ApplicationCollectionChanged
     {
-        private event EventHandler<ApplicationCollectionChangedArgs>? InternalCollectionChanged;
-
-        public event EventHandler<ApplicationCollectionChangedArgs>? ApplicationCollectionChanged
+        add
         {
-            add
-            {
-                if (value == null) return;
+            if (value == null) return;
 
-                lock (_eventLocker)
-                {
-                    foreach (var app in _applications.Values)
-                    {
-                        value(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Added));
-                    }
-                    InternalCollectionChanged += value;
-                }
-            }
-            remove
+            lock (_eventLocker)
             {
-                lock (_eventLocker)
+                foreach (var app in _applications.Values)
                 {
-                    InternalCollectionChanged -= value;
+                    value(this, new ApplicationCollectionChangedArgs(app, CollectionChangedAction.Added));
                 }
+                InternalCollectionChanged += value;
+            }
+        }
+        remove
+        {
+            lock (_eventLocker)
+            {
+                InternalCollectionChanged -= value;
             }
         }
     }

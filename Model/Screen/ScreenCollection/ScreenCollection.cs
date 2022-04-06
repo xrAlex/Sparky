@@ -7,24 +7,23 @@ using Common.Infrastructure.INPC;
 using Common.Interfaces;
 using Model.Entities.Domain;
 
-namespace Model.Screen.ScreenCollection
+namespace Model.Screen.ScreenCollection;
+
+internal sealed partial class ScreenCollection : IReadOnlyDictionary<int, IScreenContext>
 {
-    internal sealed partial class ScreenCollection : IReadOnlyDictionary<int, IScreenContext>
+    private readonly Dictionary<int, IScreenContext> _screens = new();
+
+    public event EventHandler<ScreensCollectionChangedArgs>? CollectionChanged;
+
+    private void ScreenEntityChanged(object? sender, PropertyChangedEventArgs args)
     {
-        private readonly Dictionary<int, IScreenContext> _screens = new();
-
-        public event EventHandler<ScreensCollectionChangedArgs>? CollectionChanged;
-
-        private void ScreenEntityChanged(object? sender, PropertyChangedEventArgs args)
+        if (sender is ScreenContext screen)
         {
-            if (sender is ScreenContext screen)
-            {
-                CollectionChanged?.Invoke(this,
-                    new ScreensCollectionChangedArgs(screen,
-                        CollectionChangedAction.Updated,
-                        args.PropertyName!,
-                        ((PropertyChangedValueEventArgs) args).NewValue));
-            }
+            CollectionChanged?.Invoke(this,
+                new ScreensCollectionChangedArgs(screen,
+                    CollectionChangedAction.Updated,
+                    args.PropertyName!,
+                    ((PropertyChangedValueEventArgs) args).NewValue));
         }
     }
 }

@@ -2,47 +2,46 @@
 using System.Windows.Controls;
 using Common.Infrastructure.Commands;
 
-namespace View.Extension
+namespace View.Extension;
+
+internal sealed partial class PageNavigator : Freezable
 {
-    internal sealed partial class PageNavigator : Freezable
+    protected override Freezable CreateInstanceCore()
     {
-        protected override Freezable CreateInstanceCore()
-        {
-            throw new System.NotImplementedException();
-        }
+        throw new System.NotImplementedException();
+    }
+}
+
+internal sealed partial class PageNavigator
+{
+
+    /// <summary>
+    /// Текущее представление.
+    /// </summary>
+    public UserControl Current
+    {
+        get => (UserControl)GetValue(CurrentProperty);
+        set => SetValue(CurrentProperty, value);
     }
 
-    internal sealed partial class PageNavigator
+    /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Current"/>.</summary>
+    public static readonly DependencyProperty CurrentProperty =
+        DependencyProperty.Register(nameof(Current), typeof(UserControl), typeof(PageNavigator), new PropertyMetadata(null));
+
+    public RelayCommand SetCurrent { get; }
+
+    public PageNavigator()
     {
+        SetCurrent = new RelayCommand(SetCurrentExecute, SetCurrentCanExecute);
+    }
 
-        /// <summary>
-        /// Текущее представление.
-        /// </summary>
-        public UserControl Current
-        {
-            get => (UserControl)GetValue(CurrentProperty);
-            set => SetValue(CurrentProperty, value);
-        }
+    private bool SetCurrentCanExecute(object parameter)
+    {
+        return parameter == null || parameter is UserControl;
+    }
 
-        /// <summary><see cref="DependencyProperty"/> для свойства <see cref="Current"/>.</summary>
-        public static readonly DependencyProperty CurrentProperty =
-            DependencyProperty.Register(nameof(Current), typeof(UserControl), typeof(PageNavigator), new PropertyMetadata(null));
-
-        public RelayCommand SetCurrent { get; }
-
-        public PageNavigator()
-        {
-            SetCurrent = new RelayCommand(SetCurrentExecute, SetCurrentCanExecute);
-        }
-
-        private bool SetCurrentCanExecute(object parameter)
-        {
-            return parameter == null || parameter is UserControl;
-        }
-
-        private void SetCurrentExecute(object parameter)
-        {
-            Current = (UserControl) parameter;
-        }
+    private void SetCurrentExecute(object parameter)
+    {
+        Current = (UserControl) parameter;
     }
 }

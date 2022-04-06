@@ -1,9 +1,8 @@
-﻿namespace Common.Enums
+﻿namespace Common.Enums;
+
+public enum CollectionChangedAction
 {
-    public enum CollectionChangedAction
-    {
-        Added,
-        Removed,
-        Updated
-    }
+    Added,
+    Removed,
+    Updated
 }

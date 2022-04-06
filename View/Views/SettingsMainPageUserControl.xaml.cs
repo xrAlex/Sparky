@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace View.Views
+namespace View.Views;
+
+public partial class SettingsMainPageUserControl : UserControl
 {
-    public partial class SettingsMainPageUserControl : UserControl
-    {
-        public SettingsMainPageUserControl() => InitializeComponent();
-    }
+    public SettingsMainPageUserControl() => InitializeComponent();
 }

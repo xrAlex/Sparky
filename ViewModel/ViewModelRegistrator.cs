@@ -2,14 +2,13 @@
 using ViewModel.ViewModels;
 using ViewModel.ViewModels.Settings;
 
-namespace ViewModel
+namespace ViewModel;
+
+public class ViewModelRegistrator
 {
-    public class ViewModelRegistrator
+    public static void Register(Container container)
     {
-        public static void Register(Container container)
-        {
-            container.Register<MainWindowViewModel>(Lifestyle.Transient);
-            container.Register<SettingsViewModel>(Lifestyle.Transient);
-        }
+        container.Register<MainWindowViewModel>(Lifestyle.Transient);
+        container.Register<SettingsViewModel>(Lifestyle.Transient);
     }
 }
