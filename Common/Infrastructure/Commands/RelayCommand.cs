@@ -29,23 +29,10 @@ public class RelayCommand : ICommand
 
     /// <inheritdoc cref="RelayCommand(ExecuteHandler, CanExecuteHandler)"/>
     public RelayCommand(ExecuteHandler execute, CanExecuteHandler? canExecute = null) : this
-    (_ => execute(),
-        _ => canExecute?.Invoke() ?? true
-    )
-    { }
+    (
+        _ => execute(),_ => canExecute?.Invoke() ?? true
+    ){}
 
-    /// <summary>Метод, подымающий событие <see cref="CanExecuteChanged"/>.</summary>
-    public void RaiseCanExecuteChanged()
-    {
-        if (Dispatcher.CheckAccess())
-        {
-            _invalidate();
-        }
-        else
-        {
-            _ = Dispatcher.BeginInvoke(_invalidate);
-        }
-    }
     private RelayCommand()
     {
         _invalidate = () => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
@@ -58,18 +45,28 @@ public class RelayCommand : ICommand
         CommandManager.RequerySuggested += RequerySuggested;
     }
 
+    /// <summary>Метод, подымающий событие <see cref="CanExecuteChanged"/>.</summary>
+    public void RaiseCanExecuteChanged()
+    {
+        if (Dispatcher.CheckAccess())
+        {
+            _invalidate();
+        }
+        else
+        {
+            Dispatcher.BeginInvoke(_invalidate);
+        }
+    }
+
+
     /// <summary>Вызов метода, возвращающего состояние команды.</summary>
     /// <param name="parameter">Параметр команды.</param>
     /// <returns><see langword="true"/> - если выполнение команды разрешено.</returns>
-    public bool CanExecute(object? parameter)
-    {
-        return _canExecute?.Invoke(parameter) ?? true;
-    }
+    public bool CanExecute(object? parameter) 
+        => _canExecute?.Invoke(parameter) ?? true;
 
     /// <summary>Вызов выполняющего метода команды.</summary>
     /// <param name="parameter">Параметр команды.</param>
     public void Execute(object? parameter)
-    {
-        _execute?.Invoke(parameter);
-    }
+        => _execute?.Invoke(parameter);
 }
