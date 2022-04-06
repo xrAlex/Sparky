@@ -7,14 +7,14 @@ using System.Windows.Markup;
 namespace View.Localization
 {
     [ContentProperty(nameof(LocalizationsDictionary))]
-    public class LocalizationProvider : Freezable
+    public sealed class LocalizationProvider : Freezable
     {
         protected override Freezable CreateInstanceCore()
         {
             throw new NotImplementedException();
         }
 
-        public event EventHandler<string> LocalizationChanged;
+        public event EventHandler<string> LocalizationChanged = null!;
         public string CurrentLocalization
         {
             get => (string)GetValue(CurrentLocalizationProperty);

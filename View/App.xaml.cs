@@ -14,9 +14,9 @@ namespace View
         private static readonly string ConfigurationFilepath
             = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
-        public static LocalizationProvider LocalizationProvider { get; private set; }
-        private IAppSettingsModel _settings;
-        private IPeriodObserverModel _observer;
+        public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
+        private IAppSettingsModel? _settings;
+        private IPeriodObserverModel? _observer;
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
@@ -28,9 +28,10 @@ namespace View
             _observer.RefreshAllScreensColorConfiguration();
             _observer.StartWatch();
 
-            LocalizationProvider = (LocalizationProvider)FindResource(nameof(LocalizationProvider));
+            LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider 
+                                   ?? throw new InvalidOperationException("Localization provider not founded");
             LocalizationProvider.App = this;
-            LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey??= "Rus";
+            LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey;
 
             LocalizationProvider.LocalizationChanged += (_, value) =>
             {
