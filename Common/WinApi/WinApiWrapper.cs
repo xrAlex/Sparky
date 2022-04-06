@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using Common.WinApi.Entities;
 
 namespace Common.WinApi
 {
@@ -84,10 +85,10 @@ namespace Common.WinApi
         /// Проверяет есть ли на указанном источнике отображения полноэкранное окно переднего плана.
         /// </summary>
         /// <returns> <see langword="true"/>, если найдено окно развернутое во весь экран.</returns>
-        public static bool IsForegroundWindowOnFullScreen(ScreenBounds screenBounds, out nint windowHandle)
+        public static bool IsForegroundWindowOnFullScreen(ref ScreenBounds screenBounds, out nint windowHandle)
         {
             windowHandle = GetForegroundWindow();
-            return IsWindowValid(windowHandle) && IsWindowOnFullScreen(windowHandle, screenBounds);
+            return IsWindowValid(windowHandle) && IsWindowOnFullScreen(windowHandle, ref screenBounds);
         }
 
 
@@ -95,7 +96,7 @@ namespace Common.WinApi
         /// Проверяет развернуто ли указанное окно на весь экран, включая панель задач
         /// </summary>
         /// <returns> <see langword="true"/>, если окно отображается во весь экран</returns>
-        public static bool IsWindowOnFullScreen(nint handle, ScreenBounds screenBounds)
+        public static bool IsWindowOnFullScreen(nint handle, ref ScreenBounds screenBounds)
         {
             GetWindowRect(new HandleRef(null, handle), out var rect);
             return screenBounds.Width == rect.Right + rect.Left && screenBounds.Height == rect.Bottom + rect.Top;

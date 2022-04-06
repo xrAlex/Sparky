@@ -17,6 +17,11 @@ namespace Common.Interfaces
         bool IsGammaSmoothingEnabled { get; set; }
 
         /// <summary>
+        /// Ключ локализации
+        /// </summary>
+        string CurrentLocalizationKey { get; set; }
+
+        /// <summary>
         /// Загружает настройки приложения из файла
         /// </summary>
         void Load();

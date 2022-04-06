@@ -12,7 +12,11 @@ namespace View.Converters
         {
             var min = (byte)value;
             var result = System.Convert.ToString(min);
-            if (result.Length < 2) result = $"0{result}";
+
+            if (result.Length < 2)
+            {
+                result = $"0{result}";
+            }
 
             return result;
         }
@@ -20,8 +24,16 @@ namespace View.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var valid = byte.TryParse((string)value, out var min);
-            if (!valid) return DependencyProperty.UnsetValue;
-            if (min is > 60 or < 0) min = 60;
+
+            if (!valid)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+
+            if (min is > 60 or < 0)
+            {
+                min = 60;
+            }
 
             return min;
         }

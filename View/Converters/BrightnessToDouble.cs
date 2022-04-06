@@ -7,14 +7,10 @@ namespace View.Converters
     [ValueConversion(typeof(double), typeof(double))]
     internal sealed class BrightnessToDouble : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return System.Convert.ToDouble(value) * 100;
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
+            => System.Convert.ToDouble(value) * 100;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return System.Convert.ToDouble(value) * 0.01;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) 
+            => System.Convert.ToDouble(value) * 0.01;
     }
 }

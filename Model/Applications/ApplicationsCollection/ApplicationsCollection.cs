@@ -11,9 +11,7 @@ namespace Model.Applications.ApplicationsCollection
     internal partial class ApplicationsCollection : IReadOnlyDictionary<string, Application>
     {
         private readonly Dictionary<string, Application> _applications = new();
-
         public event EventHandler<ApplicationCollectionChangedArgs>? CollectionChanged;
-
 
         private void EntityPropertyChanged(object? sender, PropertyChangedEventArgs args)
         {
@@ -26,6 +24,5 @@ namespace Model.Applications.ApplicationsCollection
                         ((PropertyChangedValueEventArgs)args).NewValue));
             }
         }
-
     }
 }

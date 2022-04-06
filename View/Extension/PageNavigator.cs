@@ -4,14 +4,15 @@ using Common.Infrastructure.Commands;
 
 namespace View.Extension
 {
-    public partial class PageNavigator : Freezable
+    internal sealed partial class PageNavigator : Freezable
     {
         protected override Freezable CreateInstanceCore()
         {
             throw new System.NotImplementedException();
         }
     }
-    public partial class PageNavigator
+
+    internal sealed partial class PageNavigator
     {
 
         /// <summary>

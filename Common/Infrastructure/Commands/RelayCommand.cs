@@ -10,28 +10,28 @@ namespace Common.Infrastructure.Commands
     /// и дополнена конструктором для методов без параметра.</summary>
     public class RelayCommand : ICommand
     {
-        private readonly CanExecuteHandler<object> _canExecute;
-        private readonly ExecuteHandler<object> _execute;
+        private readonly CanExecuteHandler<object>? _canExecute;
+        private readonly ExecuteHandler<object>? _execute;
         private readonly Action _invalidate;
-
         private static readonly Dispatcher Dispatcher = Application.Current.Dispatcher;
+
         /// <summary>Событие извещающее об изменении состояния команды.</summary>
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
 
         /// <summary>Конструктор команды.</summary>
         /// <param name="execute">Выполняемый метод команды.</param>
         /// <param name="canExecute">Метод, возвращающий состояние команды.</param>
-        public RelayCommand(ExecuteHandler<object> execute, CanExecuteHandler<object> canExecute = null) : this()
+        public RelayCommand(ExecuteHandler<object>? execute, CanExecuteHandler<object>? canExecute = null) : this()
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
         /// <inheritdoc cref="RelayCommand(ExecuteHandler, CanExecuteHandler)"/>
-        public RelayCommand(ExecuteHandler execute, CanExecuteHandler canExecute = null) : this
-            (p => execute(),
-                p => canExecute?.Invoke() ?? true
+        public RelayCommand(ExecuteHandler execute, CanExecuteHandler? canExecute = null) : this
+            (_ => execute(),
+                _ => canExecute?.Invoke() ?? true
             )
         { }
 
@@ -51,7 +51,7 @@ namespace Common.Infrastructure.Commands
         {
             _invalidate = () => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-            void RequerySuggested(object o, EventArgs e)
+            void RequerySuggested(object? o, EventArgs e)
             {
                 CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -62,16 +62,19 @@ namespace Common.Infrastructure.Commands
         /// <summary>Вызов метода, возвращающего состояние команды.</summary>
         /// <param name="parameter">Параметр команды.</param>
         /// <returns><see langword="true"/> - если выполнение команды разрешено.</returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
-            return _canExecute?.Invoke(parameter) ?? true;
+            return parameter == null || (_canExecute?.Invoke(parameter) ?? true);
         }
 
         /// <summary>Вызов выполняющего метода команды.</summary>
         /// <param name="parameter">Параметр команды.</param>
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            _execute?.Invoke(parameter);
+            if (parameter != null)
+            {
+                _execute?.Invoke(parameter);
+            }
         }
     }
 }

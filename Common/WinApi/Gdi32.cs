@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using Common.Entities;
+using Common.WinApi.Entities;
 
 namespace Common.WinApi
 {

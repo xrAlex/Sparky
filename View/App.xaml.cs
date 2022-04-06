@@ -11,22 +11,35 @@ namespace View
 {
     public partial class App : Application
     {
-        private static readonly string ConfigurationFilepath 
+        private static readonly string ConfigurationFilepath
             = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
         public static LocalizationProvider LocalizationProvider { get; private set; }
+        private IAppSettingsModel _settings;
+        private IPeriodObserverModel _observer;
+
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            LocalizationProvider = (LocalizationProvider) FindResource(nameof(LocalizationProvider));
-            LocalizationProvider.App = this;
-
             ConfigureIoC();
+            _settings = IoC.GetInstance<IAppSettingsModel>();
+            _observer = IoC.GetInstance<IPeriodObserverModel>();
 
-            IoC.GetInstance<IAppSettingsModel>().Load();
-            IoC.GetInstance<IPeriodObserverModel>().RefreshAllScreensColorConfiguration();
-            IoC.GetInstance<IPeriodObserverModel>().StartWatch();
+            _settings.Load();
+            _observer.RefreshAllScreensColorConfiguration();
+            _observer.StartWatch();
+
+            LocalizationProvider = (LocalizationProvider)FindResource(nameof(LocalizationProvider));
+            LocalizationProvider.App = this;
+            LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey??= "Rus";
+
+            LocalizationProvider.LocalizationChanged += (_, value) =>
+            {
+                _settings.CurrentLocalizationKey = value;
+            };
+
             new MainWindow().Show();
         }
+
     }
 
     public partial class App

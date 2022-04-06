@@ -109,7 +109,7 @@ namespace Model.PeriodObserver
                 }
             }
 
-            if (_settings.IsGammaSmoothingEnabled && (remainingTime > 0 && remainingTime <= 10))
+            if (_settings.IsGammaSmoothingEnabled && remainingTime > 0 && remainingTime <= 10)
             {
                 return currentPeriod == Period.Day 
                     ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime) 
@@ -229,9 +229,12 @@ namespace Model.PeriodObserver
         /// <summary>
         /// Проверяет есть ли в системе окно развернутое на полный экран
         /// </summary>
-        private bool IsFullScreenAppFounded(IScreenContext screen) 
-            => WinApiWrapper.IsForegroundWindowOnFullScreen(screen.Bounds, out var windowHandle) 
-               && !IsAppExePathInIgnored(WinApiWrapper.TryGetExecutablePath(windowHandle));
+        private bool IsFullScreenAppFounded(IScreenContext screen)
+        {
+            var screenBounds = screen.Bounds;
+            return WinApiWrapper.IsForegroundWindowOnFullScreen(ref screenBounds, out var windowHandle)
+                   && !IsAppExePathInIgnored(WinApiWrapper.TryGetExecutablePath(windowHandle));
+        }
 
         /// <summary>
         /// Проверяет есть в в игрнориемых пользователем приложениях

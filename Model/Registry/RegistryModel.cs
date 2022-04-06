@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using Common.Extensions;
 using Common.Interfaces;
 

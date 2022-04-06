@@ -2,14 +2,14 @@
 
 namespace Model.Entities
 {
-    internal class ScreenUserSettings
+    internal sealed class ScreenUserSettings
     {
         public ColorConfiguration NightColorConfiguration { get; set; }
         public ColorConfiguration DayColorConfiguration { get; set; }
         public PeriodStartTime NightStartTime { get; set; }
         public PeriodStartTime DayStartTime { get; set; }
         public ScreenBounds Bounds { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
         public int DisplayCode { get; }
 
         public ScreenUserSettings(int displayCode)

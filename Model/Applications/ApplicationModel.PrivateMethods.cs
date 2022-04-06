@@ -69,7 +69,11 @@ namespace Model.Applications
             => _appSettings.ScreenRepository
                 .GetData()
                 .Values
-                .Select(screen => WinApiWrapper.IsWindowOnFullScreen(handle, screen.Bounds))
+                .Select(screen =>
+                {
+                    var screenBounds = screen.Bounds;
+                    return WinApiWrapper.IsWindowOnFullScreen(handle, ref screenBounds);
+                })
                 .FirstOrDefault();
 
         private bool IsApplicationIgnored(string executablePath)

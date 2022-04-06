@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
-using Common.Entities;
+using Common.WinApi.Entities;
 
 namespace Common.WinApi
 {

@@ -20,7 +20,7 @@ namespace Common.Infrastructure.INPC
         /// <summary>Защищённый метод для создания события <see cref="PropertyChanged"/>.</summary>
         /// <param name="propertyName">Имя изменившегося свойства. 
         /// Если значение не задано, то используется имя метода или свойства в котором был вызов.</param>
-        protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -30,7 +30,7 @@ namespace Common.Infrastructure.INPC
         /// <param name="propertyName">Имя изменившегося свойства. 
         /// Если значение не задано, то используется имя метода или свойства в котором был вызов.</param>
         /// <param name="newValue">Новое значение изменившегося свойства.</param>
-        protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null, in object? newValue = default)
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null!, in object newValue = null!)
             => PropertyChanged?.Invoke(this, new PropertyChangedValueEventArgs(propertyName, newValue));
 
         /// <summary>Защищённый метод для присвоения значения полю и
@@ -56,7 +56,7 @@ namespace Common.Infrastructure.INPC
         /// метода <see cref="RaisePropertyChanged(string)"/>
         /// с передачей ему параметра <paramref name="propertyName"/>.<br/>
         /// После создания события вызывается метод <see cref="OnPropertyChanged(in string, in object, in object)"/>.</remarks>
-        protected bool Set<T>(ref T? propertyField, T? newValue, Equality<T?>? equality = null, [CallerMemberName] string? propertyName = null)
+        protected bool Set<T>(ref T? propertyField, T? newValue, Equality<T>? equality = null, [CallerMemberName] string propertyName = null!)
         {
             var isFieldNull = propertyField == null;
             var isValueNull = newValue == null;
@@ -66,7 +66,7 @@ namespace Common.Infrastructure.INPC
             {
                 if (propertyField != null)
                     isEquals = ReferenceEquals(propertyField, newValue) 
-                               || (equality?.Invoke(propertyField, newValue) 
+                               || (equality?.Invoke(propertyField, newValue!) 
                                    ?? (propertyField is IEquatable<T> equatable 
                                        ? equatable.Equals(newValue) 
                                        : propertyField.Equals(newValue)));
@@ -74,11 +74,11 @@ namespace Common.Infrastructure.INPC
 
             if (!isEquals)
             {
-                var oldValue = propertyField;
+                var oldValue = propertyField!;
 
-                propertyField = newValue;
-                RaisePropertyChanged(propertyName, newValue);
-                OnPropertyChanged(propertyName, oldValue, newValue);
+                propertyField = newValue!;
+                RaisePropertyChanged(propertyName, newValue!);
+                OnPropertyChanged(propertyName, oldValue, newValue!);
             }
 
             return !isEquals;

@@ -62,8 +62,8 @@ namespace Model.Screen
                 if (screenSystemSettings != null)
                 {
                     return screenUserSettings != null 
-                        ? new ScreenContext(screenSystemSettings.Value, screenUserSettings) 
-                        : new ScreenContext(screenSystemSettings.Value);
+                        ? new ScreenContext(screenSystemSettings, screenUserSettings) 
+                        : new ScreenContext(screenSystemSettings);
                 }
                 return null;
             }

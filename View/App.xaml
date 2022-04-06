@@ -21,9 +21,7 @@
             <converters:TemperatureToKelvin x:Key="TemperatureToKelvin"></converters:TemperatureToKelvin>
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
 
-            <locl:LocalizationProvider
-                x:Key="LocalizationProvider"
-                CurrentLocalization="Rus">
+            <locl:LocalizationProvider x:Key="LocalizationProvider">
                 <locl:LocalizationProvider.LocalizationsDictionary>
                     <locl:LocalizationResource Source="/Localization/RusDictionary.xaml" x:Key="Rus"/>
                     <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>

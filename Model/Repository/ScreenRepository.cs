@@ -51,16 +51,16 @@ namespace Model.Repository
             switch (property)
             {
                 case nameof(ScreenUserSettings.DayColorConfiguration):
-                    screen.DayColorConfiguration = (ColorConfiguration)newValue;
+                    screen.DayColorConfiguration = (ColorConfiguration) newValue;
                     break;
                 case nameof(ScreenUserSettings.DayStartTime):
-                    screen.DayStartTime = (PeriodStartTime)newValue;
+                    screen.DayStartTime = (PeriodStartTime) newValue;
                     break;
                 case nameof(ScreenUserSettings.IsActive):
-                    screen.IsActive = (bool)newValue;
+                    screen.IsActive = (bool) newValue;
                     break;
                 case nameof(ScreenUserSettings.NightColorConfiguration):
-                    screen.NightColorConfiguration = (ColorConfiguration)newValue;
+                    screen.NightColorConfiguration = (ColorConfiguration) newValue;
                     break;
                 case nameof(ScreenUserSettings.NightStartTime):
                     screen.NightStartTime = (PeriodStartTime) newValue;

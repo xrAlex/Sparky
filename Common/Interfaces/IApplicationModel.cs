@@ -12,7 +12,7 @@ namespace Common.Interfaces
         void RefreshApplications();
 
         /// <returns>Коллекцию имен приложений.</returns>
-        List<string> GetAllNames();
+        IReadOnlyList<string> GetAllNames();
 
         /// <summary>
         /// Событие оповещающее об изменении внутренней коллекции приложений.

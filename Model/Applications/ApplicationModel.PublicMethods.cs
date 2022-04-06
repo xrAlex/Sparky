@@ -14,8 +14,11 @@ namespace Model.Applications
         }
 
         /// <inheritdoc cref="IApplicationModel.GetAllNames"/>
-        public List<string> GetAllNames() 
-            => _applications.Select(application => application.Value.Name).ToList();
+        public IReadOnlyList<string> GetAllNames() 
+            => _applications
+                .Select(application => application.Value.Name)
+                .ToList()
+                .AsReadOnly();
 
     }
 }

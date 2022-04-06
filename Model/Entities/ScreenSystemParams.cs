@@ -2,7 +2,7 @@
 
 namespace Model.Entities
 {
-    internal struct ScreenSystemParams
+    internal sealed class ScreenSystemParams
     {
         public ScreenBounds Bounds { get; }
         public string SystemName { get; }

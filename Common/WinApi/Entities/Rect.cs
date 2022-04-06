@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Common.Entities
+namespace Common.WinApi.Entities
 {
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Rect

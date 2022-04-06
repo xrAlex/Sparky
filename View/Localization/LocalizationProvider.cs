@@ -14,10 +14,15 @@ namespace View.Localization
             throw new NotImplementedException();
         }
 
-        public object CurrentLocalization
+        public event EventHandler<string> LocalizationChanged;
+        public string CurrentLocalization
         {
-            get => GetValue(CurrentLocalizationProperty);
-            set => SetValue(CurrentLocalizationProperty, value);
+            get => (string)GetValue(CurrentLocalizationProperty);
+            set
+            {
+                SetValue(CurrentLocalizationProperty, value);
+                LocalizationChanged?.Invoke(this, value);
+            }
         }
 
         /// <summary>
@@ -41,7 +46,7 @@ namespace View.Localization
         public static readonly DependencyProperty CurrentLocalizationProperty =
             DependencyProperty.Register(
                 nameof(CurrentLocalization),
-                typeof(object),
+                typeof(string),
                 typeof(LocalizationProvider));
 
         /// <summary><see cref="DependencyProperty"/> для свойства <see cref="LocalizationsDictionary"/>.</summary>
@@ -60,18 +65,19 @@ namespace View.Localization
                 typeof(Application),
                 typeof(LocalizationProvider),
                 new PropertyMetadata(null,
-                    (d, _e) => ((LocalizationProvider)d).LocalizationChange()));
+                    (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
         public LocalizationProvider()
         {
+            //var asd = IoC.GetInstance<IAppSettingsModel>().IsFullScreenAppCheckEnabled;
             LocalizationsDictionary = new Dictionary<object, LocalizationResource>();
             BindingOperations.SetBinding(this, AppProperty, new Binding());
         }
 
-        public string GetLocalizedString(string param)
+        public string GetLocalizedString(string key)
         {
             var localizationDict = LocalizationsDictionary[CurrentLocalization];
-            return localizationDict.Contains(param) ? localizationDict[param].ToString()! : "ERROR";
+            return localizationDict.Contains(key) ? localizationDict[key].ToString()! : "ERROR";
         }
 
         private void LocalizationChange()

@@ -6,5 +6,5 @@
     public delegate void ExecuteHandler<in T>(T parameter);
     public delegate bool CanExecuteHandler<in T>(T parameter);
 
-    public delegate bool ConverterFromObjectHandler<T>(in object value, out T result);
+    public delegate bool ConverterFromObjectHandler<T>(in object? value, out T result);
 }

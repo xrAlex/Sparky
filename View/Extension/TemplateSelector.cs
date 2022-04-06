@@ -8,7 +8,9 @@ namespace View.Extension
     [ContentProperty(nameof(DataTemplates))]
     internal class TemplateSelector : DataTemplateSelector
     {
+        // ReSharper disable once CollectionNeverUpdated.Global
         public Dictionary<object, DataTemplate> DataTemplates { get; set; } = new();
+
         public static DataTemplate Default { get; } = (DataTemplate)XamlReader.Parse(@"
         <DataTemplate
             xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">
@@ -18,7 +20,7 @@ namespace View.Extension
         </DataTemplate>
         ");
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate SelectTemplate(object? item, DependencyObject container)
         {
             if (item != null)
             {

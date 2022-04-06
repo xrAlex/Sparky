@@ -10,6 +10,7 @@ namespace Model.Settings
         public ApplicationRepository IgnoredAppRepository { get; } = new();
         public bool IsFullScreenAppCheckEnabled { get; set; }
         public bool IsGammaSmoothingEnabled { get; set; }
+        public string CurrentLocalizationKey { get; set; } = "Rus";
 
         public AppSettingsModel(string configurationFilePath)
         {

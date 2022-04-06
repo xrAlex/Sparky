@@ -12,7 +12,11 @@ namespace View.Converters
         {
             var hour = (byte)value;
             var result = System.Convert.ToString(hour);
-            if (result.Length < 2) result = $"0{result}";
+
+            if (result.Length < 2)
+            {
+                result = $"0{result}";
+            }
 
             return result;
         }
@@ -20,7 +24,12 @@ namespace View.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var valid = byte.TryParse((string)value, out var hour);
-            if (!valid) return DependencyProperty.UnsetValue;
+
+            if (!valid)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+
             if (hour is > 23 or < 0) hour = 23;
 
             return hour;

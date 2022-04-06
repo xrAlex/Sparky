@@ -12,7 +12,7 @@
         /// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/is">
         /// is not compatible</see> with a <typeparamref name="T"/> type.
         /// </param>
-        public RelayCommand(ExecuteHandler<T> execute, CanExecuteHandler<T> canExecute, ConverterFromObjectHandler<T> converter = null) : base
+        public RelayCommand(ExecuteHandler<T> execute, CanExecuteHandler<T>? canExecute, ConverterFromObjectHandler<T>? converter = null) : base
             (
                 p =>
                 {
@@ -25,6 +25,6 @@
         /// <summary> Command constructor. </summary>
         /// <param name = "execute"> Command method to execute. </param>
         /// <param name="converter">Optional converter to convert <see cref="object"/> to <typeparamref name="T"/>.</param>
-        public RelayCommand(ExecuteHandler<T> execute, ConverterFromObjectHandler<T> converter = null) : this(execute, null, converter) { }
+        public RelayCommand(ExecuteHandler<T> execute, ConverterFromObjectHandler<T>? converter = null) : this(execute, null, converter) { }
     }
 }

@@ -4,7 +4,7 @@ namespace Common.Infrastructure.Commands
 {
     public static class CommandExtensionMethods
     {
-        public static bool TryExecute(this ICommand command, object parameter)
+        public static bool TryExecute(this ICommand command, object? parameter)
         {
             var can = command.CanExecute(parameter);
             if (can)

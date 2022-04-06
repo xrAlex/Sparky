@@ -1,6 +1,7 @@
 ﻿using Common.Entities;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
+using Common.WinApi;
 using Model.GammaRegulator;
 
 namespace Model.Entities.Domain
@@ -11,10 +12,10 @@ namespace Model.Entities.Domain
     internal sealed class ScreenContext : INPCBase, IScreenContext
     {
         private bool _isActive = true;
-        private ColorConfiguration _dayColorConfiguration = new (6600f, 1f);
-        private ColorConfiguration _nightColorConfiguration = new (5400f, 0.8f);
-        private PeriodStartTime _dayStartTime = new (7,0);
-        private PeriodStartTime _nightStartTime = new (23,0);
+        private ColorConfiguration _dayColorConfiguration = new(6600f, 1f);
+        private ColorConfiguration _nightColorConfiguration = new(5400f, 0.8f);
+        private PeriodStartTime _dayStartTime = new(7, 0);
+        private PeriodStartTime _nightStartTime = new(23, 0);
         private ColorConfiguration _currentColorConfiguration = new(6600f, 1f);
         private ScreenBounds _bounds;
 
@@ -86,25 +87,25 @@ namespace Model.Entities.Domain
         {
             base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
 
-            switch (propertyName)
+            if (IsActive)
             {
-                case nameof(NightColorConfiguration):
-                    CurrentColorConfiguration = NightColorConfiguration;
-                    break;
-                case nameof(DayColorConfiguration):
-                    CurrentColorConfiguration = DayColorConfiguration;
-                    break;
-                case nameof(CurrentColorConfiguration):
-                    if (IsActive)
-                    {
-                        SystemGamma.ApplyColorConfiguration((ColorConfiguration)newValue, SystemHandle);
-                    }
-                    break;
+                switch (propertyName)
+                {
+                    case nameof(NightColorConfiguration):
+                        CurrentColorConfiguration = NightColorConfiguration;
+                        break;
+                    case nameof(DayColorConfiguration):
+                        CurrentColorConfiguration = DayColorConfiguration;
+                        break;
+                    case nameof(CurrentColorConfiguration):
+                        SystemGamma.ApplyColorConfiguration(ref _currentColorConfiguration, SystemHandle);
+                        break;
+                }
             }
         }
 
         /// <summary>
-        /// Создает контекст устрйоства отображения на основе пользовательских настроек.
+        /// Создает контекст устроqства отображения на основе пользовательских настроек.
         /// </summary>
         public ScreenContext(ScreenSystemParams systemParams, ScreenUserSettings screenSettings)
         {
@@ -132,5 +133,8 @@ namespace Model.Entities.Domain
             Bounds = systemParams.Bounds;
             SystemHandle = systemParams.Handle;
         }
+
+        ~ScreenContext()
+            => WinApiWrapper.DeleteScreenDeviceContext(SystemHandle);
     }
 }

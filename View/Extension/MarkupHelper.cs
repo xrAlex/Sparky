@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace View.Extension
 {
-    public static class MarkupHelper
+    internal static class MarkupHelper
     {
         private static bool ShowWindowCanExecute(Type winType)
             => typeof(Window).IsAssignableFrom(winType) && winType.GetConstructor(Type.EmptyTypes) != null;
@@ -53,7 +53,7 @@ namespace View.Extension
         /// <param name="element">Элемент с которого начинается поиск.</param>
         /// <returns>В поиск включается и сам элемент. Если он указанного типа,
         /// то будет он же и возвращён.</returns>
-        public static T? TryGetAncestor<T>(DependencyObject? element) where T : DependencyObject
+        private static T? TryGetAncestor<T>(DependencyObject? element) where T : DependencyObject
         {
             T? ancestor = null;
             while (element != null && (ancestor = element as T) == null)
