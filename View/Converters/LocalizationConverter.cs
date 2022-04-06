@@ -10,6 +10,7 @@ internal sealed class LocalizationConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var localizationKey = (string)value;
+
         //var result = Localization.LangDictionary.GetString(localizationKey);
         //return result;
         return "";

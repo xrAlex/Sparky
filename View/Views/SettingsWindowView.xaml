@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="clr-namespace:View.Extension"
         xmlns:views="clr-namespace:View.Views"
+        xmlns:localization="clr-namespace:View.Localization"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="500" Width="450"
@@ -82,28 +83,25 @@
                 <ComboBox
                     VerticalAlignment="Top"
                     Width="45" Height="45"
-                    SelectedIndex="{Binding SelectedLangIndex}"
+                    ItemsSource="{Binding LocalizationsDictionary, Source={StaticResource LocalizationProvider}}"
+                    SelectedItem="{Binding CurrentLocalization, Source={StaticResource LocalizationProvider}, Mode=TwoWay}"
                     ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
                     Style="{StaticResource PictureComboBox}" 
                     Margin="0,7,0,0">
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagEng}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagRus}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagChn}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagSpa}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagUae}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Image Width="41" Height="26" Source="{StaticResource FlagFra}"/>
-                    </ComboBoxItem>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Image
+                                Source="{Binding Key,
+                                Converter={StaticResource LocalizationKeyToImage}}" 
+                                Width="41" Height="26">
+                            </Image>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button
                     Width="45" Height="45"
