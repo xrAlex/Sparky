@@ -8,7 +8,6 @@ internal sealed class ScreenUserSettings
     public ColorConfiguration DayColorConfiguration { get; set; }
     public PeriodStartTime NightStartTime { get; set; }
     public PeriodStartTime DayStartTime { get; set; }
-    public ScreenBounds Bounds { get; set; }
     public bool IsActive { get; set; }
     public int DisplayCode { get; }
 
