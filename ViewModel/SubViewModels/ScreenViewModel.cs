@@ -47,6 +47,17 @@ public class ScreenViewModel : INPCBase
         get => _dayColorTemperature;
         set => Set(ref _dayColorTemperature, value);
     }
+    public byte DayStartHour
+    {
+        get => _dayStartHour;
+        set => Set(ref _dayStartHour, value);
+    }
+
+    public byte DayStartMin
+    {
+        get => _dayStartMinute;
+        set => Set(ref _dayStartMinute, value);
+    }
 
     public float NightBrightness
     {
@@ -72,18 +83,6 @@ public class ScreenViewModel : INPCBase
         set => Set(ref _nightStartMinute, value);
     }
 
-    public byte DayStartHour
-    {
-        get => _dayStartHour;
-        set => Set(ref _dayStartHour, value);
-    }
-
-    public byte DayStartMin
-    {
-        get => _dayStartMinute;
-        set => Set(ref _dayStartMinute, value);
-    }
-
     protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
     {
         base.OnPropertyChanged(propertyName, oldValue, newValue);
@@ -100,11 +99,11 @@ public class ScreenViewModel : INPCBase
                 break;
             case nameof(NightStartHour):
             case nameof(NightStartMin):
-                Screen.NightStartTime = new PeriodStartTime(NightStartHour, _nightStartMinute);
+                Screen.NightStartTime = new PeriodStartTime(NightStartHour, NightStartMin);
                 break;
             case nameof(DayStartHour):
             case nameof(DayStartMin):
-                Screen.DayStartTime = new PeriodStartTime(NightStartHour, _nightStartMinute);
+                Screen.DayStartTime = new PeriodStartTime(DayStartHour, DayStartMin);
                 break;
         }
     }

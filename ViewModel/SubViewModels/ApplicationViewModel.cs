@@ -15,6 +15,8 @@ public class ApplicationViewModel : INPCBase
         set => Set(ref _isIgnored, value);
     }
 
+    public string Title => App.OnFullScreen? $"{App.Name} [Full screen]" : App.Name;
+
     protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
     {
         base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
