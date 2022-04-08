@@ -62,7 +62,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
         {
             if (screen.IsActive)
             {
-                screen.CurrentColorConfiguration = new ColorConfiguration(6000f, 1f);
+                screen.CurrentColorConfiguration = new ColorConfiguration(6600f, 1f);
             }
         }
     }
