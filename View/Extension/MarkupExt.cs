@@ -18,5 +18,25 @@ internal sealed class CloseWindowExtension : MarkupExtension
 internal sealed class ShowWindowExtension : MarkupExtension
 {
     public override object ProvideValue(IServiceProvider serviceProvider) 
-        => MarkupHelper.ShowWindowClicker;
+        => MarkupHelper.ShowWindow;
+}
+
+/// <summary>
+/// Возвращает <see cref="MarkupHelper.AppShutdown"/>.
+/// </summary>
+[MarkupExtensionReturnType(typeof(RoutedEventHandler))]
+internal sealed class AppShutdown : MarkupExtension
+{
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => MarkupHelper.AppShutdown;
+}
+
+/// <summary>
+/// Возвращает <see cref="MarkupHelper.ToTray"/>.
+/// </summary>
+[MarkupExtensionReturnType(typeof(RoutedEventHandler))]
+internal sealed class ToTray : MarkupExtension
+{
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => MarkupHelper.ToTray;
 }

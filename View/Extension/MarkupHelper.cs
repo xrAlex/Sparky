@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using ViewModel;
 
 namespace View.Extension;
 
@@ -36,7 +37,7 @@ internal static class MarkupHelper
     /// <summary>
     /// Обработчик события открытия окна
     /// </summary>
-    public static RoutedEventHandler ShowWindowClicker { get; } = (sender, _) =>
+    public static RoutedEventHandler ShowWindow { get; } = (sender, _) =>
     {
         if (sender is ICommandSource {CommandParameter: Type commandParam})
         {
@@ -47,6 +48,26 @@ internal static class MarkupHelper
             }
         }
     };
+
+    /// <summary>
+    /// Обработчик события закрытия приложения
+    /// </summary>
+    public static RoutedEventHandler AppShutdown { get; } = (_, _) 
+        => Application.Current.Shutdown();
+
+
+    /// <summary>
+    /// Обработчик события сворачивания приложения в трей
+    /// </summary>
+    public static RoutedEventHandler ToTray { get; } = (_, _) =>
+    {
+        foreach (var wnd in Application.Current.Windows)
+        {
+           var window = wnd as Window;
+           window?.Close();
+        }
+    };
+
 
     /// <summary>Поиск родителя в визуальном дереве</summary>
     /// <typeparam name="T">Тип родителя.</typeparam>
