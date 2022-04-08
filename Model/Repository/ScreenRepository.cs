@@ -29,8 +29,7 @@ internal sealed class ScreenRepository
             DayStartTime = screen.DayStartTime,
             IsActive = screen.IsActive,
             NightColorConfiguration = screen.NightColorConfiguration,
-            NightStartTime = screen.NightStartTime,
-            Bounds = screen.Bounds
+            NightStartTime = screen.NightStartTime
         };
 
         _screens.Add(key, screenSettings);

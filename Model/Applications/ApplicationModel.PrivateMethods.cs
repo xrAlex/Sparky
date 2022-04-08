@@ -66,9 +66,8 @@ internal partial class ApplicationModel
     }
 
     private bool IsApplicationWindowOnFullScreen(nint handle) 
-        => _appSettings.ScreenRepository
-            .GetData()
-            .Values
+        => _screenModel
+            .GetAllScreens()
             .Select(screen =>
             {
                 var screenBounds = screen.Bounds;
