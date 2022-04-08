@@ -23,7 +23,10 @@ public partial class App
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
         ConfigureIoC();
+
         _settings = IoC.GetInstance<IAppSettingsModel>();
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
