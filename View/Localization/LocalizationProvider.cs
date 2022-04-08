@@ -15,14 +15,10 @@ public sealed class LocalizationProvider : Freezable
     }
 
     public event EventHandler<string> LocalizationChanged = null!;
-    public string CurrentLocalization
+    public object CurrentLocalization
     {
-        get => (string)GetValue(CurrentLocalizationProperty);
-        set
-        {
-            SetValue(CurrentLocalizationProperty, value);
-            LocalizationChanged?.Invoke(this, value);
-        }
+        get => GetValue(CurrentLocalizationProperty);
+        set => SetValue(CurrentLocalizationProperty, value);
     }
 
     /// <summary>
@@ -46,8 +42,10 @@ public sealed class LocalizationProvider : Freezable
     public static readonly DependencyProperty CurrentLocalizationProperty =
         DependencyProperty.Register(
             nameof(CurrentLocalization),
-            typeof(string),
-            typeof(LocalizationProvider));
+            typeof(object),
+            typeof(LocalizationProvider), 
+            new PropertyMetadata(null,
+                (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
     /// <summary><see cref="DependencyProperty"/> для свойства <see cref="LocalizationsDictionary"/>.</summary>
     public static readonly DependencyProperty LocalizationsDictionaryProperty =
@@ -100,6 +98,7 @@ public sealed class LocalizationProvider : Freezable
                 if (app.Resources.MergedDictionaries[i] is LocalizationResource)
                 {
                     app.Resources.MergedDictionaries[i] = localization;
+                    LocalizationChanged?.Invoke(this, loc.ToString());
                     break;
                 }
             }
