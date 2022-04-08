@@ -14,7 +14,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
-        DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
+        DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}, Mode=OneWay}"
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
@@ -45,32 +45,34 @@
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Left"
-                            Command="{Binding ResetValues}"
+                            Command="{Binding ResetValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocReset}" Cursor="Hand">
+                            Content="{DynamicResource LocReset}">
                         </Button>
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Center"
-                            Command="{Binding ResetValues}"
+                            Command="{Binding ResetValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocCancel}" Cursor="Hand">
+                            Content="{DynamicResource LocCancel}">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"
                             Width="80" Height="40"
-                            Command="{Binding ApplyValues}"
+                            Command="{Binding ApplyValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource LocApply}" Cursor="Hand">
+                            Content="{DynamicResource LocApply}">
                         </Button>
                     </Grid>
                     <ContentControl 
-                        Content="{Binding Current, Source={StaticResource Navigator}}" 
+                        Content="{Binding Current,
+                        Source={StaticResource Navigator},
+                        Mode=OneWay}" 
                         Margin="15,15,15,55"/>
                 </Grid>
             </Border>
@@ -83,8 +85,12 @@
                 <ComboBox
                     VerticalAlignment="Top"
                     Width="45" Height="45"
-                    ItemsSource="{Binding LocalizationsDictionary, Source={StaticResource LocalizationProvider}}"
-                    SelectedItem="{Binding CurrentLocalization, Source={StaticResource LocalizationProvider}, Mode=TwoWay}"
+                    ItemsSource="{Binding LocalizationsDictionary.Keys,
+                    Source={StaticResource LocalizationProvider},
+                    Mode=OneWay}"
+                    SelectedItem="{Binding CurrentLocalization,
+                    Source={StaticResource LocalizationProvider},
+                    Mode=TwoWay}"
                     ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
                     Style="{StaticResource PictureComboBox}" 
                     Margin="0,7,0,0">
@@ -96,8 +102,8 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Image
-                                Source="{Binding Key,
-                                Converter={StaticResource LocalizationKeyToImage}}" 
+                                Source="{Binding Converter={StaticResource LocalizationKeyToImage},
+                                Mode=OneWay}" 
                                 Width="41" Height="26">
                             </Image>
                         </DataTemplate>
@@ -108,9 +114,12 @@
                     VerticalAlignment="Bottom"
                     Style="{StaticResource ButtonAnimatedBackground}"
                     Background="{StaticResource TBlack}"
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}"
+                    Command="{Binding SetCurrent,
+                    Source={StaticResource Navigator},
+                    Mode=OneWay}"
                     Margin="0,0,0,5"
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource SettingsUC}}">
+                    CommandParameter="{Binding Source={StaticResource SettingsUC},
+                    Mode=OneWay}">
                     <Image Width="35" Height="35" Source="{StaticResource Main}"/>
                 </Button>
                 <Button
@@ -120,8 +129,12 @@
                     VerticalAlignment="Center" 
                     Margin="8,0,7,0" 
                     Grid.Row="1"
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" 
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource ProcessesUC}}">
+                    Command="{Binding SetCurrent,
+                    Source={StaticResource Navigator},
+                    Mode=OneWay}" 
+                    CommandParameter="{Binding
+                    Source={StaticResource ProcessesUC},
+                    Mode=OneWay}">
                     <Image Width="35" Height="35" Source="{StaticResource Process}"/>
                 </Button>
                 <Button
@@ -131,8 +144,11 @@
                     VerticalAlignment="Top"
                     Grid.Row="2" 
                     Margin="0,5,0,0" 
-                    Command="{Binding SetCurrent, Mode=OneWay, Source={StaticResource Navigator}}" 
-                    CommandParameter="{Binding Mode=OneWay, Source={StaticResource OtherUC}}">
+                    Command="{Binding SetCurrent,
+                    Source={StaticResource Navigator},
+                    Mode=OneWay}" 
+                    CommandParameter="{Binding Source={StaticResource OtherUC},
+                    Mode=OneWay}" Cursor="Hand">
                     <Image Width="35" Height="35" Source="{StaticResource Other}"/>
                 </Button>
                 <Button

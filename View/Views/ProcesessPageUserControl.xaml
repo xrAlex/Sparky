@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="410" d:DesignWidth="350"
-             DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
+             DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}, Mode=OneWay}"
              Background="Transparent">
     <StackPanel Orientation="Vertical">
         <CheckBox
@@ -26,9 +26,9 @@
         <Button 
             Style="{DynamicResource RotaryButton}" 
             Command="{Binding RefreshApplicationsList, Mode=OneWay}"
-            IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox}"
+            IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox, Mode=OneWay}"
             HorizontalAlignment="Right" VerticalAlignment="Top"
-            Width="25" Height="20">
+            Width="25" Height="20" Cursor="Hand">
             <Image Source="{StaticResource Refresh}" Height="20"/>
         </Button>
         <ListBox
@@ -49,7 +49,7 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         IsChecked="{Binding IsIgnored, Mode=TwoWay}"
-                        Content="{Binding App.Name, Mode=OneWay}">
+                        Content="{Binding Title, Mode=OneWay}">
                     </CheckBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
