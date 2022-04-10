@@ -41,7 +41,7 @@ public partial class App
 
         LocalizationProvider.LocalizationChanged += (_, value) =>
         {
-            _settings.CurrentLocalizationKey = value;
+            _settings.CurrentLocalizationKey = value?.ToString();
         };
 
         new MainWindow().Show();

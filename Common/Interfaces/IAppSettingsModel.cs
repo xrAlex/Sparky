@@ -19,7 +19,7 @@ public interface IAppSettingsModel
     /// <summary>
     /// Ключ локализации
     /// </summary>
-    string CurrentLocalizationKey { get; set; }
+    string? CurrentLocalizationKey { get; set; }
 
     /// <summary>
     /// Загружает настройки приложения из файла

@@ -14,7 +14,7 @@ public sealed class LocalizationProvider : Freezable
         throw new NotImplementedException();
     }
 
-    public event EventHandler<string> LocalizationChanged = null!;
+    public event EventHandler<object?>? LocalizationChanged;
     public object CurrentLocalization
     {
         get => GetValue(CurrentLocalizationProperty);
@@ -39,18 +39,36 @@ public sealed class LocalizationProvider : Freezable
         set => SetValue(AppProperty, value);
     }
 
+
+
+    /// <summary>
+    /// Текущий словарь локализации.
+    /// </summary>
+    public LocalizationResource CurrentResources
+    {
+        get { return (LocalizationResource)GetValue(CurrentResourcesProperty); }
+        private set { SetValue(CurrentResourcesPropertyKey, value); }
+    }
+
+    private static readonly DependencyPropertyKey CurrentResourcesPropertyKey =
+        DependencyProperty.RegisterReadOnly(nameof(CurrentResources), typeof(LocalizationResource), typeof(LocalizationProvider), new PropertyMetadata(null));
+    /// <summary><see cref="DependencyProperty"/> для свойства <see cref="CurrentResources"/>.</summary>
+    public static readonly DependencyProperty CurrentResourcesProperty = CurrentResourcesPropertyKey.DependencyProperty;
+
+
+
     public static readonly DependencyProperty CurrentLocalizationProperty =
         DependencyProperty.Register(
             nameof(CurrentLocalization),
             typeof(object),
-            typeof(LocalizationProvider), 
+            typeof(LocalizationProvider),
             new PropertyMetadata(null,
                 (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
     /// <summary><see cref="DependencyProperty"/> для свойства <see cref="LocalizationsDictionary"/>.</summary>
     public static readonly DependencyProperty LocalizationsDictionaryProperty =
         DependencyProperty.Register(
-            nameof(LocalizationsDictionary), 
+            nameof(LocalizationsDictionary),
             typeof(Dictionary<object, LocalizationResource>),
             typeof(LocalizationProvider),
             new PropertyMetadata(null,
@@ -106,6 +124,8 @@ public sealed class LocalizationProvider : Freezable
             {
                 app.Resources.MergedDictionaries.Add(localization);
             }
+
+            CurrentResources = localization;
         }
         else
         {
@@ -117,3 +137,4 @@ public sealed class LocalizationProvider : Freezable
 }
 
 public class LocalizationResource : ResourceDictionary { }
+

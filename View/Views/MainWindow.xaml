@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:View.Views"
         xmlns:ext="clr-namespace:View.Extension"
+        xmlns:locl="clr-namespace:View.Localization"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Sparky" 
@@ -77,18 +78,19 @@
                                             FontSize="12"
                                             Grid.Column="3" Grid.Row="1">
                                         </TextBlock>
-                                        <!--<TextBlock
+                                        <TextBlock
                                             FontSize="12"
                                             Grid.Column="3" Grid.Row="1">
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} : {1} K">
+                                                <MultiBinding StringFormat="{}{0} : {1} K" Converter="{locl:KeyToLocalizationResource}">
                                                     <Binding
-                                                        Source="{DynamicResource LocalizationProvider,
-                                                        ResourceKey=LocColorTemperature}"/>
+                                                        Source="{StaticResource LocalizationProvider}"
+                                                        Path="CurrentResources"
+                                                        ConverterParameter="LocColorTemperature"/>
                                                     <Binding Path="CurrentColorConfiguration.ColorTemperature" />
                                                 </MultiBinding>
                                             </TextBlock.Text>
-                                        </TextBlock>-->
+                                        </TextBlock>
                                         <TextBlock
                                             Text="{Binding CurrentColorConfiguration.Brightness,
                                             Mode=OneWay,
