@@ -14,7 +14,14 @@ public sealed class LocalizationProvider : Freezable
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Событие уведомляющее о смене локализации.
+    /// </summary>
     public event EventHandler<object?>? LocalizationChanged;
+
+    /// <summary>
+    /// Текущий ключ словаря локализации.
+    /// </summary>
     public object CurrentLocalization
     {
         get => GetValue(CurrentLocalizationProperty);
@@ -39,23 +46,24 @@ public sealed class LocalizationProvider : Freezable
         set => SetValue(AppProperty, value);
     }
 
-
-
     /// <summary>
     /// Текущий словарь локализации.
     /// </summary>
     public LocalizationResource CurrentResources
     {
-        get { return (LocalizationResource)GetValue(CurrentResourcesProperty); }
-        private set { SetValue(CurrentResourcesPropertyKey, value); }
+        get => (LocalizationResource)GetValue(CurrentResourcesProperty);
+        private set => SetValue(CurrentResourcesPropertyKey, value);
     }
 
     private static readonly DependencyPropertyKey CurrentResourcesPropertyKey =
-        DependencyProperty.RegisterReadOnly(nameof(CurrentResources), typeof(LocalizationResource), typeof(LocalizationProvider), new PropertyMetadata(null));
-    /// <summary><see cref="DependencyProperty"/> для свойства <see cref="CurrentResources"/>.</summary>
-    public static readonly DependencyProperty CurrentResourcesProperty = CurrentResourcesPropertyKey.DependencyProperty;
+        DependencyProperty.RegisterReadOnly(nameof(CurrentResources),
+            typeof(LocalizationResource),
+            typeof(LocalizationProvider),
+            new PropertyMetadata(null));
+    
 
-
+    public static readonly DependencyProperty CurrentResourcesProperty =
+        CurrentResourcesPropertyKey.DependencyProperty;
 
     public static readonly DependencyProperty CurrentLocalizationProperty =
         DependencyProperty.Register(
@@ -65,7 +73,6 @@ public sealed class LocalizationProvider : Freezable
             new PropertyMetadata(null,
                 (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
-    /// <summary><see cref="DependencyProperty"/> для свойства <see cref="LocalizationsDictionary"/>.</summary>
     public static readonly DependencyProperty LocalizationsDictionaryProperty =
         DependencyProperty.Register(
             nameof(LocalizationsDictionary),
@@ -74,7 +81,6 @@ public sealed class LocalizationProvider : Freezable
             new PropertyMetadata(null,
                 (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
-    /// <summary><see cref="DependencyProperty"/> для свойства <see cref="App"/>.</summary>
     public static readonly DependencyProperty AppProperty =
         DependencyProperty.Register(
             nameof(App),
@@ -85,7 +91,6 @@ public sealed class LocalizationProvider : Freezable
 
     public LocalizationProvider()
     {
-        //var asd = IoC.GetInstance<IAppSettingsModel>().IsFullScreenAppCheckEnabled;
         LocalizationsDictionary = new Dictionary<object, LocalizationResource>();
         BindingOperations.SetBinding(this, AppProperty, new Binding());
     }

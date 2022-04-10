@@ -6,17 +6,20 @@ using System.Windows.Markup;
 
 namespace View.Localization;
 
-public class KeyToLocalizationResourceConverter : IMultiValueConverter, IValueConverter
+public sealed class KeyToLocalizationResourceConverter : IMultiValueConverter, IValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         try
         {
-            LocalizationResource resource = (LocalizationResource)values[0];
+            var resource = (LocalizationResource)values[0];
             return resource[values[1]];
         }
         catch (Exception)
-        { }
+        {
+            // ignored
+        }
+
         return DependencyProperty.UnsetValue;
     }
 
@@ -29,11 +32,14 @@ public class KeyToLocalizationResourceConverter : IMultiValueConverter, IValueCo
     {
         try
         {
-            LocalizationResource resource = (LocalizationResource)value;
+            var resource = (LocalizationResource)value;
             return resource[parameter];
         }
         catch (Exception)
-        { }
+        {
+            // ignored
+        }
+
         return DependencyProperty.UnsetValue;
     }
 
@@ -44,12 +50,6 @@ public class KeyToLocalizationResourceConverter : IMultiValueConverter, IValueCo
 
     public static KeyToLocalizationResourceConverter Instance { get; } = new();
 }
-public class KeyToLocalizationResourceExtension : MarkupExtension
-{
-    public override object ProvideValue(IServiceProvider serviceProvider)
-    {
-        return KeyToLocalizationResourceConverter.Instance;
-    }
-}
+
 
 
