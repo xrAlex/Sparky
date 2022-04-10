@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Net.Mime;
 using System.Windows;
+using Common.Entities;
 using Common.Enums;
 using Common.Extensions;
 using Common.Extensions.CollectionChanged;
@@ -16,15 +17,10 @@ public sealed class MainWindowViewModel : ViewModelBase
 {
     private readonly IScreenModel _screenModel;
     private readonly IPeriodObserverModel _periodObserverModel;
-    public ObservableCollection<ScreenViewModel> Screens { get; } = new();
+    public ObservableCollection<IScreenContext> Screens { get; } = new();
 
     public RelayCommand StopObserver { get; }
     public RelayCommand UnsubscribeEvents { get; }
-
-    private void StopObserverExecute()
-    {
-        _periodObserverModel.StopWatch();
-    }
 
     public MainWindowViewModel(IScreenModel screenModel, IPeriodObserverModel periodObserverModel)
     {
@@ -37,6 +33,8 @@ public sealed class MainWindowViewModel : ViewModelBase
         SubscribeEvents();
     }
 
+    private void StopObserverExecute()
+        => _periodObserverModel.StopWatch();
     private void SubscribeEvents()
     {
         _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
@@ -52,10 +50,10 @@ public sealed class MainWindowViewModel : ViewModelBase
         switch (args.Action)
         {
             case CollectionChangedAction.Added:
-                Screens.Add(new ScreenViewModel(args.Screen));
+                Screens.Add(args.Screen);
                 break;
             case CollectionChangedAction.Removed:
-                Screens.RemoveFirst(screen => screen.Screen.DisplayCode == args.Screen.DisplayCode);
+                Screens.RemoveFirst(screen => screen.DisplayCode == args.Screen.DisplayCode);
                 break;
             case CollectionChangedAction.Updated:
                 break;
