@@ -34,10 +34,10 @@ public partial class App
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
 
-        LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
-                               ?? throw new InvalidOperationException("Localization provider not founded");
-        LocalizationProvider.App = this;
-        LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey;
+        LocalizationProvider = new LocalizationProvider
+        {
+            CurrentLocalization = _settings.CurrentLocalizationKey ?? "Rus"
+        };
 
         LocalizationProvider.LocalizationChanged += (_, value) =>
         {

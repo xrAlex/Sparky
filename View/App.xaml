@@ -21,15 +21,10 @@
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
             <converters:LocalizationKeyToImage x:Key="LocalizationKeyToImage"></converters:LocalizationKeyToImage>
 
-            <locl:LocalizationProvider x:Key="LocalizationProvider">
-                <locl:LocalizationProvider.LocalizationsDictionary>
-                    <locl:LocalizationResource Source="/Localization/RusDictionary.xaml" x:Key="Rus"/>
-                    <locl:LocalizationResource Source="/Localization/EngDictionary.xaml" x:Key="Eng"/>
-                </locl:LocalizationProvider.LocalizationsDictionary>
-            </locl:LocalizationProvider>
+            <locl:LocalizationProvider x:Key="LocalizationProvider"></locl:LocalizationProvider>
             
             <ResourceDictionary.MergedDictionaries>
-                <locl:LocalizationResource Source="Localization/RusDictionary.xaml"/>
+                <!--<ResourceDictionary Source="Localization/RusDictionary.xaml" />-->
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />

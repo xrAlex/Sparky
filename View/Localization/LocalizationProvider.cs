@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
+using View.Localization.LangDictionaries;
 
 namespace View.Localization;
 
-[ContentProperty(nameof(LocalizationsDictionary))]
+[ContentProperty(nameof(Localizations))]
 public sealed class LocalizationProvider : Freezable
 {
     protected override Freezable CreateInstanceCore()
@@ -31,33 +32,34 @@ public sealed class LocalizationProvider : Freezable
     /// <summary>
     /// Коллекция словарей локализации.
     /// </summary>
-    public Dictionary<object, LocalizationResource> LocalizationsDictionary
+    public Dictionary<object, LocalizationDictionary> Localizations
     {
-        get => (Dictionary<object, LocalizationResource>)GetValue(LocalizationsDictionaryProperty);
+        get => (Dictionary<object, LocalizationDictionary>)GetValue(LocalizationsDictionaryProperty);
         set => SetValue(LocalizationsDictionaryProperty, value);
     }
 
-    /// <summary>
-    /// Локализуемое приложение.
-    /// </summary>
-    public Application App
-    {
-        get => (Application)GetValue(AppProperty);
-        set => SetValue(AppProperty, value);
-    }
+    // <summary>
+    // Локализуемое приложение.
+    // </summary>
+    //public Application App
+    //{
+    //    get => (Application)GetValue(AppProperty);
+    //    set => SetValue(AppProperty, value);
+    //}
+
 
     /// <summary>
     /// Текущий словарь локализации.
     /// </summary>
-    public LocalizationResource CurrentResources
+    public LocalizationDictionary CurrentResources
     {
-        get => (LocalizationResource)GetValue(CurrentResourcesProperty);
+        get => (LocalizationDictionary)GetValue(CurrentResourcesProperty);
         private set => SetValue(CurrentResourcesPropertyKey, value);
     }
 
     private static readonly DependencyPropertyKey CurrentResourcesPropertyKey =
         DependencyProperty.RegisterReadOnly(nameof(CurrentResources),
-            typeof(LocalizationResource),
+            typeof(LocalizationDictionary),
             typeof(LocalizationProvider),
             new PropertyMetadata(null));
     
@@ -75,38 +77,43 @@ public sealed class LocalizationProvider : Freezable
 
     public static readonly DependencyProperty LocalizationsDictionaryProperty =
         DependencyProperty.Register(
-            nameof(LocalizationsDictionary),
-            typeof(Dictionary<object, LocalizationResource>),
+            nameof(Localizations),
+            typeof(Dictionary<object, LocalizationDictionary>),
             typeof(LocalizationProvider),
             new PropertyMetadata(null,
                 (d, _) => ((LocalizationProvider)d).LocalizationChange()));
-
-    public static readonly DependencyProperty AppProperty =
-        DependencyProperty.Register(
-            nameof(App),
-            typeof(Application),
-            typeof(LocalizationProvider),
-            new PropertyMetadata(null,
-                (d, _) => ((LocalizationProvider)d).LocalizationChange()));
+ 
+    //public static readonly DependencyProperty AppProperty =
+    //    DependencyProperty.Register(
+    //        nameof(App),
+    //        typeof(Application),
+    //        typeof(LocalizationProvider),
+    //        new PropertyMetadata(null,
+    //            (d, _) => ((LocalizationProvider)d).LocalizationChange()));
 
     public LocalizationProvider()
     {
-        LocalizationsDictionary = new Dictionary<object, LocalizationResource>();
-        BindingOperations.SetBinding(this, AppProperty, new Binding());
+        Localizations = new Dictionary<object, LocalizationDictionary>()
+        {
+            {"Rus", new RusDict().Localization},
+            {"Eng", new EngDict().Localization},
+        };
     }
 
     public string GetLocalizedString(string key)
     {
-        var localizationDict = LocalizationsDictionary[CurrentLocalization];
-        return localizationDict.Contains(key) ? localizationDict[key].ToString()! : "ERROR";
+        var localizationDict = Localizations[CurrentLocalization];
+
+        return localizationDict.ContainsKey(key) ? localizationDict[key] : "ERROR";
     }
 
     private void LocalizationChange()
     {
-        var app = App;
-        if (app == null)
-            return;
-        var locs = LocalizationsDictionary;
+        //var app = App;
+        //if (app == null)
+        //    return;
+
+        var locs = Localizations;
         if (locs == null)
             return;
         var loc = CurrentLocalization;
@@ -115,22 +122,24 @@ public sealed class LocalizationProvider : Freezable
 
         if (locs.TryGetValue(loc, out var localization))
         {
-            int i = 0;
-            for (; i < app.Resources.MergedDictionaries.Count; i++)
-            {
-                if (app.Resources.MergedDictionaries[i] is LocalizationResource)
-                {
-                    app.Resources.MergedDictionaries[i] = localization;
-                    LocalizationChanged?.Invoke(this, loc.ToString());
-                    break;
-                }
-            }
-            if (i >= app.Resources.MergedDictionaries.Count)
-            {
-                app.Resources.MergedDictionaries.Add(localization);
-            }
+
+            //int i = 0;
+            //for (; i < app.Resources.MergedDictionaries.Count; i++)
+            //{
+            //    if (app.Resources.MergedDictionaries[i] is LocalizationResource)
+            //    {
+            //        app.Resources.MergedDictionaries[i] = localization;
+            //        LocalizationChanged?.Invoke(this, loc.ToString());
+            //        break;
+            //    }
+            //}
+            //if (i >= app.Resources.MergedDictionaries.Count)
+            //{
+            //    app.Resources.MergedDictionaries.Add(localization);
+            //}
 
             CurrentResources = localization;
+            LocalizationChanged?.Invoke(this, loc.ToString());
         }
         else
         {

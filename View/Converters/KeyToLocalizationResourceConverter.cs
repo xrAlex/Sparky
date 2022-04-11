@@ -12,8 +12,8 @@ public sealed class KeyToLocalizationResourceConverter : IMultiValueConverter, I
     {
         try
         {
-            var resource = (LocalizationResource)values[0];
-            return resource[values[1]];
+            //var resource = (LocalizationResource)values[0];
+            //return resource[values[1]];
         }
         catch (Exception)
         {
@@ -32,8 +32,8 @@ public sealed class KeyToLocalizationResourceConverter : IMultiValueConverter, I
     {
         try
         {
-            var resource = (LocalizationResource)value;
-            return resource[parameter];
+            //var resource = (LocalizationResource)value;
+            //return resource[parameter];
         }
         catch (Exception)
         {
