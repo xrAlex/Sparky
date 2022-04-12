@@ -3,7 +3,7 @@ using Common.Interfaces;
 using Model;
 using System;
 using System.Windows;
-using View.Localization;
+using View.Localization.WithDto;
 using View.Views;
 using ViewModel;
 
@@ -13,8 +13,7 @@ public partial class App : Application
 {
     private static readonly string ConfigurationFilepath
         = $"{Environment.CurrentDirectory}" + "\\Settings.json";
-
-    public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
+    
     private IAppSettingsModel? _settings;
     private IPeriodObserverModel? _observer;
 }
@@ -34,15 +33,8 @@ public partial class App
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
 
-        LocalizationProvider = new LocalizationProvider
-        {
-            CurrentLocalization = _settings.CurrentLocalizationKey ?? "Rus"
-        };
-
-        LocalizationProvider.LocalizationChanged += (_, value) =>
-        {
-            _settings.CurrentLocalizationKey = value?.ToString();
-        };
+        Localizator.Instance.Default = LocalizationDto.ParseEmbeddedXml("View.Localization.WithDto.RuLocalization.xml");
+        Localizator.Instance.Current = LocalizationDto.ParseEmbeddedXml("View.Localization.WithDto.RuLocalization.xml");
 
         new MainWindow().Show();
 

@@ -57,7 +57,7 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocCancel}">
+                            Content="{Binding Instance.Current.Cancel, Source={StaticResource LocalizationProvider}}">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"

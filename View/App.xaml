@@ -8,7 +8,8 @@
              xmlns:language="clr-namespace:View.Localization"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:extension="clr-namespace:View.Extension"
-             xmlns:locl="clr-namespace:View.Localization">
+             xmlns:locl="clr-namespace:View.Localization"
+             xmlns:withDto="clr-namespace:View.Localization.WithDto">
     <Application.Resources>
         <ResourceDictionary>
             <vmroot:ViewModelLocator x:Key="Locator"/>
@@ -21,7 +22,7 @@
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
             <converters:LocalizationKeyToImage x:Key="LocalizationKeyToImage"></converters:LocalizationKeyToImage>
 
-            <locl:LocalizationProvider x:Key="LocalizationProvider"></locl:LocalizationProvider>
+            <withDto:Localizator x:Key="LocalizationProvider"></withDto:Localizator>
             
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="Localization/RusDictionary.xaml" />-->

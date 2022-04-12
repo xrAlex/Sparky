@@ -8,6 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Localization\WithDto\EngLocalization.xml" />
+    <None Remove="Localization\WithDto\RuLocalization.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\WithDto\EngLocalization.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\WithDto\RuLocalization.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Images\BlueReduce.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
