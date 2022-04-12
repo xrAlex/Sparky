@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -94,11 +95,11 @@ namespace View.Localization.WithDto
             TrayUnPause = trayUnPause;
         }
 
-        private static readonly XmlSerializer localizationSerializator = new(typeof(LocalizationXml));
+        private static readonly XmlSerializer LocalizationSerializer = new(typeof(LocalizationXml));
 
         public static LocalizationDto? ParseXml(XmlReader reader)
         {
-            LocalizationXml? xml = (LocalizationXml?)localizationSerializator.Deserialize(reader);
+            var xml = (LocalizationXml?)LocalizationSerializer.Deserialize(reader);
             if (xml == null)
                 return null;
             return new LocalizationDto(xml.language,
@@ -130,5 +131,17 @@ namespace View.Localization.WithDto
             return ParseXml(XmlReader.Create(file));
         }
 
+        public static LocalizationDto? ParseEmbeddedXml(string embeddedFileName)
+        {
+            using var resourceStream = Assembly
+                .GetCallingAssembly()
+                .GetManifestResourceStream(embeddedFileName);
+
+            if (resourceStream == null)
+                return null;
+
+            using var reader = new StreamReader(resourceStream);
+            return ParseXml(XmlReader.Create(reader));
+        }
     }
 }
