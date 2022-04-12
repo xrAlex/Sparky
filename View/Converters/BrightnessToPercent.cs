@@ -10,7 +10,8 @@ internal sealed class BrightnessToPercent : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var val = System.Convert.ToDouble(value);
-        return $"{App.LocalizationProvider.GetLocalizedString("LocBrightness")}: {Math.Round(val * 100)} %";
+        //return $"{App.LocalizationProvider.Current.Brightness}: {Math.Round(val * 100)} %";
+        return $"";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
