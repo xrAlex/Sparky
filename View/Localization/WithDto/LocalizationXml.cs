@@ -11,7 +11,7 @@ namespace View.Localization.WithDto
     [Serializable()]
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(Namespace = "", IsNullable = false, ElementName="Localization")]
     public class LocalizationXml
     {
 

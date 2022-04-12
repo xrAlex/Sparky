@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -129,19 +128,6 @@ namespace View.Localization.WithDto
         {
             using var file = File.OpenRead(fileName);
             return ParseXml(XmlReader.Create(file));
-        }
-
-        public static LocalizationDto? ParseEmbeddedXml(string embeddedFileName)
-        {
-            using var resourceStream = Assembly
-                .GetCallingAssembly()
-                .GetManifestResourceStream(embeddedFileName);
-
-            if (resourceStream == null)
-                return null;
-
-            using var reader = new StreamReader(resourceStream);
-            return ParseXml(XmlReader.Create(reader));
         }
     }
 }
