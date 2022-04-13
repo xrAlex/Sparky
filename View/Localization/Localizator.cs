@@ -31,30 +31,20 @@ namespace View.Localization
 
         public LocalizationDto? Default
         {
-            get => _defaultDto; 
-            set
-            {
-                if (Equals(value, _defaultDto)) return;
-                _defaultDto = value;
-                RaisePropertyChanged(DefaultArg);
-            }
+            get => _defaultDto;
+            set => Set(DefaultArg, ref _defaultDto, value);
         }
 
         public LocalizationDto? Current
         {
-            get => _currentDto; 
-            set
-            {
-                if (Equals(value, _currentDto)) return;
-                _currentDto = value;
-                RaisePropertyChanged(CurrentArg);
-            }
+            get => _currentDto;
+            set => Set(CurrentArg, ref _currentDto, value);
         }
 
-        public static RelayCommand SetLocalization { get; } = new (
+        public static RelayCommand SetLocalization { get; } = new(
             key =>
             {
-                Instance.Current = key == null ? _defaultDto : LocalizationsDict[key];
+                Instance.Current = key == null ? Instance.Default : LocalizationsDict[key];
             },
             key => key == null || LocalizationsDict.ContainsKey(key));
 
@@ -66,8 +56,11 @@ namespace View.Localization
         }
 
         // Подымает PropertyChanged для всех существующих экземпляров.
-        private static void RaisePropertyChanged(PropertyChangedEventArgs arg)
+        private static void Set<T>(PropertyChangedEventArgs arg, ref T field, T value)
         {
+            if (Equals(field, value)) return;
+            field = value;
+
             for (int i = Instances.Count - 1; i >= 0; i--)
             {
                 // Проверка существования экземпляра
