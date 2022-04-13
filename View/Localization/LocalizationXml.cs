@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Xml;
 using System.Xml.Serialization;
 
-namespace View.Localization.WithDto
+namespace View.Localization
 {
-
     // Примечание. Для запуска созданного кода может потребоваться NET Framework версии 4.5 или более поздней версии и .NET Core или Standard версии 2.0 или более поздней.
     /// <remarks/>
     [Serializable()]
@@ -14,68 +12,67 @@ namespace View.Localization.WithDto
     [XmlRoot(Namespace = "", IsNullable = false, ElementName="Localization")]
     public class LocalizationXml
     {
+        [XmlAttribute()]
+        public string? Language;
 
         [XmlAttribute()]
-        public string? language;
+        public string? Apply;
 
         [XmlAttribute()]
-        public string? apply;
+        public string? AutoLaunch;
 
         [XmlAttribute()]
-        public string? autoLaunch;
+        public string? Brightness;
 
         [XmlAttribute()]
-        public string? brightness;
+        public string? Cancel;
 
         [XmlAttribute()]
-        public string? cancel;
+        public string? Day;
 
         [XmlAttribute()]
-        public string? day;
+        public string? ColorTemperature;
 
         [XmlAttribute()]
-        public string? colorTemperature;
+        public string? DontWorkInFullScreen;
 
         [XmlAttribute()]
-        public string? dontWorkInFullScreen;
+        public string? ExtendedGammaRange;
 
         [XmlAttribute()]
-        public string? extendedGammaRange;
+        public string? Night;
 
         [XmlAttribute()]
-        public string? night;
+        public string? ApplicationsWhiteList;
 
         [XmlAttribute()]
-        public string? applicationsWhiteList;
+        public string? Reset;
 
         [XmlAttribute()]
-        public string? reset;
+        public string? SmoothBrightnessChange;
 
         [XmlAttribute()]
-        public string? smoothBrightnessChange;
+        public string? Restart;
 
         [XmlAttribute()]
-        public string? restart;
+        public string? Sunrise;
 
         [XmlAttribute()]
-        public string? sunrise;
+        public string? Monitors;
 
         [XmlAttribute()]
-        public string? monitors;
+        public string? Sunset;
 
         [XmlAttribute()]
-        public string? sunset;
+        public string? ToTrayNotification;
 
         [XmlAttribute()]
-        public string? toTrayNotification;
+        public string? TrayClose;
 
         [XmlAttribute()]
-        public string? trayClose;
+        public string? TrayPause;
 
         [XmlAttribute()]
-        public string? trayPause;
-
-        [XmlAttribute()]
-        public string? trayUnPause;
+        public string? TrayUnPause;
     }
 }

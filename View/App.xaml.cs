@@ -5,7 +5,7 @@ using System;
 using System.Reflection;
 using System.Windows;
 using System.Xml;
-using View.Localization.WithDto;
+using View.Localization;
 using View.Views;
 using ViewModel;
 
@@ -35,28 +35,12 @@ public partial class App
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
 
-        var ru = GetLocalization("View.Localization.WithDto.RuLocalization.xml");
-        Localizator.Instance.Localizations.Add(ru.Language, ru);
-        Localizator.Instance.Default = ru;
-        Localizator.Instance.Current = ru;
+        SetupLocalizations();
 
         new MainWindow().Show();
 
         base.OnStartup(e);
     }
-
-    public static LocalizationDto? GetLocalization(string embeddedFileName)
-    {
-        using var resourceStream = Assembly
-            .GetCallingAssembly()
-            .GetManifestResourceStream(embeddedFileName);
-
-        if (resourceStream == null)
-            throw new ArgumentNullException(nameof(resourceStream));
-
-        return LocalizationDto.ParseXml(XmlReader.Create(resourceStream));
-    }
-
 }
 
 public partial class App
@@ -72,6 +56,29 @@ public partial class App
 
 public partial class App
 {
+    private static void SetupLocalizations()
+    {
+        var rus = GetLocalization("View.Localization.Dictionaries.RusLocalization.xml");
+        var eng = GetLocalization("View.Localization.Dictionaries.EngLocalization.xml");
+
+        Localizator.Instance.Localizations.Add(rus.Language, rus);
+        Localizator.Instance.Localizations.Add(eng.Language, eng);
+        Localizator.Instance.Default = eng;
+        Localizator.Instance.Current = rus;
+    }
+
+    public static LocalizationDto? GetLocalization(string embeddedFileName)
+    {
+        using var resourceStream = Assembly
+            .GetCallingAssembly()
+            .GetManifestResourceStream(embeddedFileName);
+
+        if (resourceStream == null)
+            throw new ArgumentNullException(nameof(resourceStream));
+
+        return LocalizationDto.ParseXml(XmlReader.Create(resourceStream));
+    }
+
     /// <summary>
     /// Конфигурация контейнера инверсии управления
     /// </summary>

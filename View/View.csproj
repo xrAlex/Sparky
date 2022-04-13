@@ -8,15 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Localization\WithDto\EngLocalization.xml" />
-    <None Remove="Localization\WithDto\RuLocalization.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Localization\WithDto\EngLocalization.xml">
+    <EmbeddedResource Include="Localization\Dictionaries\EngLocalization.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\WithDto\RuLocalization.xml">
+    <EmbeddedResource Include="Localization\Dictionaries\RusLocalization.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -48,7 +48,7 @@
                             Command="{Binding ResetValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocReset}">
+                            Content="{Binding Current.Reset, Mode=OneWay, Source={StaticResource LocalizationProvider}}">
                         </Button>
                         <Button
                             Width="80" Height="40"
@@ -57,7 +57,9 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
                             Background="{StaticResource TLightGray}"
-                            Content="{Binding Instance.Current.Cancel, Source={StaticResource LocalizationProvider}}">
+                            Content="{Binding Instance.Current.Cancel,
+                            Mode=OneWay,
+                            Source={StaticResource LocalizationProvider}}">
                         </Button>
                         <Button
                             HorizontalAlignment="Right"
@@ -66,7 +68,9 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource LocApply}" Cursor="Hand">
+                            Content="{Binding Instance.Current.Apply,
+                            Mode=OneWay,
+                            Source={StaticResource LocalizationProvider}}" Cursor="Hand">
                         </Button>
                     </Grid>
                     <ContentControl 
@@ -88,9 +92,9 @@
                     ItemsSource="{Binding Localizations.Keys,
                     Source={StaticResource LocalizationProvider},
                     Mode=OneWay}"
-                    SelectedItem="{Binding CurrentLocalization,
+                    SelectedItem="{Binding Instance.Current.Language,
                     Source={StaticResource LocalizationProvider},
-                    Mode=TwoWay}"
+                    Mode=OneWay}"
                     ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
                     Style="{StaticResource PictureComboBox}" 
                     Margin="0,7,0,0">

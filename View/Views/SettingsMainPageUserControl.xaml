@@ -15,7 +15,9 @@
             <RowDefinition Height="153"/>
         </Grid.RowDefinitions>
         <GroupBox
-            Header="{DynamicResource LocMonitors}"
+            Header="{Binding Instance.Current.Monitors,
+            Mode=OneWay,
+            Source={StaticResource LocalizationProvider}}"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <Grid>
                 <ListBox
@@ -64,7 +66,9 @@
             </Grid>
         </GroupBox>
         <GroupBox
-            Header="{DynamicResource LocDay}"
+            Header="{Binding Instance.Current.Day,
+            Mode=OneWay,
+            Source={StaticResource LocalizationProvider}}"
             FontSize="14" Grid.Row="1" Height="153" VerticalAlignment="Top">
             <StackPanel>
                 <Grid Height="129">
@@ -139,41 +143,48 @@
                         Margin="2,0,0,0"
                         Grid.Column="4" Grid.Row="1">
                     </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.DayColorTemperature,
-                        Converter={StaticResource TemperatureToKelvin},
-                        Mode=OneWay}"
                         Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} : {1} K">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="Instance.Current.ColorTemperature"/>
+                                <Binding 
+                                    Path="SelectedScreen.DayColorTemperature"
+                                    UpdateSourceTrigger="PropertyChanged"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock
                         FontSize="15"
                         Background="Transparent"
-                        Text="{DynamicResource LocSunrise}" 
-                        Grid.ColumnSpan="2" Grid.Column="3" 
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                        Padding="0,-4,0,0" 
+                        Text="{Binding Instance.Current.Sunrise,
+                        Mode=OneWay,
+                        Source={StaticResource LocalizationProvider}}"
+                        Grid.ColumnSpan="2" Grid.Column="3"
                         Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                    </TextBlock>
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.DayBrightness,
-                        Converter={StaticResource BrightnessToPercent},
-                        Mode=OneWay}"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} : {1} %">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="Instance.Current.Brightness"/>
+                                <Binding 
+                                    Path="SelectedScreen.DayBrightness"
+                                    UpdateSourceTrigger="PropertyChanged"
+                                    Converter="{StaticResource BrightnessToPercent}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"
@@ -198,7 +209,9 @@
             </StackPanel>
         </GroupBox>
         <GroupBox
-            Header="{DynamicResource LocNight}"
+            Header="{Binding Instance.Current.Night,
+            Mode=OneWay,
+            Source={StaticResource LocalizationProvider}}"
             FontSize="14" Grid.Row="2">
             <StackPanel>
                 <Grid Height="129">
@@ -270,40 +283,47 @@
                         Margin="2,0,0,0"
                         Grid.Column="4" Grid.Row="1">
                     </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.NightColorTemperature,
-                        Converter={StaticResource TemperatureToKelvin},
-                        Mode=OneWay}"
                         Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} : {1} K">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="Instance.Current.ColorTemperature"/>
+                                <Binding 
+                                    Path="SelectedScreen.NightColorTemperature"
+                                    UpdateSourceTrigger="PropertyChanged"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock
                         FontSize="15"
                         Background="Transparent"
-                        Text="{DynamicResource LocSunset}" 
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                        Padding="0,-4,0,0"
+                        Text="{Binding Instance.Current.Sunset,
+                        Mode=OneWay,
+                        Source={StaticResource LocalizationProvider}}"
                         Grid.ColumnSpan="2" Grid.Column="3" 
                         Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                    </TextBlock>
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.NightBrightness,
-                        Converter={StaticResource BrightnessToPercent},
-                        Mode=OneWay}"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} : {1} %">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="Instance.Current.Brightness"/>
+                                <Binding 
+                                    Path="SelectedScreen.NightBrightness"
+                                    UpdateSourceTrigger="PropertyChanged"
+                                    Converter="{StaticResource BrightnessToPercent}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"

@@ -11,17 +11,23 @@
         <StackPanel Orientation="Vertical">
             <CheckBox
                 Style="{StaticResource SliderCheckBox}"
-                Content="{DynamicResource LocAutoLaunch}"
+                Content="{Binding Instance.Current.AutoLaunch,
+                Mode=OneWay,
+                Source={StaticResource LocalizationProvider}}"
                 IsChecked="{Binding AutoLaunchOnStartup, Mode=TwoWay}"/>
             <CheckBox
                 Style="{StaticResource SliderCheckBox}"
                 IsChecked="{Binding  IsExtendedGammaRangeEnabled, Mode=TwoWay}"
-                Content="{DynamicResource LocExtendedGammaRange}" 
+                Content="{Binding Instance.Current.ExtendedGammaRange,
+                Mode=OneWay,
+                Source={StaticResource LocalizationProvider}}"
                 Margin="0,10,0,0"/>
             <CheckBox
                 Style="{StaticResource SliderCheckBox}"
                 IsChecked="{Binding IsGammaSmoothingEnabled, Mode=TwoWay}"
-                Content="{DynamicResource LocSmoothBrightnessChange}" 
+                Content="{Binding Instance.Current.SmoothBrightnessChange,
+                Mode=OneWay,
+                Source={StaticResource LocalizationProvider}}"
                 Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>

@@ -12,7 +12,9 @@
             Height="25"
             Style="{StaticResource SliderCheckBox}"
             x:Name="FullScreenCheckBox"
-            Content="{DynamicResource LocDontWorkInFullScreen}" 
+            Content="{Binding Instance.Current.DontWorkInFullScreen,
+            Mode=OneWay,
+            Source={StaticResource LocalizationProvider}}"
             VerticalContentAlignment="Center"
             VerticalAlignment="Top"
             IsChecked="{Binding CheckFullScreensApps, Mode=TwoWay}"/>
@@ -21,7 +23,9 @@
             FontSize="14"
             VerticalAlignment="Top"
             Margin="0,20,0,0"
-            Text="{DynamicResource LocApplicationsWhiteList}"
+            Text="{Binding Instance.Current.ApplicationsWhiteList,
+            Mode=OneWay,
+            Source={StaticResource LocalizationProvider}}"
             Cursor="Arrow"/>
         <Button 
             Style="{DynamicResource RotaryButton}" 

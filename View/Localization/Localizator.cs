@@ -1,9 +1,9 @@
-﻿using Common.Infrastructure.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Common.Infrastructure.Commands;
 
-namespace View.Localization.WithDto
+namespace View.Localization
 {
     /// <summary>Локализатор. Все значения содержатся в статических членах.
     /// Экземпляры - это прокси к статическим членам.</summary>

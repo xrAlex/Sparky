@@ -2,51 +2,30 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace View.Localization.WithDto
+namespace View.Localization
 {
     public class LocalizationDto
     {
-
         public string? Language { get; }
-
         public string? Apply { get; }
-
         public string? AutoLaunch { get; }
-
         public string? Brightness { get; }
-
         public string? Cancel { get; }
-
         public string? Day { get; }
-
         public string? ColorTemperature { get; }
-
         public string? DontWorkInFullScreen { get; }
-
         public string? ExtendedGammaRange { get; }
-
         public string? Night { get; }
-
         public string? ApplicationsWhiteList { get; }
-
         public string? Reset { get; }
-
         public string? SmoothBrightnessChange { get; }
-
         public string? Restart { get; }
-
         public string? Sunrise { get; }
-
         public string? Monitors { get; }
-
         public string? Sunset { get; }
-
         public string? ToTrayNotification { get; }
-
         public string? TrayClose { get; }
-
         public string? TrayPause { get; }
-
         public string? TrayUnPause { get; }
 
         public LocalizationDto(string? language,
@@ -101,27 +80,27 @@ namespace View.Localization.WithDto
             var xml = (LocalizationXml?)LocalizationSerializer.Deserialize(reader);
             if (xml == null)
                 return null;
-            return new LocalizationDto(xml.language,
-                                        xml.apply,
-                                        xml.autoLaunch,
-                                        xml.brightness,
-                                        xml.cancel,
-                                        xml.day,
-                                        xml.colorTemperature,
-                                        xml.dontWorkInFullScreen,
-                                        xml.extendedGammaRange,
-                                        xml.night,
-                                        xml.applicationsWhiteList,
-                                        xml.reset,
-                                        xml.smoothBrightnessChange,
-                                        xml.restart,
-                                        xml.sunrise,
-                                        xml.monitors,
-                                        xml.sunset,
-                                        xml.toTrayNotification,
-                                        xml.trayClose,
-                                        xml.trayPause,
-                                        xml.trayUnPause);
+            return new LocalizationDto(xml.Language,
+                                        xml.Apply,
+                                        xml.AutoLaunch,
+                                        xml.Brightness,
+                                        xml.Cancel,
+                                        xml.Day,
+                                        xml.ColorTemperature,
+                                        xml.DontWorkInFullScreen,
+                                        xml.ExtendedGammaRange,
+                                        xml.Night,
+                                        xml.ApplicationsWhiteList,
+                                        xml.Reset,
+                                        xml.SmoothBrightnessChange,
+                                        xml.Restart,
+                                        xml.Sunrise,
+                                        xml.Monitors,
+                                        xml.Sunset,
+                                        xml.ToTrayNotification,
+                                        xml.TrayClose,
+                                        xml.TrayPause,
+                                        xml.TrayUnPause);
         }
 
         public static LocalizationDto? ParseXml(string fileName)

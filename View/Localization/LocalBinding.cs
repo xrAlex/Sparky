@@ -1,6 +1,6 @@
 ﻿using System.Windows.Data;
 
-namespace View.Localization.WithDto
+namespace View.Localization
 {
     public class LocalBinding : Binding
     {
@@ -9,8 +9,7 @@ namespace View.Localization.WithDto
             Source = Localizator.Instance;
         }
 
-        public LocalBinding(string path)
-            : base(path)
+        public LocalBinding(string path) : base(path)
         {
             Source = Localizator.Instance;
         }
