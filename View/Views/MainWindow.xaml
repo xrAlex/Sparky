@@ -84,22 +84,22 @@
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
-        <TextBlock
-            FontSize="12"
-            Grid.Column="3" Grid.Row="2">
-            <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0}%">
-                    <!--<locl:CurrLocal CurrPath="Brightness"/>-->
-                    <Binding Path="CurrentColorConfiguration.Brightness" 
-                                Converter="{StaticResource BrightnessToPercent}"/>
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
-                                        <!--<TextBlock
+                                        <TextBlock
                                             FontSize="12"
                                             Grid.Column="3" Grid.Row="2">
                                             <TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0} : {1} %">
+                                                    <Binding Path="Current.Brightness" Source="{StaticResource LocalizationProvider}"/>
+                                                    <Binding Path="CurrentColorConfiguration.Brightness" 
+                                                                Converter="{StaticResource BrightnessToPercent}"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <!--<TextBlock
+                                            FontSize="12"
+                                            Grid.Column="3" Grid.Row="2">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0}%">
                                                     <locl:CurrLocal CurrPath="Brightness"/>
                                                     <Binding Path="CurrentColorConfiguration.Brightness" 
                                                                 Converter="{StaticResource BrightnessToPercent}"/>
