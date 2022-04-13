@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Common.Infrastructure.Commands;
 
 namespace View.Localization
 {
     /// <summary>Локализатор. Все значения содержатся в статических членах.
     /// Экземпляры - это прокси к статическим членам.</summary>
-    public sealed class Localizator : INotifyPropertyChanged
+    public class Localizator : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // Словарь всех локализаций.
-        private static readonly Dictionary<object, LocalizationDto> LocalizationsDict = new();
+        private static readonly Dictionary<object, LocalizationDto> LocalizationsDict = new(new LocalizatorKeyComparer());
 
         /// <summary>Словарь локализаций.</summary>
         public Dictionary<object, LocalizationDto> Localizations => LocalizationsDict;
@@ -20,7 +21,7 @@ namespace View.Localization
         // Содержит список всех созданных экземпляров.
         private static readonly List<WeakReference> Instances = new();
 
-        public static Localizator Instance { get; } = new();
+        public static Localizator Instance { get; private set;} = new();
 
         private static LocalizationDto? _defaultDto;
         private static LocalizationDto? _currentDto;
@@ -76,6 +77,25 @@ namespace View.Localization
                     localizator.PropertyChanged?.Invoke(localizator, arg);
                 }
             }
+        }
+
+        protected void SetInstance() => Instance = this;
+    }
+
+    class LocalizatorKeyComparer : IEqualityComparer<object>
+    {
+        public new bool Equals(object? x, object? y)
+            => (x == null, y == null) switch
+            {
+                (true, true) => true,
+                (true, false) => false,
+                (false, true) => false,
+                _ => string.Equals(x.ToString(), y.ToString(), StringComparison.Ordinal)
+            };
+
+        public int GetHashCode([DisallowNull] object obj)
+        {
+            return string.GetHashCode(obj?.ToString());
         }
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:localization="clr-namespace:View.Localization"
+             xmlns:locl="clr-namespace:View.Localization"
              mc:Ignorable="d"
              d:DesignHeight="410" d:DesignWidth="350"
              DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
@@ -162,9 +162,7 @@
                     <TextBlock
                         FontSize="15"
                         Background="Transparent"
-                        Text="{Binding Instance.Current.Sunrise,
-                        Mode=OneWay,
-                        Source={StaticResource LocalizationProvider}}"
+                        Text="{locl:CurrLocal Sunrise}"
                         Grid.ColumnSpan="2" Grid.Column="3"
                         Cursor="Arrow">
                     </TextBlock>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="clr-namespace:View.Extension"
         xmlns:views="clr-namespace:View.Views"
-        xmlns:localization="clr-namespace:View.Localization"
+        xmlns:localization="clr-namespace:View.Localization" xmlns:view="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="500" Width="450"
@@ -89,12 +89,8 @@
                 <ComboBox
                     VerticalAlignment="Top"
                     Width="45" Height="45"
-                    ItemsSource="{Binding Localizations.Keys,
-                    Source={StaticResource LocalizationProvider},
-                    Mode=OneWay}"
-                    SelectedItem="{Binding Instance.Current.Language,
-                    Source={StaticResource LocalizationProvider},
-                    Mode=OneWay}"
+                    ItemsSource="{localization:LocalBinding Localizations.Keys}"
+                    SelectedItem="{localization:LocalBinding Path=SelectedKey}"
                     ItemContainerStyle="{StaticResource PictureComboBoxItemStyle}" 
                     Style="{StaticResource PictureComboBox}" 
                     Margin="0,7,0,0">
@@ -104,10 +100,9 @@
                         </ItemsPanelTemplate>
                     </ComboBox.ItemsPanel>
                     <ComboBox.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType="{x:Type view:LocalizationImage}">
                             <Image
-                                Source="{Binding Converter={StaticResource LocalizationKeyToImage},
-                                Mode=OneWay}" 
+                                Source="{Binding Image}" 
                                 Width="41" Height="26">
                             </Image>
                         </DataTemplate>

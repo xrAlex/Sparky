@@ -8,7 +8,8 @@
              xmlns:localization="clr-namespace:View.Localization"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:extension="clr-namespace:View.Extension"
-             xmlns:locl="clr-namespace:View.Localization">
+             xmlns:locl="clr-namespace:View.Localization"
+             xmlns:local="clr-namespace:View">
     <Application.Resources>
         <ResourceDictionary>
             <vmroot:ViewModelLocator x:Key="Locator"/>
@@ -21,8 +22,15 @@
             <converters:LocalizationConverter x:Key="LocalizationConverter"></converters:LocalizationConverter>
             <converters:LocalizationKeyToImage x:Key="LocalizationKeyToImage"></converters:LocalizationKeyToImage>
 
-            <localization:Localizator x:Key="LocalizationProvider"></localization:Localizator>
-            
+            <local:LocalizatorApp x:Key="LocalizationProvider">
+                <local:LocalizatorApp.Images>
+                    <local:ListImages>
+                        <local:LocalizationImage Name="Rus" Image="/Resources/Images/Flags/russia.png"/>
+                        <local:LocalizationImage Name="Eng" Image="/Resources/Images/Flags/united-states.png"/>
+                    </local:ListImages>
+                </local:LocalizatorApp.Images>
+            </local:LocalizatorApp>
+
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="Localization/RusDictionary.xaml" />-->
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
