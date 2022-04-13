@@ -84,20 +84,18 @@
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
-                                        <TextBlock
-                                            FontSize="12"
-                                            Grid.Column="3" Grid.Row="2">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} : {1} %">
-                                                    <Binding
-                                                        Source="{StaticResource LocalizationProvider}"
-                                                        Path="Instance.Current.Brightness"/>
-                                                    <Binding Path="CurrentColorConfiguration.Brightness" 
-                                                             UpdateSourceTrigger="PropertyChanged"
-                                                             Converter="{StaticResource BrightnessToPercent}"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
+        <TextBlock
+            FontSize="12"
+            Grid.Column="3" Grid.Row="2">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} : {1} %">
+                    <locl:LocalBinding Path="Current.Brightness"/>
+                    <Binding Path="CurrentColorConfiguration.Brightness" 
+                                UpdateSourceTrigger="PropertyChanged"
+                                Converter="{StaticResource BrightnessToPercent}"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
                                     </Grid>
                                 </GroupBox>
                             </DataTemplate>

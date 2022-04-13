@@ -42,7 +42,7 @@ namespace View.Localization
 
         public LocalizationDto? Current
         {
-            get => _defaultDto; 
+            get => _currentDto; 
             set
             {
                 if (Equals(value, _currentDto)) return;
