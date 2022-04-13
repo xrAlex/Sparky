@@ -49,8 +49,7 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         IsChecked="{Binding IsIgnored, Mode=TwoWay}"
-                        Content="{Binding Title, Mode=OneWay}">
-                    </CheckBox>
+                        Content="{Binding Title, Mode=OneWay}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

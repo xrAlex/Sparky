@@ -7,8 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border CornerRadius="5" BorderThickness="1" Background="{StaticResource Black}" BorderBrush="{StaticResource Black}" Height="3">
-                    </Border>
+                    <Border CornerRadius="5" BorderThickness="1" Background="{StaticResource Black}" BorderBrush="{StaticResource Black}" Height="3" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -20,8 +19,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border CornerRadius="5" SnapsToDevicePixels="True" BorderThickness="1" Background="{StaticResource Gray}" BorderBrush="{StaticResource Black}" Height="3">
-                    </Border>
+                    <Border CornerRadius="5" SnapsToDevicePixels="True" BorderThickness="1" Background="{StaticResource Gray}" BorderBrush="{StaticResource Black}" Height="3" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -47,8 +45,7 @@
                                     x:Name="Ellipse" 
                                     Background="{StaticResource Black}" 
                                     Height="8" Width="8"
-                                    CornerRadius="50">
-                                </Border>
+                                    CornerRadius="50" />
                             </Border>
                         </Grid>
                     </StackPanel>

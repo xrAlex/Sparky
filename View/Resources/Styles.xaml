@@ -57,12 +57,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Ellipse x:Name="Ellipse" Height="13" Width="13" Fill="#FF292929"></Ellipse>
+                    <Ellipse x:Name="Ellipse" Height="13" Width="13" Fill="#FF292929" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource Black}"></Setter>
-                            <Setter TargetName="Ellipse" Property="Height" Value="13"></Setter>
-                            <Setter TargetName="Ellipse" Property="Width" Value="13"></Setter>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource Black}" />
+                            <Setter TargetName="Ellipse" Property="Height" Value="13" />
+                            <Setter TargetName="Ellipse" Property="Width" Value="13" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

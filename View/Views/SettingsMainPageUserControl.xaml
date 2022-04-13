@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:localization="clr-namespace:View.Localization"
              mc:Ignorable="d"
              d:DesignHeight="410" d:DesignWidth="350"
              DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}}"
@@ -45,8 +44,7 @@
                                     Source="{StaticResource MonitorBlack}"
                                     Width="68.2" Height="61.6"
                                  
-                                    Grid.Row="0">
-                                </Image>
+                                    Grid.Row="0" />
                                 <TextBox
                                     Text="{Binding Screen.FriendlyName, Mode=OneWay}"
                                     HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -55,8 +53,7 @@
                                     FontSize="12"
                                     Grid.Row="0" 
                                     Height="50" Width="66" 
-                                    Margin="0,3,0,0">
-                                </TextBox>
+                                    Margin="0,3,0,0" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -92,22 +89,19 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         Height="4" Width="4"
                         Margin="56,3,0,0"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
-                    </Ellipse>
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" />
                     <Ellipse
                         Fill="Black" Stroke="Black"
                         HorizontalAlignment="Left" Width="4"
                         Margin="56,12,0,6"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
-                    </Ellipse>
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" />
                     <Image
                         Source="{StaticResource Day}" 
                         Height="124"
                         Opacity="0.03" 
                         HorizontalAlignment="Stretch"
                         Margin="0,0,0,5"
-                        Grid.RowSpan="7" Grid.ColumnSpan="4" Grid.Column="2">
-                    </Image>
+                        Grid.RowSpan="7" Grid.ColumnSpan="4" Grid.Column="2" />
                     <TextBox
                         Text="{Binding SelectedScreen.DayStartHour,
                         Converter= {StaticResource HourConverter},
@@ -121,8 +115,7 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
                         Padding="0,-5,0,0" 
                         Margin="0,0,2,0"
-                        Grid.Column="3" Grid.Row="1">
-                    </TextBox>
+                        Grid.Column="3" Grid.Row="1" />
                     <TextBox
                         Text="{Binding SelectedScreen.DayStartMin,
                         Converter= {StaticResource MinConverter},
@@ -137,20 +130,21 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         Padding="0,-5,0,0" 
                         Margin="2,0,0,0"
-                        Grid.Column="4" Grid.Row="1">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        Grid.Column="4" Grid.Row="1" />
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.DayColorTemperature,
-                        Converter={StaticResource TemperatureToKelvin},
-                        Mode=OneWay}"
                         Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0: } : {1} K">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="CurrentResources[LocColorTemperature]"/>
+                                <Binding Path="SelectedScreen.DayColorTemperature" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -160,20 +154,22 @@
                         Grid.ColumnSpan="2" Grid.Column="3" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Padding="0,-4,0,0" 
-                        Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        Cursor="Arrow" />
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.DayBrightness,
-                        Converter={StaticResource BrightnessToPercent},
-                        Mode=OneWay}"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0: } : {1} %">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="CurrentResources[LocBrightness]"/>
+                                <Binding Path="SelectedScreen.DayBrightness" 
+                                         Converter="{StaticResource BrightnessToPercent}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"
@@ -182,18 +178,16 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding SelectedScreen.DayColorTemperature, Mode=TwoWay}"
-                        Grid.Row="3" Grid.ColumnSpan="6" Grid.Column="1">
-                    </Slider>
+                        Grid.Row="3" Grid.ColumnSpan="6" Grid.Column="1" />
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding SelectedScreen.DayBrightness,
-                        Converter= {StaticResource BrightnessToDouble},
+                        Converter= {StaticResource BrightnessToPercent},
                         Mode=TwoWay}"
-                        Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1">
-                    </Slider>
+                        Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </GroupBox>
@@ -226,14 +220,12 @@
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         Height="4" Width="4"
                         Margin="56,3,0,0"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
-                    </Ellipse>
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" />
                     <Ellipse
                         Fill="Black" Stroke="Black"
                         HorizontalAlignment="Left" Width="4"
                         Margin="56,12,0,6"
-                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
-                    </Ellipse>
+                        Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" />
                     <Image
                         Source="{StaticResource Night}"
                         Opacity="0.03" 
@@ -252,8 +244,7 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
                         Padding="0,-5,0,0" 
                         Margin="0,0,2,0"
-                        Grid.Column="3" Grid.Row="1">
-                    </TextBox>
+                        Grid.Column="3" Grid.Row="1" />
                     <TextBox
                         Text="{Binding SelectedScreen.NightStartMin,
                         Converter= {StaticResource MinConverter},
@@ -268,20 +259,21 @@
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         Padding="0,-5,0,0" 
                         Margin="2,0,0,0"
-                        Grid.Column="4" Grid.Row="1">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        Grid.Column="4" Grid.Row="1" />
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.NightColorTemperature,
-                        Converter={StaticResource TemperatureToKelvin},
-                        Mode=OneWay}"
                         Grid.Row="2" Grid.ColumnSpan="6" Grid.Column="1" 
                         Cursor="Arrow">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0: } : {1} K">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="CurrentResources[LocColorTemperature]"/>
+                                <Binding Path="SelectedScreen.NightColorTemperature" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <TextBox
                         BorderThickness="0"
                         IsReadOnly="True"
@@ -291,19 +283,21 @@
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Padding="0,-4,0,0"
                         Grid.ColumnSpan="2" Grid.Column="3" 
-                        Cursor="Arrow">
-                    </TextBox>
-                    <TextBox
-                        BorderThickness="0"
-                        IsReadOnly="True"
+                        Cursor="Arrow" />
+                    <TextBlock
                         FontSize="12"
                         Background="Transparent"
-                        HorizontalContentAlignment="Left"
-                        Text="{Binding SelectedScreen.NightBrightness,
-                        Converter={StaticResource BrightnessToPercent},
-                        Mode=OneWay}"
                         Grid.Row="4" Grid.ColumnSpan="6" Grid.Column="1">
-                    </TextBox>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0: } : {1} %">
+                                <Binding
+                                    Source="{StaticResource LocalizationProvider}"
+                                    Path="CurrentResources[LocBrightness]"/>
+                                <Binding Path="SelectedScreen.NightBrightness" 
+                                         Converter="{StaticResource BrightnessToPercent}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="12000" Minimum="{Binding MinGammaRange}"
@@ -312,16 +306,14 @@
                         Cursor="Hand"
                         IsDirectionReversed="True"
                         Value="{Binding SelectedScreen.NightColorTemperature, Mode=TwoWay}"
-                        Grid.Row="3" Grid.ColumnSpan="6" Grid.Column="1">
-                    </Slider>
+                        Grid.Row="3" Grid.ColumnSpan="6" Grid.Column="1" />
                     <Slider
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
                         IsDirectionReversed="True"
-                        Value="{Binding SelectedScreen.NightBrightness, Converter= {StaticResource BrightnessToDouble}, Mode=TwoWay}"
-                        Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1">
-                    </Slider>
+                        Value="{Binding SelectedScreen.NightBrightness, Converter= {StaticResource BrightnessToPercent}, Mode=TwoWay}"
+                        Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </GroupBox>

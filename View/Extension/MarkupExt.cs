@@ -5,14 +5,6 @@ using View.Localization;
 
 namespace View.Extension;
 
-public class KeyToLocalizationResourceExtension : MarkupExtension
-{
-    public override object ProvideValue(IServiceProvider serviceProvider)
-    {
-        return KeyToLocalizationResourceConverter.Instance;
-    }
-}
-
 /// <summary>Возвращает <see cref="MarkupHelper.CloseWindow"/>.</summary>
 [MarkupExtensionReturnType(typeof(RoutedEventHandler))]
 internal sealed class CloseWindowExtension : MarkupExtension

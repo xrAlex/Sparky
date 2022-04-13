@@ -66,8 +66,7 @@
                         x:Name="templateRoot" 
                         BorderThickness="0" 
                         Background="Transparent" 
-                        SnapsToDevicePixels="true">
-                    </Border>
+                        SnapsToDevicePixels="true" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -90,8 +89,7 @@
                             <Image 
                                 Width="35" Height="35"
                                 HorizontalAlignment="Center" 
-                                Source="{StaticResource Lang}">
-                            </Image>
+                                Source="{StaticResource Lang}" />
                             <ToggleButton 
                                 x:Name="toggleButton" 
                                 BorderBrush="Transparent" 

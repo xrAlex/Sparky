@@ -11,8 +11,7 @@
                                 Width="45" Height="20" 
                                 Background="LightGray" 
                                 CornerRadius="10" 
-                                Margin="5,0">
-                            </Border>
+                                Margin="5,0" />
                             <Border 
                                 x:Name="button" 
                                 Background="{StaticResource Gray}" 
@@ -24,8 +23,7 @@
                                     Background="{StaticResource Black}" 
                                     Height="11.5" Width="11.5" 
                                     CornerRadius="12.5" 
-                                    HorizontalAlignment="Center">
-                                </Border>
+                                    HorizontalAlignment="Center" />
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="1"/>
                                 </Border.Effect>
@@ -59,14 +57,14 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="false">
                             <Trigger.ExitActions>
-                                <RemoveStoryboard BeginStoryboardName="ToLeft"></RemoveStoryboard>
-                                <BeginStoryboard Storyboard="{StaticResource ToRight}" x:Name="ToRight"></BeginStoryboard>
+                                <RemoveStoryboard BeginStoryboardName="ToLeft" />
+                                <BeginStoryboard Storyboard="{StaticResource ToRight}" x:Name="ToRight" />
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.ExitActions>
-                                <RemoveStoryboard BeginStoryboardName="ToRight"></RemoveStoryboard>
-                                <BeginStoryboard Storyboard="{StaticResource ToLeft}" x:Name="ToLeft"></BeginStoryboard>
+                                <RemoveStoryboard BeginStoryboardName="ToRight" />
+                                <BeginStoryboard Storyboard="{StaticResource ToLeft}" x:Name="ToLeft" />
                             </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="clr-namespace:View.Extension"
         xmlns:views="clr-namespace:View.Views"
-        xmlns:localization="clr-namespace:View.Localization"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="500" Width="450"
@@ -48,8 +47,7 @@
                             Command="{Binding ResetValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocReset}">
-                        </Button>
+                            Content="{DynamicResource LocReset}" Cursor="Hand" />
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Center"
@@ -57,8 +55,7 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Click="{ext:CloseWindow}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocCancel}">
-                        </Button>
+                            Content="{DynamicResource LocCancel}" />
                         <Button
                             HorizontalAlignment="Right"
                             Width="80" Height="40"
@@ -66,8 +63,7 @@
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
                             Click="{ext:CloseWindow}"
-                            Content="{DynamicResource LocApply}">
-                        </Button>
+                            Content="{DynamicResource LocApply}" />
                     </Grid>
                     <ContentControl 
                         Content="{Binding Current,
@@ -104,8 +100,7 @@
                             <Image
                                 Source="{Binding Converter={StaticResource LocalizationKeyToImage},
                                 Mode=OneWay}" 
-                                Width="41" Height="26">
-                            </Image>
+                                Width="41" Height="26" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

@@ -28,25 +28,21 @@
                                 CornerRadius="3" 
                                 Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Border x:Name="BorderNavi" 
-                                CornerRadius="3" 
-                                Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                    CornerRadius="3" 
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{StaticResource TGray}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Border x:Name="BorderSelected"
-                                CornerRadius="3" 
-                                Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                    CornerRadius="3" 
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{StaticResource TGray}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <ContentPresenter
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            </ContentPresenter>
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -137,25 +133,21 @@
                                 CornerRadius="3" 
                                 Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Border x:Name="BorderNavi" 
-                                CornerRadius="3" 
-                                Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                    CornerRadius="3" 
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{StaticResource TGray}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Border x:Name="BorderSelected"
-                                CornerRadius="3" 
-                                Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource TGray}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            </Border>
+                                    CornerRadius="3" 
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{StaticResource TGray}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <ContentPresenter Margin="4,0,0,0"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            </ContentPresenter>
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
