@@ -159,20 +159,20 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <TextBlock
+                    <!--<TextBlock
                         FontSize="15"
                         Background="Transparent"
                         Text="{Binding Current.Sunrise, Source={x:Static locl:Localizator.Instance}}"
                         Grid.ColumnSpan="2" Grid.Column="3"
                         Cursor="Arrow">
-                    </TextBlock>
-                    <!--<TextBlock
+                    </TextBlock>-->
+                    <TextBlock
                         FontSize="15"
                         Background="Transparent"
                         Text="{locl:CurrLocal Sunrise}"
                         Grid.ColumnSpan="2" Grid.Column="3"
                         Cursor="Arrow">
-                    </TextBlock>-->
+                    </TextBlock>
                     <TextBlock
                         FontSize="12"
                         Background="Transparent"

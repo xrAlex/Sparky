@@ -46,6 +46,7 @@ namespace View.Localization
 
             set
             {
+                Path ??= new(string.Empty);
                 if (string.IsNullOrWhiteSpace(value))
                     Path.Path = current;
                 else
@@ -55,12 +56,13 @@ namespace View.Localization
 
         public CurrLocal()
         {
-            Path = new PropertyPath(current);
+            CurrPath = string.Empty;
         }
 
-        public CurrLocal(string path) : base(path)
+        public CurrLocal(string currPath)
+            : base($"{current}.{currPath}")
         {
-            Path = new PropertyPath($"{current}.{path}");
+            CurrPath = currPath;
         }
     }
 }

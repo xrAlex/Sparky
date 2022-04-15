@@ -87,14 +87,18 @@
                                         <TextBlock
                                             FontSize="12"
                                             Grid.Column="3" Grid.Row="2">
-                                            <TextBlock.Text>
+                                            <!--<TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0} : {1} %">
                                                     <Binding Path="Current.Brightness" Source="{StaticResource LocalizationProvider}"/>
                                                     <Binding Path="CurrentColorConfiguration.Brightness" 
                                                                 Converter="{StaticResource BrightnessToPercent}"/>
                                                 </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
+                                            </TextBlock.Text>-->
+                                            <Run Text="{Binding Current.Brightness, Mode=OneWay, Source={StaticResource LocalizationProvider}}"/>
+                                            <Run Text=":"/>
+                                            <Run Text="{Binding CurrentColorConfiguration.Brightness, Mode=OneWay, Converter={StaticResource BrightnessToPercent}}"/>
+                                            <Run Text="%"/>
+                                       </TextBlock>
                                         <!--<TextBlock
                                             FontSize="12"
                                             Grid.Column="3" Grid.Row="2">
