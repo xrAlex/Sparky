@@ -53,8 +53,8 @@
     <system:String x:Key="LocToTrayNotification">
         Application will continue to work in a collapsed state
     </system:String>
-    <system:String x:Key="LocTrayClose">
-        Close
+    <system:String x:Key="LocTrayShutdown">
+        Exit
     </system:String>
     <system:String x:Key="LocTrayPause">
         Pause

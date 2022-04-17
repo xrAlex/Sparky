@@ -52,8 +52,8 @@
     <system:String x:Key="LocToTrayNotification">
         Приложение продолжит работу в свернутом состоянии
     </system:String>
-    <system:String x:Key="LocTrayClose">
-        Закрыть
+    <system:String x:Key="LocTrayShutdown">
+        Выход
     </system:String>
     <system:String x:Key="LocTrayPause">
         Приостановить
