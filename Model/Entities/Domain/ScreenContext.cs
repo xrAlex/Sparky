@@ -1,4 +1,6 @@
-﻿using Common.Entities;
+﻿using System.Diagnostics.Eventing.Reader;
+using Common.Entities;
+using Common.Enums;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
 using Common.WinApi;
@@ -18,6 +20,7 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
     private PeriodStartTime _nightStartTime = new(23, 0);
     private ColorConfiguration _currentColorConfiguration = new(6600f, 1f);
     private ScreenBounds _bounds;
+    private CurrentPeriod _currentPeriod;
 
     /// <inheritdoc cref="IScreenContext.SystemName"/>
     public string SystemName { get; }
@@ -36,6 +39,13 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
     {
         get => _isActive;
         set => Set(ref _isActive, value);
+    }
+
+    /// <inheritdoc cref="IScreenContext.CurrentPeriod"/>
+    public CurrentPeriod CurrentPeriod
+    {
+        get => _currentPeriod;
+        private set => Set(ref _currentPeriod, value);
     }
 
     /// <inheritdoc cref="IScreenContext.DayColorConfiguration"/>
@@ -98,6 +108,19 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
                     CurrentColorConfiguration = DayColorConfiguration;
                     break;
                 case nameof(CurrentColorConfiguration):
+                    if (CurrentColorConfiguration.Equals(ref _nightColorConfiguration))
+                    {
+                        CurrentPeriod = CurrentPeriod.Night;
+                    }
+                    else if (CurrentColorConfiguration.Equals(ref _dayColorConfiguration))
+                    {
+                        CurrentPeriod = CurrentPeriod.Day;
+                    }
+                    else
+                    {
+                        CurrentPeriod = CurrentPeriod.Transition;
+                    }
+
                     SystemGamma.ApplyColorConfiguration(ref _currentColorConfiguration, SystemHandle);
                     break;
             }

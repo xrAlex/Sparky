@@ -1,14 +1,19 @@
 ﻿using Common.Entities;
+using Common.Enums;
 
 namespace Common.Interfaces;
 
 public interface IScreenContext
 {
+    /// <summary>
+    /// Текущий период источника отображения
+    /// </summary>
+    CurrentPeriod CurrentPeriod { get; }
 
     /// <summary>
     /// Границы (в пикселях) источника отображения
     /// </summary>
-    ScreenBounds Bounds { get; set; }
+    ScreenBounds Bounds { get; }
 
     /// <summary>
     /// Текущая цветовая конфигурация
