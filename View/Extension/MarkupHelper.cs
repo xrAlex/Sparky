@@ -9,7 +9,8 @@ namespace View.Extension;
 internal static class MarkupHelper
 {
     private static bool ShowWindowCanExecute(Type winType)
-        => typeof(Window).IsAssignableFrom(winType) && winType.GetConstructor(Type.EmptyTypes) != null;
+        => typeof(Window).IsAssignableFrom(winType) 
+           && winType.GetConstructor(Type.EmptyTypes) != null;
 
     private static void ShowWindowExecute(Type winType, Window? owner)
     {
@@ -66,6 +67,8 @@ internal static class MarkupHelper
            var window = wnd as Window;
            window?.Close();
         }
+
+        App.TaskBarIcon.Visibility = Visibility.Visible;
     };
 
 

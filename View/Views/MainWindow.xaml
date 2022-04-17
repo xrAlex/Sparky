@@ -35,23 +35,32 @@
                 CornerRadius="5"
                 Background="White">
                 <Grid>
-                    <ListBox HorizontalContentAlignment="Left"
+                    <ListBox 
+                        HorizontalContentAlignment="Left"
                         ItemsSource="{Binding Screens, Mode=OneWay}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         BorderThickness="0"
-                        IsEnabled="False"
-                        Height="194" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,25,15,0">
+                        Height="285" 
+                        d:ItemsSource="{d:SampleData ItemCount=5}" 
+                        Margin="0,0,75,0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="IsHitTestVisible" Value="False"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <GroupBox 
                                     Header="{Binding FriendlyName, Mode=OneWay}"
-                                    Width="380">
-                                    <Grid Height="67" Width="Auto">
+                                    FontSize="18"
+                                    Width="330" Height="90">
+                                    <Grid Height="60" Width="Auto">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="3*" />
-                                            <ColumnDefinition Width="58*" />
-                                            <ColumnDefinition Width="12*" />
-                                            <ColumnDefinition Width="295*" />
+                                            <ColumnDefinition Width="60*" />
+                                            <ColumnDefinition Width="10*" />
+                                            <ColumnDefinition Width="245*" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="3*" />
@@ -61,35 +70,40 @@
                                         </Grid.RowDefinitions>
                                         <Image
                                             Source="{StaticResource MonitorBlack}"
-                                            Height="56" Width="56"
                                             Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
                                         <Image
-                                            Source="{Binding CurrentTimePeriodImage,
-                                            Mode=OneWay,
+                                            d:Source="{StaticResource Day}"
+                                            Source="{Binding CurrentPeriod,
+                                            Mode = OneWay,
+                                            Converter = {StaticResource CurrentPeriodToImage},
                                             UpdateSourceTrigger=PropertyChanged}"
-                                            Height="27" Width="32" 
-                                            Grid.Row="1" Grid.Column="1" Margin="0,19,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+                                            Height="26" Width="30" 
+                                            Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" 
+                                            Margin="0,9,0,0" VerticalAlignment="Top"/>
                                         <TextBlock
-                                            FontSize="12"
-                                            Grid.Column="3" Grid.Row="1">
+                                            FontSize="16"
+                                            d:Text ="Color temperature: 6600K"
+                                            Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
                                             <TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0} : {1} K">
                                                     <Binding
                                                         Source="{StaticResource LocalizationProvider}"
                                                         Path="CurrentResources[LocColorTemperature]"/>
-                                                    <Binding Path="CurrentColorConfiguration.ColorTemperature" />
+                                                    <Binding Path="CurrentColorConfiguration.ColorTemperature"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock
-                                            FontSize="12"
+                                            FontSize="16"
+                                            d:Text ="Brightness: 100%"
                                             Grid.Column="3" Grid.Row="2">
                                             <TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0} : {1} %">
                                                     <Binding
                                                         Source="{StaticResource LocalizationProvider}"
                                                         Path="CurrentResources[LocBrightness]"/>
-                                                    <Binding Path="CurrentColorConfiguration.Brightness" />
+                                                    <Binding Path="CurrentColorConfiguration.Brightness" 
+                                                             Converter="{StaticResource BrightnessToPercent}"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
@@ -132,7 +146,7 @@
                     Background="{StaticResource TDeepGray}"
                     Click="{ext:ToTray}"
                     Command ="{Binding UnsubscribeEvents, Mode=OneWay}"
-                    Width="30" Height="30" Cursor="Hand">
+                    Width="30" Height="30">
                     <Image
                         Width="20" Height="20"
                         Source="{StaticResource ToTray}" />

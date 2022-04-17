@@ -3,6 +3,7 @@ using Common.Interfaces;
 using Model;
 using System;
 using System.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
 using View.Localization;
 using View.Views;
 using ViewModel;
@@ -15,6 +16,8 @@ public partial class App : Application
         = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
+    public static TaskbarIcon? TaskBarIcon { get; private set; }
+
     private IAppSettingsModel? _settings;
     private IPeriodObserverModel? _observer;
 }
@@ -27,17 +30,21 @@ public partial class App
 
         ConfigureIoC();
 
+        TaskBarIcon = FindResource(nameof(TaskBarIcon)) as TaskbarIcon 
+                      ?? throw new InvalidOperationException("Task bar icon not founded");
+        TaskBarIcon.NoLeftClickDelay = true;
+
         _settings = IoC.GetInstance<IAppSettingsModel>();
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
         _settings.Load();
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
-
+        
         LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
                                ?? throw new InvalidOperationException("Localization provider not founded");
         LocalizationProvider.App = this;
-        LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey;
+        LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey!;
 
         LocalizationProvider.LocalizationChanged += (_, value) =>
         {
@@ -56,6 +63,12 @@ public partial class App
     {
         _observer?.StopWatch();
         _observer?.ForceDefaultColorConfiguration();
+
+        if (TaskBarIcon != null)
+        {
+            TaskBarIcon.Visibility = Visibility.Collapsed;
+            TaskBarIcon.Dispose();
+        }
 
         base.OnExit(e);
     }

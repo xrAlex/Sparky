@@ -10,5 +10,6 @@ public class ViewModelRegistrator
     {
         container.Register<MainWindowViewModel>(Lifestyle.Transient);
         container.Register<SettingsViewModel>(Lifestyle.Transient);
+        container.Register<TrayViewModel>(Lifestyle.Transient);
     }
 }

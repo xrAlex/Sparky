@@ -11,4 +11,8 @@ public sealed class ViewModelLocator
 
     public static SettingsViewModel SettingsViewModel
         => IoC.GetInstance<SettingsViewModel>();
+
+    public static TrayViewModel TrayViewModel
+        => IoC.GetInstance<TrayViewModel>();
+    
 }
