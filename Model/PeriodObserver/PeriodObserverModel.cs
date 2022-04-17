@@ -17,6 +17,9 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     private readonly ScreenModel _screenModel;
     private CancellationTokenSource? _cts;
 
+    public event EventHandler ObserverStarted;
+    public event EventHandler ObserverStopped;
+
     private enum Period
     {
         Day,
@@ -37,8 +40,10 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <inheritdoc cref="IPeriodObserverModel.StopWatch"/>
-    public void StopWatch() 
-        => _cts?.Cancel();
+    public void StopWatch()
+    {
+        _cts?.Cancel();
+    }
 
     /// <inheritdoc cref="IPeriodObserverModel.RefreshAllScreensColorConfiguration"/>
     public void RefreshAllScreensColorConfiguration()
@@ -72,6 +77,8 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// </summary>
     private void Cycle(CancellationToken token)
     {
+        ObserverStarted?.Invoke(this, EventArgs.Empty);
+
         while (!token.IsCancellationRequested)
         {
             foreach (var screen in _screenModel.GetAllScreens().ToArray())
@@ -83,6 +90,8 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
             }
             Thread.Sleep(100);
         }
+
+        ObserverStopped?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

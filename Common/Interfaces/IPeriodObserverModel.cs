@@ -1,4 +1,6 @@
-﻿namespace Common.Interfaces;
+﻿using System;
+
+namespace Common.Interfaces;
 
 public interface IPeriodObserverModel
 {
@@ -21,4 +23,14 @@ public interface IPeriodObserverModel
     /// Останавливает цикл обновления гаммы для устройств отображения
     /// </summary>
     void StopWatch();
+
+    /// <summary>
+    /// Событие оповещающее о начале работы цикла обсервера
+    /// </summary>
+    public event EventHandler ObserverStarted;
+
+    /// <summary>
+    /// Событие оповещающее о остановке работы цикла обсервера
+    /// </summary>
+    public event EventHandler ObserverStopped;
 }
