@@ -108,11 +108,11 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
                     CurrentColorConfiguration = DayColorConfiguration;
                     break;
                 case nameof(CurrentColorConfiguration):
-                    if (CurrentColorConfiguration.Equals(ref _nightColorConfiguration))
+                    if (CurrentColorConfiguration.Equals(NightColorConfiguration))
                     {
                         CurrentPeriod = CurrentPeriod.Night;
                     }
-                    else if (CurrentColorConfiguration.Equals(ref _dayColorConfiguration))
+                    else if (CurrentColorConfiguration.Equals(DayColorConfiguration))
                     {
                         CurrentPeriod = CurrentPeriod.Day;
                     }
