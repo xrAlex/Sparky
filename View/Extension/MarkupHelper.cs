@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using ViewModel;
@@ -9,7 +11,7 @@ namespace View.Extension;
 internal static class MarkupHelper
 {
     private static bool ShowWindowCanExecute(Type winType)
-        => typeof(Window).IsAssignableFrom(winType) 
+        => typeof(Window).IsAssignableFrom(winType)
            && winType.GetConstructor(Type.EmptyTypes) != null;
 
     private static void ShowWindowExecute(Type winType, Window? owner)
@@ -40,7 +42,7 @@ internal static class MarkupHelper
     /// </summary>
     public static RoutedEventHandler ShowWindow { get; } = (sender, _) =>
     {
-        if (sender is ICommandSource {CommandParameter: Type commandParam})
+        if (sender is ICommandSource { CommandParameter: Type commandParam })
         {
             if (ShowWindowCanExecute(commandParam))
             {
@@ -51,9 +53,39 @@ internal static class MarkupHelper
     };
 
     /// <summary>
+    /// Обработчик события открытия ссылки
+    /// </summary>
+    public static RoutedEventHandler OpenLink { get; } = (sender, _) =>
+    {
+        if (sender is ICommandSource { CommandParameter: string commandParam })
+        {
+            OpenLinkExecute(commandParam);
+        }
+    };
+
+    public static void OpenLinkExecute(string link)
+    {
+        var pi = new ProcessStartInfo()
+        {
+            UseShellExecute = true,
+            FileName = link
+        };
+        Process.Start(pi);
+    }
+
+    /// <summary>
+    /// Возвращает текующию версию сборки приложения
+    /// </summary>
+    public static string GetAppVersion()
+    {
+        var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+        return version != null? $"Ver {version}" : "";
+    }
+
+    /// <summary>
     /// Обработчик события закрытия приложения
     /// </summary>
-    public static RoutedEventHandler AppShutdown { get; } = (_, _) 
+    public static RoutedEventHandler AppShutdown { get; } = (_, _)
         => Application.Current.Shutdown();
 
 
@@ -64,8 +96,8 @@ internal static class MarkupHelper
     {
         foreach (var wnd in Application.Current.Windows)
         {
-           var window = wnd as Window;
-           window?.Close();
+            var window = wnd as Window;
+            window?.Close();
         }
 
         App.TaskBarIcon.Visibility = Visibility.Visible;

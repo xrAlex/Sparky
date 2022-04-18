@@ -12,6 +12,15 @@ internal sealed class CloseWindowExtension : MarkupExtension
     public override object ProvideValue(IServiceProvider serviceProvider) 
         => MarkupHelper.CloseWindow;
 }
+
+/// <summary>Возвращает <see cref="MarkupHelper.CloseWindow"/>.</summary>
+[MarkupExtensionReturnType(typeof(string))]
+internal sealed class GetAppVersionExtension : MarkupExtension
+{
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => MarkupHelper.GetAppVersion();
+}
+
 /// <summary>
 /// Возвращает <see cref="MarkupHelper.ShowWindow"/>.
 /// </summary>
@@ -20,6 +29,16 @@ internal sealed class ShowWindowExtension : MarkupExtension
 {
     public override object ProvideValue(IServiceProvider serviceProvider) 
         => MarkupHelper.ShowWindow;
+}
+
+/// <summary>
+/// Открывает указанную в параметре ссылку в браузере
+/// </summary>
+[MarkupExtensionReturnType(typeof(RoutedEventHandler))]
+internal sealed class OpenLinkExtension : MarkupExtension
+{
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => MarkupHelper.OpenLink;
 }
 
 /// <summary>

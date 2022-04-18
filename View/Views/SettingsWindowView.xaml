@@ -151,7 +151,8 @@
                     Background="{StaticResource TBlack}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Center"
                     Width="45" Height="45"
-                    Command="{Binding OpenInformationWindowCommand, Mode=OneWay}" 
+                    Click="{ext:ShowWindow}"
+                    CommandParameter="{x:Type views:InformationWindow}"
                     Grid.Row="2" 
                     Margin="0,0,0,7" Cursor="Arrow">
                     <Image Width="35" Height="35" Source="{StaticResource Info}"/>
