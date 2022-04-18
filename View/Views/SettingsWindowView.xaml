@@ -47,7 +47,7 @@
                             Command="{Binding ResetValues, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocReset}" Cursor="Hand" />
+                            Content="{DynamicResource LocReset}" />
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Center"
@@ -143,7 +143,7 @@
                     Source={StaticResource Navigator},
                     Mode=OneWay}" 
                     CommandParameter="{Binding Source={StaticResource OtherUC},
-                    Mode=OneWay}" Cursor="Hand">
+                    Mode=OneWay}">
                     <Image Width="35" Height="35" Source="{StaticResource Other}"/>
                 </Button>
                 <Button

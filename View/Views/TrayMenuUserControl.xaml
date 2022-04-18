@@ -7,7 +7,7 @@
              xmlns:extension="clr-namespace:View.Extension"
              mc:Ignorable="d"
              d:DataContext ="{Binding TrayViewModel, Source={StaticResource Locator}}"
-             d:DesignHeight="200" d:DesignWidth="200">
+             d:DesignHeight="80" d:DesignWidth="154">
     <Border
         Background="{StaticResource Black}"
         BorderBrush="{StaticResource Black}"
@@ -64,7 +64,7 @@
                         Width="40" Height="40"
                         Click="{extension:AppShutdown}"
                         Command="{Binding UnSubscribeEvents}"
-                        VerticalAlignment="Center" HorizontalAlignment="Right" Cursor="Hand">
+                        VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Image 
                             Width="38" Height="38" 
                             Source="{DynamicResource TurnOffBlack}" 

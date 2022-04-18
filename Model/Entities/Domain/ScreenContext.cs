@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using Common.Entities;
+﻿using Common.Entities;
 using Common.Enums;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;

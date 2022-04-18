@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Markup;
-using View.Localization;
 
 namespace View.Extension;
 

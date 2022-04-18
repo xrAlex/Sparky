@@ -28,7 +28,7 @@
             Command="{Binding RefreshApplicationsList, Mode=OneWay}"
             IsEnabled="{Binding IsChecked, ElementName=FullScreenCheckBox, Mode=OneWay}"
             HorizontalAlignment="Right" VerticalAlignment="Top"
-            Width="25" Height="20" Cursor="Hand">
+            Width="25" Height="20">
             <Image Source="{StaticResource Refresh}" Height="20"/>
         </Button>
         <ListBox

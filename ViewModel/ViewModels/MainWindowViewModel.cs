@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Net.Mime;
-using System.Windows;
-using Common.Entities;
 using Common.Enums;
 using Common.Extensions;
 using Common.Extensions.CollectionChanged;
 using Common.Infrastructure.Commands;
 using Common.Infrastructure.ViewModelTemplate;
 using Common.Interfaces;
-using ViewModel.SubViewModels;
 
 namespace ViewModel.ViewModels;
 

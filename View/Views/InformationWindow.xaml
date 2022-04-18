@@ -27,7 +27,7 @@
                 Click="{extension:CloseWindow}"
                 VerticalAlignment="Top" HorizontalAlignment="Right"
                 FontSize="20" 
-                Foreground="White" Cursor="Hand"/>
+                Foreground="White" Cursor="Hand" />
             <Image 
                 Source="{StaticResource Logo}" 
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -68,7 +68,7 @@
                         Text="{extension:GetAppVersion}"
                         HorizontalAlignment="Center"
                         Margin="5"
-                        VerticalAlignment="Bottom"/>
+                        VerticalAlignment="Bottom" Cursor="Arrow"/>
                 </Grid>
             </Border>
         </Grid>

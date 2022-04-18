@@ -12,17 +12,13 @@
     <None Remove="Resources\Images\pause.png" />
     <None Remove="Resources\Images\play-button.png" />
     <None Remove="Resources\Images\turnoffblack.png" />
-    <None Remove="Resources\Images\turnoffblack2.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\BlueReduce.png">
+    <Resource Include="Resources\Images\NightImg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\buyacoffe.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\buyacoffe2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Flags\china.png">
@@ -46,7 +42,7 @@
     <Resource Include="Resources\Images\Flags\united-states.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\Gamma.png">
+    <Resource Include="Resources\Images\DayImg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\howto.png">
@@ -59,9 +55,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Logo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Logo2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Main.png">
@@ -94,9 +87,6 @@
     <Resource Include="Resources\Images\Settings.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\SparkyBlack.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Resources\Images\totray.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -107,9 +97,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\turnoffblack.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\turnoffblack2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
