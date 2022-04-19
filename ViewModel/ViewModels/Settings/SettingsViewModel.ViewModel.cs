@@ -58,7 +58,7 @@ public partial class SettingsViewModel
         switch (propertyName)
         {
             case nameof(CheckFullScreensApps):
-                _settings.IsFullScreenAppCheckEnabled = (bool)newValue;
+                _settingsModel.IsFullScreenAppCheckEnabled = (bool)newValue;
                 break;
             case nameof(AutoLaunchOnStartup) when (bool) newValue:
                 _registryModel.AddAppStartupKey();
@@ -73,7 +73,7 @@ public partial class SettingsViewModel
                 _registryModel.SetDefaultGammaRangeKey();
                 break;
             case nameof(IsGammaSmoothingEnabled):
-                _settings.IsGammaSmoothingEnabled = (bool)newValue;
+                _settingsModel.IsGammaSmoothingEnabled = (bool)newValue;
                 break;
         }
     }

@@ -7,6 +7,7 @@ public partial class SettingsViewModel
     public RelayCommand RefreshApplicationsList { get; }
     public RelayCommand ApplyValues { get; }
     public RelayCommand ResetValues { get; }
+    public RelayCommand ResetSettings { get; }
 
     private void RefreshApplicationsListExecute()
         => _applicationModel.RefreshApplications();
@@ -14,7 +15,7 @@ public partial class SettingsViewModel
     private void ApplyValuesExecute()
     {
         UnsubscribeEvents();
-        _settings.SaveAsync();
+        _settingsModel.SaveAsync();
         _periodObserverModel.RefreshAllScreensColorConfiguration();
         _periodObserverModel.StartWatch();
     }
@@ -22,8 +23,11 @@ public partial class SettingsViewModel
     private void ResetValuesExecute()
     {
         UnsubscribeEvents();
-        _settings.Reset();
+        _settingsModel.Reset();
         _periodObserverModel.RefreshAllScreensColorConfiguration();
         _periodObserverModel.StartWatch();
     }
+
+    private void ResetSettingsExecute() 
+        => _settingsModel.Reset();
 }

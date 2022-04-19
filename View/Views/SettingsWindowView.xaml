@@ -44,10 +44,10 @@
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Left"
-                            Command="{Binding ResetValues, Mode=OneWay}"
+                            Command="{Binding ResetSettings, Mode=OneWay}"
                             Style="{StaticResource ButtonAnimatedBackground}"
                             Background="{StaticResource TLightGray}"
-                            Content="{DynamicResource LocReset}" />
+                            Content="{DynamicResource LocReset}"/>
                         <Button
                             Width="80" Height="40"
                             HorizontalAlignment="Center"

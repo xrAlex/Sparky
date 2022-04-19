@@ -8,7 +8,7 @@ public sealed partial class SettingsViewModel : ViewModelBase
 {
     private readonly IScreenModel _screenModel;
     private readonly IApplicationModel _applicationModel;
-    private readonly IAppSettingsModel _settings;
+    private readonly IAppSettingsModel _settingsModel;
     private readonly IRegistryModel _registryModel;
     private readonly IPeriodObserverModel _periodObserverModel;
 
@@ -19,10 +19,10 @@ public sealed partial class SettingsViewModel : ViewModelBase
     {
         _screenModel = screenModel;
         _applicationModel = applicationModel;
-        _settings = settings;
+        _settingsModel = settings;
         _registryModel = registryModel;
         _periodObserverModel = periodObserver;
-        _checkFullScreensApps = _settings.IsFullScreenAppCheckEnabled;
+        _checkFullScreensApps = _settingsModel.IsFullScreenAppCheckEnabled;
         _autoLaunchOnStartup = registryModel.IsAppStartupKeyFounded();
         _extendedGammaRangeEnabled = registryModel.IsExtendedGammaRangeActive();
         _gammaSmoothingEnabled = settings.IsGammaSmoothingEnabled;
@@ -30,6 +30,7 @@ public sealed partial class SettingsViewModel : ViewModelBase
         RefreshApplicationsList = new RelayCommand(RefreshApplicationsListExecute);
         ApplyValues = new RelayCommand(ApplyValuesExecute);
         ResetValues = new RelayCommand(ResetValuesExecute);
+        ResetSettings = new RelayCommand(ResetSettingsExecute);
 
         SubscribeEvents();
     }
