@@ -35,7 +35,7 @@ internal partial class AppSettingsModel
         {
             var serializer = new JsonSerializer()
             {
-                Formatting = Formatting.Indented,
+                Formatting = Formatting.Indented
             };
 
             using var fs = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);

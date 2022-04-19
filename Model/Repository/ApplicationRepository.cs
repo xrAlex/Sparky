@@ -5,7 +5,7 @@ namespace Model.Repository;
 
 internal sealed class ApplicationRepository
 {
-    [JsonProperty]
+    [JsonProperty("Applications path")]
     private readonly List<string> _ignoredAppPaths = new();
 
     public void Add(string value)

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Common.Entities;
 using Model.Entities.Domain;
 
@@ -13,7 +14,7 @@ namespace Model.Repository;
 /// </summary>
 internal sealed class ScreenRepository
 {
-    [JsonProperty]
+    [JsonProperty("Screens")]
     private readonly Dictionary<int, ScreenUserSettings> _screens = new();
 
     public bool TryAdd(int key, ScreenContext screen)
