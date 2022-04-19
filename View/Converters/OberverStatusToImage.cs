@@ -5,7 +5,8 @@ using System.Windows.Media.Imaging;
 
 namespace View.Converters;
 
-internal class ObserverStatusToImage : IValueConverter
+[ValueConversion(typeof(bool), typeof(BitmapImage))]
+internal sealed class ObserverStatusToImage : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

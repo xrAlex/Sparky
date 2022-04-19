@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace View.Converters;
 
+[ValueConversion(typeof(string), typeof(BitmapImage))]
 internal sealed class LocalizationKeyToImage : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

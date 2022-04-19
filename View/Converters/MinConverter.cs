@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace View.Converters;
 
-[ValueConversion(typeof(int), typeof(string))]
+[ValueConversion(typeof(byte), typeof(string))]
 internal sealed class MinConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

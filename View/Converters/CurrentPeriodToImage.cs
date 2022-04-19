@@ -6,7 +6,8 @@ using Common.Enums;
 
 namespace View.Converters;
 
-internal class CurrentPeriodToImage : IValueConverter
+[ValueConversion(typeof(CurrentPeriod), typeof(BitmapImage))]
+internal sealed class CurrentPeriodToImage : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -34,7 +35,6 @@ internal class CurrentPeriodToImage : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-
-        return value;
+        throw new NotImplementedException();
     }
 }
