@@ -10,8 +10,7 @@ internal sealed class MinConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var min = (byte)value;
-        var result = System.Convert.ToString(min);
+        var result = System.Convert.ToString((byte)value);
 
         if (result.Length < 2)
         {

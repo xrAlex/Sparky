@@ -30,7 +30,10 @@ internal sealed class HourConverter : IValueConverter
             return DependencyProperty.UnsetValue;
         }
 
-        if (hour is > 23 or < 0) hour = 23;
+        if (hour is > 23 or < 0)
+        {
+            hour = 23;
+        }
 
         return hour;
     }

@@ -8,9 +8,9 @@ namespace View.Converters;
 internal sealed class BrightnessToPercent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        => Math.Round(System.Convert.ToDouble(value) * 100);
+        => Math.Round(System.Convert.ToSingle(value) * 100);
     
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => System.Convert.ToDouble(value) * 0.01;
+        => System.Convert.ToSingle(value) * 0.01;
 }
