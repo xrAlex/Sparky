@@ -38,8 +38,8 @@ public readonly struct ColorConfiguration: IEquatable<ColorConfiguration>
            && Equals((ColorConfiguration)obj);
 
     public bool Equals(ColorConfiguration other)
-        => Math.Abs(Brightness - other.Brightness) < 0.1
-           && Math.Abs(ColorTemperature - other.ColorTemperature) < 1;
+        => Math.Abs(Brightness - other.Brightness) < 0.001
+           && Math.Abs(ColorTemperature - other.ColorTemperature) < 0.001;
 
     public override int GetHashCode()
         => HashCode.Combine(Brightness, ColorTemperature);
