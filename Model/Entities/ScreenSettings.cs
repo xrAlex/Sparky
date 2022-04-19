@@ -2,6 +2,9 @@
 
 namespace Model.Entities;
 
+/// <summary>
+/// Пользовательские настройки устрйоства отображения
+/// </summary>
 internal sealed class ScreenUserSettings
 {
     public ColorConfiguration NightColorConfiguration { get; set; }

@@ -10,7 +10,7 @@ internal sealed partial class AppSettingsModel : IAppSettingsModel
     public ApplicationRepository IgnoredAppRepository { get; } = new();
     public bool IsFullScreenAppCheckEnabled { get; set; }
     public bool IsGammaSmoothingEnabled { get; set; }
-    public string CurrentLocalizationKey { get; set; } = "Rus";
+    public string? CurrentLocalizationKey { get; set; }
 
     public AppSettingsModel(string configurationFilePath)
     {

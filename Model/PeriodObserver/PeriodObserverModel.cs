@@ -17,8 +17,8 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     private readonly ScreenModel _screenModel;
     private CancellationTokenSource? _cts;
 
-    public event EventHandler ObserverStarted;
-    public event EventHandler ObserverStopped;
+    public event EventHandler? ObserverStarted;
+    public event EventHandler? ObserverStopped;
 
     private enum Period
     {
@@ -48,7 +48,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// <inheritdoc cref="IPeriodObserverModel.RefreshAllScreensColorConfiguration"/>
     public void RefreshAllScreensColorConfiguration()
     {
-        foreach (var screen in _screenModel.GetAllScreens().ToArray())
+        foreach (var screen in _screenModel.GetAllScreens())
         {
             if (screen.IsActive)
             {
@@ -63,12 +63,9 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// <inheritdoc cref="IPeriodObserverModel.ForceDefaultColorConfiguration"/>
     public void ForceDefaultColorConfiguration()
     {
-        foreach (var screen in _screenModel.GetAllScreens().ToArray())
+        foreach (var screen in _screenModel.GetAllScreens())
         {
-            if (screen.IsActive)
-            {
-                screen.CurrentColorConfiguration = new ColorConfiguration(6600f, 1f);
-            }
+            screen.SetDefaultColorConfiguration();
         }
     }
 
@@ -81,11 +78,11 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
 
         while (!token.IsCancellationRequested)
         {
-            foreach (var screen in _screenModel.GetAllScreens().ToArray())
+            foreach (var screen in _screenModel.GetAllScreens())
             {
                 if (screen.IsActive)
                 {
-                    SetColorConfiguration(screen, GetCurrentColorConfiguration(screen));
+                    RefreshColorConfiguration(screen);
                 }
             }
             Thread.Sleep(100);
@@ -95,29 +92,25 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Получает цветовую конфигурацию для текущего периода времени
+    /// Обновляет цветовую конфигурацию утсройства отображения для текущего периода времени
     /// </summary>
-    private ColorConfiguration GetCurrentColorConfiguration(IScreenContext screen)
+    private void RefreshColorConfiguration(IScreenContext screen)
     {
         var (currentPeriod, remainingTime) = GetCurrentPeriod(screen);
-        return CalculateCurrentConfiguration(currentPeriod, screen, (float) remainingTime);
+        var newConfiguration = GetNewColorConfiguration(currentPeriod, screen, remainingTime);
+
+        if (!screen.CurrentColorConfiguration.IsCloseTo(newConfiguration))
+        {
+            newConfiguration = SmoothOutColorTransition(screen.CurrentColorConfiguration, newConfiguration);
+        }
+
+        screen.CurrentColorConfiguration = newConfiguration;
     }
 
     /// <summary>
-    /// Устанавливает цветовую конфигурацию для текущего периода времени
+    /// Подсчитывает значения цветовой конфигурации для текщуего период времени
     /// </summary>
-    /// <param name="screen"></param>
-    /// <param name="newColorConfiguration"></param>
-    private static void SetColorConfiguration(IScreenContext screen, ColorConfiguration newColorConfiguration)
-    {
-        var configuration = SmoothOutColorTransition(screen.CurrentColorConfiguration, newColorConfiguration);
-        screen.CurrentColorConfiguration = configuration;
-    }
-
-    /// <summary>
-    /// Подсчитывает значения цветовой конфигурации для текщуего период времени или переходного периода
-    /// </summary>
-    private ColorConfiguration CalculateCurrentConfiguration(Period currentPeriod, IScreenContext screen, float remainingTime)
+    private ColorConfiguration GetNewColorConfiguration(Period currentPeriod, IScreenContext screen, float remainingTime)
     {
         var screenDayConfig = screen.DayColorConfiguration;
         var screenNightConfig = screen.NightColorConfiguration;
@@ -149,12 +142,6 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
         var brightness = currentConfiguration.Brightness;
         var targetTemperature = targetConfiguration.ColorTemperature;
         var targetBrightness = targetConfiguration.Brightness;
-
-        if (temperature.IsCloseTo(targetTemperature) && brightness.IsCloseTo(targetBrightness))
-        {
-            return targetConfiguration;
-        }
-
         const float temperatureStepSize = 60f;
         const float brightnessStepSize = 0.016f;
 
@@ -165,11 +152,11 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
         var brightnessSteps = brightnessAbsDelta / brightnessStepSize;
 
         var temperatureAdaptedStep = temperatureSteps >= brightnessSteps
-            ? Math.Abs(temperatureStepSize)
+            ? temperatureStepSize
             : Math.Abs(temperatureAbsDelta / brightnessSteps);
 
         var brightnessAdaptedStep = brightnessSteps >= temperatureSteps
-            ? Math.Abs(brightnessStepSize)
+            ? brightnessStepSize
             : Math.Abs(brightnessAbsDelta / temperatureSteps);
 
         temperature = targetTemperature >= temperature
@@ -189,7 +176,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// </summary>
     private static ColorConfiguration GetTransientColorConfiguration(ColorConfiguration targetValues, ColorConfiguration startValues, float remainingTime)
     {
-        if (startValues.ColorTemperature.IsCloseTo(targetValues.ColorTemperature) && startValues.Brightness.IsCloseTo(targetValues.Brightness))
+        if (startValues.IsCloseTo(targetValues))
         {
             return targetValues;
         }
@@ -206,25 +193,25 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// <summary>
     /// Возвращает текущий период со временем до его кончания
     /// </summary>
-    private static (Period period, double remainingTime) GetCurrentPeriod(IScreenContext screen)
+    private static (Period period, float remainingTime) GetCurrentPeriod(IScreenContext screen)
     {
         var dayStart = screen.DayStartTime;
         var nightStart = screen.NightStartTime;
         var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
         var nightStartTime = new TimeSpan(nightStart.Hour, nightStart.Minute, 0);
         var dayStartTime = new TimeSpan(dayStart.Hour, dayStart.Minute, 0);
-        double remainingTime;
+        float remainingTime;
 
         // время смены конфигурации в текущем дне
         if (dayStartTime <= nightStartTime)
         {
             if (currentTime >= dayStartTime && currentTime < nightStartTime)
             {
-                remainingTime = nightStartTime.TotalMinutes - currentTime.TotalMinutes;
+                remainingTime = (float)(nightStartTime.TotalMinutes - currentTime.TotalMinutes);
                 return (Period.Day, remainingTime);
             }
 
-            remainingTime = dayStartTime.TotalMinutes - currentTime.TotalMinutes;
+            remainingTime = (float)(dayStartTime.TotalMinutes - currentTime.TotalMinutes);
             return (Period.Night, remainingTime);
         }
 
@@ -234,16 +221,16 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
             const int midNight = 1440;
             if (currentTime.TotalMinutes == 0)
             {
-                remainingTime = nightStartTime.TotalMinutes - currentTime.TotalMinutes;
+                remainingTime = (float)(nightStartTime.TotalMinutes - currentTime.TotalMinutes);
             }
             else
             {
-                remainingTime = nightStartTime.TotalMinutes - (currentTime.TotalMinutes - midNight);
+                remainingTime = (float)(nightStartTime.TotalMinutes - (currentTime.TotalMinutes - midNight));
             }
             return (Period.Day, remainingTime);
         }
 
-        remainingTime = dayStartTime.TotalMinutes - currentTime.TotalMinutes;
+        remainingTime = (float)(dayStartTime.TotalMinutes - currentTime.TotalMinutes);
         return (Period.Night, remainingTime);
     }
 

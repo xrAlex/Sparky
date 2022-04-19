@@ -8,7 +8,7 @@ namespace Model.GammaRegulator;
 internal static class SystemGamma
 {
     /// <summary>
-    /// Применяет параметры цветовой гаммы для устройства
+    /// Применяет параметры цветовой гаммы для устройства отображения
     /// </summary>
     public static void ApplyColorConfiguration(ref ColorConfiguration colorConfiguration, nint deviceContext)
     {
@@ -47,9 +47,8 @@ internal static class SystemGamma
     /// </summary>
     /// <remarks> <see href="http://tannerhelland.com/4435/convert-temperature-rgb-algorithm-code">Источник алгоритма</see> </remarks>
     /// <returns> Цветовая маска <see cref="RGBMask"/></returns>
-    private static RGBMask ConvertKelvinsToRGB(double kelvins)
-    {
-        return new RGBMask
+    private static RGBMask ConvertKelvinsToRGB(double kelvins) 
+        => new
         (
             red: kelvins > 6600
                 ? Math.Clamp(Math.Pow(kelvins / 100 - 60, -0.1332047592) * 329.698727446 / 255, 0, 1)
@@ -63,5 +62,4 @@ internal static class SystemGamma
                     ? 0
                     : Math.Clamp((Math.Log(kelvins / 100 - 10) * 138.5177312231 - 305.0447927307) / 255, 0, 1)
         );
-    }
 }

@@ -187,7 +187,9 @@
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
+                        TickFrequency="1"
                         IsDirectionReversed="True"
+                        IsSnapToTickEnabled="True"
                         Value="{Binding SelectedScreen.DayBrightness,
                         Converter= {StaticResource BrightnessToPercent},
                         Mode=TwoWay}"
@@ -319,7 +321,9 @@
                         Style="{StaticResource HorizontalSlider}"
                         Maximum="100" Minimum="{Binding MinBrightnessRange}"
                         Cursor="Hand"
+                        TickFrequency="1"
                         IsDirectionReversed="True"
+                        IsSnapToTickEnabled="True"
                         Value="{Binding SelectedScreen.NightBrightness, Converter= {StaticResource BrightnessToPercent}, Mode=TwoWay}"
                         Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1" />
                 </Grid>

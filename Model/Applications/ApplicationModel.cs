@@ -3,6 +3,13 @@ using Model.Settings;
 
 namespace Model.Applications;
 
+/// <summary>
+/// Класс модели приложения
+/// </summary>
+/// <remarks>
+/// Модель используется для
+/// - Хранения/удалаения/добавления/получения сущностей <see cref="Entities.Domain.Application"/>
+/// </remarks>
 internal sealed partial class ApplicationModel : IApplicationModel
 {
     private readonly ApplicationsCollection.ApplicationsCollection _applications = new();

@@ -12,7 +12,7 @@ public class ScreensCollectionChangedArgs : EventArgs
     public object? NewValue { get; }
 
     public override string ToString()
-        => $"Screen: {Screen}, Action: {Action}";
+        => $"Screen: {Screen.DisplayCode}, Action: {Action}";
 
     public ScreensCollectionChangedArgs(IScreenContext screen, CollectionChangedAction action, string propertyName, object newValue)
     {

@@ -35,13 +35,16 @@ internal sealed partial class PageNavigator
         SetCurrent = new RelayCommand(SetCurrentExecute, SetCurrentCanExecute);
     }
 
-    private bool SetCurrentCanExecute(object parameter)
+    private bool SetCurrentCanExecute(object? parameter)
     {
         return parameter == null || parameter is UserControl;
     }
 
-    private void SetCurrentExecute(object parameter)
+    private void SetCurrentExecute(object? parameter)
     {
-        Current = (UserControl) parameter;
+        if (parameter is UserControl uc)
+        {
+            Current = uc;
+        }
     }
 }

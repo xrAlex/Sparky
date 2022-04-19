@@ -8,20 +8,17 @@ using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection;
 
-internal partial class ApplicationsCollection : IReadOnlyDictionary<string, Application>
+internal sealed partial class ApplicationsCollection : IReadOnlyDictionary<string, Application>
 {
     private readonly Dictionary<string, Application> _applications = new();
     public event EventHandler<ApplicationCollectionChangedArgs>? CollectionChanged;
 
     private void EntityPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        if (sender is Application app)
-        {
-            CollectionChanged?.Invoke(this,
-                new ApplicationCollectionChangedArgs(app,
-                    CollectionChangedAction.Updated,
-                    args.PropertyName!,
-                    ((PropertyChangedValueEventArgs)args).NewValue));
-        }
+        CollectionChanged?.Invoke(this,
+            new ApplicationCollectionChangedArgs((Application)sender!,
+                CollectionChangedAction.Updated,
+                args.PropertyName!,
+                ((PropertyChangedValueEventArgs)args).NewValue));
     }
 }

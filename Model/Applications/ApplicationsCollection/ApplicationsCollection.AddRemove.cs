@@ -4,7 +4,7 @@ using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection;
 
-internal partial class ApplicationsCollection
+internal sealed partial class ApplicationsCollection
 {
     /// <summary>
     /// Создание источника отображения на основе DTO и добавление его в коллекцию.

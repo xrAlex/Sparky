@@ -31,15 +31,12 @@ public sealed class MainWindowViewModel : ViewModelBase
 
     private void StopObserverExecute()
         => _periodObserverModel.StopWatch();
-    private void SubscribeEvents()
-    {
-        _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
-    }
 
-    private void UnsubscribeEventsExecute()
-    {
-        _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
-    }
+    private void SubscribeEvents() 
+        => _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+
+    private void UnsubscribeEventsExecute() 
+        => _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
 
     private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)
     {

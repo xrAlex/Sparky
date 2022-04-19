@@ -98,7 +98,7 @@ internal static class MarkupHelper
             window?.Close();
         }
 
-        App.TaskBarIcon.Visibility = Visibility.Visible;
+        App.TaskBarIcon!.Visibility = Visibility.Visible;
     };
 
 

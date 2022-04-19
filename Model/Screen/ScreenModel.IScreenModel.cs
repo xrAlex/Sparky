@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common.Interfaces;
 
 namespace Model.Screen;
@@ -11,5 +12,5 @@ internal sealed partial class ScreenModel
 
     /// <inheritdoc cref="IScreenModel.GetAllScreens"/>
     public IEnumerable<IScreenContext> GetAllScreens()
-        => _screenCollection.Values;
+        => _screenCollection.Values.ToArray();
 }

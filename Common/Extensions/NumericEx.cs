@@ -12,17 +12,6 @@ public static class NumericEx
         => targetValue * (1f - multiplier) + startValue * multiplier;
 
     /// <summary>
-    /// Проверяет насколько близко первое значение ко второму
-    /// </summary>
-    /// <param name="value"></param>
-    /// <param name="secondValue"></param>
-    /// <returns>Если первое значение отличается от второго на 1%,<see langword="true"/></returns>
-    public static bool IsCloseTo(this float value, float secondValue)
-        => value > secondValue
-            ? Math.Abs((secondValue - value) / value * 100) < 1
-            : Math.Abs((value - secondValue) / secondValue * 100) < 1;
-
-    /// <summary>
     /// Проверяет что переданное значение не меньше минимального.
     /// </summary>
     /// <param name="value">Значение.</param>

@@ -1,10 +1,16 @@
-﻿using Common.Entities;
+﻿using System.ComponentModel;
+using Common.Entities;
 using Common.Enums;
 
 namespace Common.Interfaces;
 
-public interface IScreenContext
+public interface IScreenContext : INotifyPropertyChanged
 {
+    /// <summary>
+    /// Устанавливает стандартную цветовую конфигурацию для источника отображения
+    /// </summary>
+    public void SetDefaultColorConfiguration();
+
     /// <summary>
     /// Текущий период источника отображения
     /// </summary>

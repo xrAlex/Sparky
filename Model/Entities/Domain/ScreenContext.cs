@@ -1,4 +1,5 @@
-﻿using Common.Entities;
+﻿using System.ComponentModel;
+using Common.Entities;
 using Common.Enums;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
@@ -18,6 +19,7 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
     private PeriodStartTime _dayStartTime = new(7, 0);
     private PeriodStartTime _nightStartTime = new(23, 0);
     private ColorConfiguration _currentColorConfiguration = new(6600f, 1f);
+    private ColorConfiguration _defaultColorConfiguration = new(6600f, 1f);
     private ScreenBounds _bounds;
     private CurrentPeriod _currentPeriod;
 
@@ -89,6 +91,15 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
         set => Set(ref _bounds, value);
     }
 
+    public void SetDefaultColorConfiguration()
+    {
+        if (IsActive)
+        {
+            SystemGamma.ApplyColorConfiguration(ref _defaultColorConfiguration, SystemHandle);
+            CurrentColorConfiguration = _defaultColorConfiguration;
+        }
+    }
+
     public override string ToString()
         => FriendlyName;
 
@@ -107,11 +118,11 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
                     CurrentColorConfiguration = DayColorConfiguration;
                     break;
                 case nameof(CurrentColorConfiguration):
-                    if (CurrentColorConfiguration.Equals(NightColorConfiguration))
+                    if (CurrentColorConfiguration == NightColorConfiguration)
                     {
                         CurrentPeriod = CurrentPeriod.Night;
                     }
-                    else if (CurrentColorConfiguration.Equals(DayColorConfiguration))
+                    else if (CurrentColorConfiguration == DayColorConfiguration)
                     {
                         CurrentPeriod = CurrentPeriod.Day;
                     }

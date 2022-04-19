@@ -12,7 +12,7 @@ public interface IApplicationModel
     void RefreshApplications();
 
     /// <returns>Коллекцию имен приложений.</returns>
-    IReadOnlyList<string> GetAllNames();
+    IEnumerable<string> GetAllNames();
 
     /// <summary>
     /// Событие оповещающее об изменении внутренней коллекции приложений.

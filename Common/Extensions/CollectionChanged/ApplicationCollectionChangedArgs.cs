@@ -11,6 +11,9 @@ public class ApplicationCollectionChangedArgs : EventArgs
     public string? PropertyName { get; }
     public object? NewValue { get; }
 
+    public override string ToString()
+        => $"Screen: {App.Name}, Action: {Action}";
+
     public ApplicationCollectionChangedArgs(IApplication app, CollectionChangedAction action, string propertyName, object newValue)
     {
         App = app;

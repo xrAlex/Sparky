@@ -40,6 +40,8 @@ internal sealed partial class ScreenCollection
 
         _screens.Remove(key);
 
+        screen.PropertyChanged -= ScreenEntityChanged;
+
         CollectionChanged?.Invoke(this, new ScreensCollectionChangedArgs(screen, CollectionChangedAction.Removed));
         return true;
     }

@@ -2,6 +2,9 @@
 
 namespace Model.Entities;
 
+/// <summary>
+/// Системные параметры устройства отображения
+/// </summary>
 internal sealed class ScreenSystemParams
 {
     public ScreenBounds Bounds { get; }

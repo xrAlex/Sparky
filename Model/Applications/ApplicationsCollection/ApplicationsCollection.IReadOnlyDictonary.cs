@@ -5,7 +5,7 @@ using Model.Entities.Domain;
 
 namespace Model.Applications.ApplicationsCollection;
 
-internal partial class ApplicationsCollection
+internal sealed partial class ApplicationsCollection
 {
     public IEnumerator<KeyValuePair<string, Application>> GetEnumerator() 
         => _applications.GetEnumerator();
@@ -21,9 +21,9 @@ internal partial class ApplicationsCollection
     /// </summary>
     public void Clear()
     {
-        foreach (var applicationName in _applications.Keys)
+        foreach (var applicationKey in _applications.Keys)
         {
-            Remove(applicationName);
+            Remove(applicationKey);
         }
     }
 

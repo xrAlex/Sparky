@@ -1,6 +1,8 @@
-﻿namespace Common.Interfaces;
+﻿using System.ComponentModel;
 
-public interface IApplication
+namespace Common.Interfaces;
+
+public interface IApplication : INotifyPropertyChanged
 {
     /// <summary>
     /// Имя приложения

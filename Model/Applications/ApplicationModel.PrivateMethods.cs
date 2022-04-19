@@ -65,6 +65,10 @@ internal partial class ApplicationModel
         }
     }
 
+    /// <summary>
+    /// Проверяет работает ли приложение в полноэкранном режиме на любом из источников отображения
+    /// </summary>
+    /// <param name="handle">Дескриптор окна</param>
     private bool IsApplicationWindowOnFullScreen(nint handle) 
         => _screenModel
             .GetAllScreens()
@@ -75,6 +79,10 @@ internal partial class ApplicationModel
             })
             .FirstOrDefault();
 
+    /// <summary>
+    /// Проверяет не находится ли путь приложения в игнорируемых пользователем
+    /// </summary>
+    /// <param name="executablePath">Путь по исполняемого файла приложения</param>
     private bool IsApplicationIgnored(string executablePath)
         => _appSettings.IgnoredAppRepository.Contains(executablePath);
 }

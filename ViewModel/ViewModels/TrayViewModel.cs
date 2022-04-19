@@ -43,19 +43,19 @@ public sealed class TrayViewModel : ViewModelBase
 
     private void SubscribeEvents()
     {
-        _observer.ObserverStarted += Observer_ObserverStarted;
-        _observer.ObserverStopped += Observer_ObserverStopped;
+        _observer.ObserverStarted += ObserverStarted;
+        _observer.ObserverStopped += ObserverStopped;
     }
 
     public void UnSubscribeEventsExecute()
     {
-        _observer.ObserverStarted -= Observer_ObserverStarted;
-        _observer.ObserverStopped -= Observer_ObserverStopped;
+        _observer.ObserverStarted -= ObserverStarted;
+        _observer.ObserverStopped -= ObserverStopped;
     }
 
-    private void Observer_ObserverStopped(object? sender, EventArgs e) 
+    private void ObserverStopped(object? sender, EventArgs e) 
         => IsObserverWorking = false;
 
-    private void Observer_ObserverStarted(object? sender, EventArgs e) 
+    private void ObserverStarted(object? sender, EventArgs e) 
         => IsObserverWorking = true;
 }

@@ -17,13 +17,10 @@ internal sealed partial class ScreenCollection : IReadOnlyDictionary<int, IScree
 
     private void ScreenEntityChanged(object? sender, PropertyChangedEventArgs args)
     {
-        if (sender is ScreenContext screen)
-        {
-            CollectionChanged?.Invoke(this,
-                new ScreensCollectionChangedArgs(screen,
-                    CollectionChangedAction.Updated,
-                    args.PropertyName!,
-                    ((PropertyChangedValueEventArgs) args).NewValue));
-        }
+        CollectionChanged?.Invoke(this,
+            new ScreensCollectionChangedArgs((ScreenContext)sender!,
+                CollectionChangedAction.Updated,
+                args.PropertyName!,
+                ((PropertyChangedValueEventArgs)args).NewValue));
     }
 }

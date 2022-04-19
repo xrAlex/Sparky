@@ -30,26 +30,15 @@ public partial class App
 
         ConfigureIoC();
 
-        TaskBarIcon = FindResource(nameof(TaskBarIcon)) as TaskbarIcon 
-                      ?? throw new InvalidOperationException("Task bar icon not founded");
-        TaskBarIcon.NoLeftClickDelay = true;
-
         _settings = IoC.GetInstance<IAppSettingsModel>();
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
         _settings.Load();
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
-        
-        LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
-                               ?? throw new InvalidOperationException("Localization provider not founded");
-        LocalizationProvider.App = this;
-        LocalizationProvider.CurrentLocalization = _settings.CurrentLocalizationKey!;
 
-        LocalizationProvider.LocalizationChanged += (_, value) =>
-        {
-            _settings.CurrentLocalizationKey = value?.ToString();
-        };
+        ConfigureTaskBarIcon();
+        ConfigureLocalizationProvider();
 
         new MainWindow().Show();
 
@@ -76,6 +65,26 @@ public partial class App
 
 public partial class App
 {
+    public void ConfigureTaskBarIcon()
+    {
+        TaskBarIcon = FindResource(nameof(TaskBarIcon)) as TaskbarIcon
+                      ?? throw new InvalidOperationException("Task bar icon not founded");
+        TaskBarIcon.NoLeftClickDelay = true;
+    }
+
+    public void ConfigureLocalizationProvider()
+    {
+        LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
+                               ?? throw new InvalidOperationException("Localization provider not founded");
+        LocalizationProvider.App = this;
+        LocalizationProvider.CurrentLocalization = _settings!.CurrentLocalizationKey ?? "Rus";
+
+        LocalizationProvider.LocalizationChanged += (_, value) =>
+        {
+            _settings.CurrentLocalizationKey = value?.ToString();
+        };
+    }
+
     /// <summary>
     /// Конфигурация контейнера инверсии управления
     /// </summary>

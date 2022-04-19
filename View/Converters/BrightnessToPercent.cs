@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace View.Converters;
 
-[ValueConversion(typeof(double), typeof(string))]
+[ValueConversion(typeof(float), typeof(float))]
 internal sealed class BrightnessToPercent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

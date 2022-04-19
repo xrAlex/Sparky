@@ -14,10 +14,9 @@ internal partial class ApplicationModel
     }
 
     /// <inheritdoc cref="IApplicationModel.GetAllNames"/>
-    public IReadOnlyList<string> GetAllNames() 
+    public IEnumerable<string> GetAllNames()
         => _applications
             .Select(application => application.Value.Name)
-            .ToList()
-            .AsReadOnly();
+            .ToArray();
 
 }
