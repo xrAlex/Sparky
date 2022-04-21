@@ -1,4 +1,5 @@
-﻿using Common.Entities;
+﻿using System;
+using Common.Entities;
 using Common.Infrastructure.INPC;
 using Common.Interfaces;
 
@@ -42,23 +43,6 @@ public class ScreenViewModel : INPCBase
         set => Set(ref _dayBrightness, value);
     }
 
-    public float DayColorTemperature
-    {
-        get => _dayColorTemperature;
-        set => Set(ref _dayColorTemperature, value);
-    }
-    public byte DayStartHour
-    {
-        get => _dayStartHour;
-        set => Set(ref _dayStartHour, value);
-    }
-
-    public byte DayStartMin
-    {
-        get => _dayStartMinute;
-        set => Set(ref _dayStartMinute, value);
-    }
-
     public float NightBrightness
     {
         get => _nightBrightness;
@@ -71,17 +55,64 @@ public class ScreenViewModel : INPCBase
         set => Set(ref _nightColorTemperature, value);
     }
 
+    public float DayColorTemperature
+    {
+        get => _dayColorTemperature;
+        set => Set(ref _dayColorTemperature, value);
+    }
+    public byte DayStartHour
+    {
+        get => _dayStartHour;
+        set
+        {
+            if (IsHourValid(value))
+            {
+                Set(ref _dayStartHour, value);
+            }
+        }
+    }
+
+    public byte DayStartMin
+    {
+        get => _dayStartMinute;
+        set
+        {
+            if (IsMinuteValid(value))
+            {
+                Set(ref _dayStartMinute, value);
+            }
+        }
+    }
+
     public byte NightStartHour
     {
         get => _nightStartHour;
-        set => Set(ref _nightStartHour, value);
+        set
+        {
+            if (IsHourValid(value))
+            {
+                Set(ref _nightStartHour, value);
+            }
+        }
     }
 
     public byte NightStartMin
     {
         get => _nightStartMinute;
-        set => Set(ref _nightStartMinute, value);
+        set
+        {
+            if (IsMinuteValid(value))
+            {
+                Set(ref _nightStartMinute, value);
+            }
+        }
     }
+
+    private bool IsHourValid(byte newHour) 
+        => newHour != _dayStartHour && newHour != _nightStartHour || _nightStartMinute != _dayStartMinute;
+
+    private bool IsMinuteValid(byte newMinute) 
+        => _nightStartHour != _dayStartHour || newMinute != _dayStartMinute && newMinute != _nightStartMinute;
 
     protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
     {
