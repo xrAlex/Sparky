@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.DirectoryServices.ActiveDirectory;
 using Common.Entities;
 using Common.Enums;
 using Common.Infrastructure.INPC;
@@ -11,7 +13,7 @@ namespace Model.Entities.Domain;
 /// <summary>
 /// Контекст данных источника отображения
 /// </summary>
-internal sealed class ScreenContext : INPCBase, IScreenContext
+internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<ScreenContext>
 {
     private bool _isActive = true;
     private ColorConfiguration _dayColorConfiguration = new(6600f, 1f);
@@ -103,6 +105,22 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
     public override string ToString()
         => FriendlyName;
 
+    public bool Equals(ScreenContext? other) 
+        => DisplayCode == other?.DisplayCode;
+
+    public override bool Equals(object? obj)
+        => obj?.GetType() == typeof(ScreenContext)
+           && Equals((ScreenContext)obj);
+
+    public static bool operator == (ScreenContext sc1, ScreenContext sc2)
+        => sc1.Equals(sc2);
+
+    public static bool operator != (ScreenContext sc1, ScreenContext sc2)
+        => !sc1.Equals(sc2);
+
+    public override int GetHashCode()
+        => HashCode.Combine(DisplayCode, FriendlyName);
+
     protected override void OnPropertyChanged(in string propertyName, in object oldValue, in object newValue)
     {
         base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
@@ -136,6 +154,7 @@ internal sealed class ScreenContext : INPCBase, IScreenContext
             }
         }
     }
+
 
     /// <summary>
     /// Создает контекст устроqства отображения на основе пользовательских настроек.
