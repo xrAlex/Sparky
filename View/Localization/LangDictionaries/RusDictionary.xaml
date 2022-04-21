@@ -61,4 +61,10 @@
     <system:String x:Key="LocTrayUnPause">
         Продолжить
     </system:String>
+    <system:String x:Key="LocSettings">
+        Настройки
+    </system:String>
+    <system:String x:Key="LocAbout">
+        О Sparky
+    </system:String>
 </ResourceDictionary>

@@ -15,6 +15,21 @@ public sealed class MainWindowViewModel : ViewModelBase
     private readonly IPeriodObserverModel _periodObserverModel;
     public ObservableCollection<IScreenContext> Screens { get; } = new();
 
+    private bool _isObserverWorking;
+    private IScreenContext _selectedScreen;
+
+    public IScreenContext? SelectedScreen
+    {
+        get => _selectedScreen;
+        set => Set(ref _selectedScreen, value);
+    }
+
+    public bool IsObserverWorking
+    {
+        get => _isObserverWorking;
+        private set => Set(ref _isObserverWorking, value);
+    }
+
     public RelayCommand StopObserver { get; }
     public RelayCommand UnsubscribeEvents { get; }
 
@@ -32,11 +47,25 @@ public sealed class MainWindowViewModel : ViewModelBase
     private void StopObserverExecute()
         => _periodObserverModel.StopWatch();
 
-    private void SubscribeEvents() 
-        => _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+    private void SubscribeEvents()
+    {
+        _screenModel.ScreensCollectionChanged += ScreensCollectionChanged;
+        _periodObserverModel.ObserverStarted += ObserverStarted;
+        _periodObserverModel.ObserverStopped += ObserverStopped;
+    }
 
-    private void UnsubscribeEventsExecute() 
-        => _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
+    private void UnsubscribeEventsExecute()
+    {
+        _screenModel.ScreensCollectionChanged -= ScreensCollectionChanged;
+        _periodObserverModel.ObserverStarted -= ObserverStarted;
+        _periodObserverModel.ObserverStopped -= ObserverStopped;
+    }
+
+    private void ObserverStopped(object? sender, EventArgs e)
+        => IsObserverWorking = false;
+
+    private void ObserverStarted(object? sender, EventArgs e)
+        => IsObserverWorking = true;
 
     private void ScreensCollectionChanged(object? sender, ScreensCollectionChangedArgs args)
     {
@@ -44,6 +73,8 @@ public sealed class MainWindowViewModel : ViewModelBase
         {
             case CollectionChangedAction.Added:
                 Screens.Add(args.Screen);
+
+                SelectedScreen ??= Screens[0];
                 break;
             case CollectionChangedAction.Removed:
                 Screens.RemoveFirst(screen => screen.DisplayCode == args.Screen.DisplayCode);

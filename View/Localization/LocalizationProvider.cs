@@ -95,7 +95,7 @@ public sealed class LocalizationProvider : Freezable
         BindingOperations.SetBinding(this, AppProperty, new Binding());
     }
 
-    public string GetLocalizedString(string key)
+    public string GetLocalizedString(string? key)
     {
         var localizationDict = LocalizationsDictionary[CurrentLocalization];
         return localizationDict.Contains(key) ? localizationDict[key].ToString()! : "ERROR";

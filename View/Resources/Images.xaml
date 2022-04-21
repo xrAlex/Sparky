@@ -20,6 +20,9 @@
     <BitmapImage x:Key="Maximize" UriSource="/View;component/Resources/Images/maximize.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Start" UriSource="/View;component/Resources/Images/play-button.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Pause" UriSource="/View;component/Resources/Images/pause.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Brightness" UriSource="/View;component/Resources/Images/brightnessMain.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="Temperature" UriSource="/View;component/Resources/Images/kelvinsMain.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+
 
     <BitmapImage x:Key="Lang" UriSource="/View;component/Resources/Images/Lang.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="FlagRus" UriSource="/View;component/Resources/Images/Flags/russia.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>

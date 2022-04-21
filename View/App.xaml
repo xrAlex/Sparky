@@ -16,6 +16,7 @@
             <converters:LocalizationKeyToImage x:Key="LocalizationKeyToImage" />
             <converters:CurrentPeriodToImage x:Key="CurrentPeriodToImage" />
             <converters:ObserverStatusToImage x:Key="ObserverStatusToImage" />
+            <converters:LocalizationKeyToString x:Key="LocalizationKeyToString" />
 
             <locl:LocalizationProvider x:Key="LocalizationProvider">
                 <locl:LocalizationProvider.LocalizationsDictionary>
@@ -39,6 +40,7 @@
                 <locl:LocalizationResource Source="Localization/LangDictionaries/RusDictionary.xaml"/>
                 <ResourceDictionary Source="Resources/Brushes.xaml" />
                 <ResourceDictionary Source="Resources/Button.xaml" />
+                <ResourceDictionary Source="Resources/InfoSlider.xaml" />
                 <ResourceDictionary Source="Resources/Images.xaml" />
                 <ResourceDictionary Source="Resources/ListBox.xaml" />
                 <ResourceDictionary Source="Resources/ScrollBar.xaml" />

@@ -62,4 +62,10 @@
     <system:String x:Key="LocTrayUnPause">
         Unpause
     </system:String>
+    <system:String x:Key="LocSettings">
+        Settings
+    </system:String>
+    <system:String x:Key="LocAbout">
+        About
+    </system:String>
 </ResourceDictionary>

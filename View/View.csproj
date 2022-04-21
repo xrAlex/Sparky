@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\brightnessMain.png" />
+    <None Remove="Resources\Images\kelvinsMain.png" />
     <None Remove="Resources\Images\maximize.png" />
     <None Remove="Resources\Images\pause.png" />
     <None Remove="Resources\Images\play-button.png" />
@@ -15,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\brightnessMain.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\kelvinsMain.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\NightImg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
