@@ -30,7 +30,19 @@ public sealed class MainWindowViewModel : ViewModelBase
         private set => Set(ref _isObserverWorking, value);
     }
 
-    public RelayCommand StopObserver { get; }
+    private void StartStopObserverExecute()
+    {
+        if (IsObserverWorking)
+        {
+            _periodObserverModel.StopWatch();
+        }
+        else
+        {
+            _periodObserverModel.StartWatch();
+        }
+    }
+
+    public RelayCommand StartStopObserver { get; }
     public RelayCommand UnsubscribeEvents { get; }
 
     public MainWindowViewModel(IScreenModel screenModel, IPeriodObserverModel periodObserverModel)
@@ -38,14 +50,11 @@ public sealed class MainWindowViewModel : ViewModelBase
         _screenModel = screenModel;
         _periodObserverModel = periodObserverModel;
 
-        StopObserver = new RelayCommand(StopObserverExecute);
+        StartStopObserver = new RelayCommand(StartStopObserverExecute);
         UnsubscribeEvents = new RelayCommand(UnsubscribeEventsExecute);
 
         SubscribeEvents();
     }
-
-    private void StopObserverExecute()
-        => _periodObserverModel.StopWatch();
 
     private void SubscribeEvents()
     {

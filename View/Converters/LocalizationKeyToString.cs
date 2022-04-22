@@ -19,9 +19,10 @@ namespace View.Converters
 
             if (started)
             {
-                return App.LocalizationProvider.GetLocalizedString("LocTrayPause");
+                return App.LocalizationProvider.GetLocalizedString("LocTrayUnPause");
             }
-            return App.LocalizationProvider.GetLocalizedString("LocTrayUnPause");
+
+            return App.LocalizationProvider.GetLocalizedString("LocTrayPause");
         }
 
 

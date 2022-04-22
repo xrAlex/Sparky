@@ -34,13 +34,14 @@ public partial class App
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
         _settings.Load();
-        _observer.RefreshAllScreensColorConfiguration();
-        _observer.StartWatch();
 
         ConfigureTaskBarIcon();
         ConfigureLocalizationProvider();
 
         new MainWindow().Show();
+
+        _observer.RefreshAllScreensColorConfiguration();
+        _observer.StartWatch();
 
         base.OnStartup(e);
     }
