@@ -37,13 +37,6 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
     /// <inheritdoc cref="IScreenContext.SystemHandle"/>
     public nint SystemHandle { get; }
 
-    /// <inheritdoc cref="IScreenContext.IsActive"/>
-    public bool IsActive
-    {
-        get => _isActive;
-        set => Set(ref _isActive, value);
-    }
-
     /// <inheritdoc cref="IScreenContext.CurrentPeriod"/>
     public CurrentPeriod CurrentPeriod
     {
@@ -95,27 +88,24 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
 
     public void SetDefaultColorConfiguration()
     {
-        if (IsActive)
-        {
-            SystemGamma.ApplyColorConfiguration(ref _defaultColorConfiguration, SystemHandle);
-            CurrentColorConfiguration = _defaultColorConfiguration;
-        }
+        SystemGamma.ApplyColorConfiguration(ref _defaultColorConfiguration, SystemHandle);
+        CurrentColorConfiguration = _defaultColorConfiguration;
     }
 
     public override string ToString()
         => FriendlyName;
 
-    public bool Equals(ScreenContext? other) 
+    public bool Equals(ScreenContext? other)
         => DisplayCode == other?.DisplayCode;
 
     public override bool Equals(object? obj)
         => obj?.GetType() == typeof(ScreenContext)
            && Equals((ScreenContext)obj);
 
-    public static bool operator == (ScreenContext sc1, ScreenContext sc2)
+    public static bool operator ==(ScreenContext sc1, ScreenContext sc2)
         => sc1.Equals(sc2);
 
-    public static bool operator != (ScreenContext sc1, ScreenContext sc2)
+    public static bool operator !=(ScreenContext sc1, ScreenContext sc2)
         => !sc1.Equals(sc2);
 
     public override int GetHashCode()
@@ -125,33 +115,30 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
     {
         base.OnPropertyChanged(in propertyName, in oldValue, in newValue);
 
-        if (IsActive)
+        switch (propertyName)
         {
-            switch (propertyName)
-            {
-                case nameof(NightColorConfiguration):
-                    CurrentColorConfiguration = NightColorConfiguration;
-                    break;
-                case nameof(DayColorConfiguration):
-                    CurrentColorConfiguration = DayColorConfiguration;
-                    break;
-                case nameof(CurrentColorConfiguration):
-                    if (CurrentColorConfiguration == NightColorConfiguration)
-                    {
-                        CurrentPeriod = CurrentPeriod.Night;
-                    }
-                    else if (CurrentColorConfiguration == DayColorConfiguration)
-                    {
-                        CurrentPeriod = CurrentPeriod.Day;
-                    }
-                    else
-                    {
-                        CurrentPeriod = CurrentPeriod.Transition;
-                    }
+            case nameof(NightColorConfiguration):
+                CurrentColorConfiguration = NightColorConfiguration;
+                break;
+            case nameof(DayColorConfiguration):
+                CurrentColorConfiguration = DayColorConfiguration;
+                break;
+            case nameof(CurrentColorConfiguration):
+                if (CurrentColorConfiguration == NightColorConfiguration)
+                {
+                    CurrentPeriod = CurrentPeriod.Night;
+                }
+                else if (CurrentColorConfiguration == DayColorConfiguration)
+                {
+                    CurrentPeriod = CurrentPeriod.Day;
+                }
+                else
+                {
+                    CurrentPeriod = CurrentPeriod.Transition;
+                }
 
-                    SystemGamma.ApplyColorConfiguration(ref _currentColorConfiguration, SystemHandle);
-                    break;
-            }
+                SystemGamma.ApplyColorConfiguration(ref _currentColorConfiguration, SystemHandle);
+                break;
         }
     }
 
@@ -162,7 +149,6 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
     public ScreenContext(ScreenSystemParams systemParams, ScreenUserSettings screenSettings)
     {
         DisplayCode = screenSettings.DisplayCode;
-        IsActive = screenSettings.IsActive;
         SystemName = systemParams.SystemName;
         FriendlyName = systemParams.FriendlyName;
         Bounds = systemParams.Bounds;

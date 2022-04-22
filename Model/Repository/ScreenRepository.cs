@@ -28,7 +28,6 @@ internal sealed class ScreenRepository
         {
             DayColorConfiguration = screen.DayColorConfiguration,
             DayStartTime = screen.DayStartTime,
-            IsActive = screen.IsActive,
             NightColorConfiguration = screen.NightColorConfiguration,
             NightStartTime = screen.NightStartTime
         };

@@ -47,11 +47,6 @@ public interface IScreenContext : INotifyPropertyChanged
     string FriendlyName { get; }
 
     /// <summary>
-    /// Текущее состояние источника отображения
-    /// </summary>
-    bool IsActive { get; set; }
-
-    /// <summary>
     /// Дескриптор контекста монитора
     /// </summary>
     nint SystemHandle { get; }

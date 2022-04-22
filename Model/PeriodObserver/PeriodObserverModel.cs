@@ -50,13 +50,10 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     {
         foreach (var screen in _screenModel.GetAllScreens())
         {
-            if (screen.IsActive)
-            {
-                var (currentPeriod, _) = GetCurrentPeriod(screen);
-                screen.CurrentColorConfiguration = currentPeriod == Period.Day
-                    ? screen.DayColorConfiguration
-                    : screen.NightColorConfiguration;
-            }
+            var (currentPeriod, _) = GetCurrentPeriod(screen);
+            screen.CurrentColorConfiguration = currentPeriod == Period.Day
+                ? screen.DayColorConfiguration
+                : screen.NightColorConfiguration;
         }
     }
 
@@ -80,10 +77,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
         {
             foreach (var screen in _screenModel.GetAllScreens())
             {
-                if (screen.IsActive)
-                {
-                    RefreshColorConfiguration(screen);
-                }
+                RefreshColorConfiguration(screen);
             }
             Thread.Sleep(100);
         }
@@ -125,8 +119,8 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
 
         if (_settings.IsGammaSmoothingEnabled && remainingTime > 0 && remainingTime <= 10)
         {
-            return currentPeriod == Period.Day 
-                ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime) 
+            return currentPeriod == Period.Day
+                ? GetTransientColorConfiguration(screenNightConfig, screenDayConfig, remainingTime)
                 : GetTransientColorConfiguration(screenDayConfig, screenNightConfig, remainingTime);
         }
 
@@ -248,6 +242,6 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     /// Проверяет есть в в игрнориемых пользователем приложениях
     /// путь указанного приложения
     /// </summary>
-    private bool IsAppExePathInIgnored(string? processExePath) 
+    private bool IsAppExePathInIgnored(string? processExePath)
         => _settings.IgnoredAppRepository.GetData().Contains(processExePath);
 }
