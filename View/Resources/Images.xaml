@@ -19,7 +19,9 @@
     <BitmapImage x:Key="HowTo" UriSource="/View;component/Resources/Images/howto.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Maximize" UriSource="/View;component/Resources/Images/maximize.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Start" UriSource="/View;component/Resources/Images/play-button.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="StartBlack" UriSource="/View;component/Resources/Images/play-buttonBlack.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Pause" UriSource="/View;component/Resources/Images/pause.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
+    <BitmapImage x:Key="PauseBlack" UriSource="/View;component/Resources/Images/pauseBlack.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Brightness" UriSource="/View;component/Resources/Images/brightnessMain.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
     <BitmapImage x:Key="Temperature" UriSource="/View;component/Resources/Images/kelvinsMain.png" CacheOption="OnLoad" CreateOptions="IgnoreImageCache"/>
 

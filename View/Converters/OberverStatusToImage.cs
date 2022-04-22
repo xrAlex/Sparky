@@ -12,14 +12,27 @@ internal sealed class ObserverStatusToImage : IValueConverter
     {
         var status = (bool)value;
         var flagsPath = "pack://application:,,,/Resources/Images/";
-
-        if (status)
+        if (parameter != null && parameter.ToString() == "Black")
         {
-            flagsPath += "pause.png";
+            if (status)
+            {
+                flagsPath += "pauseBlack.png";
+            }
+            else
+            {
+                flagsPath += "play-buttonBlack.png";
+            }
         }
         else
         {
-            flagsPath += "play-button.png";
+            if (status)
+            {
+                flagsPath += "pause.png";
+            }
+            else
+            {
+                flagsPath += "play-button.png";
+            }
         }
 
 

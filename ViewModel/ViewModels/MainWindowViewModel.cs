@@ -73,7 +73,6 @@ public sealed class MainWindowViewModel : ViewModelBase
         {
             case CollectionChangedAction.Added:
                 Screens.Add(args.Screen);
-
                 SelectedScreen ??= Screens[0];
                 break;
             case CollectionChangedAction.Removed:

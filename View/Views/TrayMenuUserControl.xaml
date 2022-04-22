@@ -51,9 +51,10 @@
                         VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Image 
                             Width="38" Height="38" 
-                            d:Source ="{StaticResource Start}"
+                            d:Source ="{StaticResource StartBlack}"
                             Source="{Binding IsObserverWorking,
                             Converter={StaticResource ObserverStatusToImage},
+                            ConverterParameter=Black,
                             UpdateSourceTrigger = PropertyChanged}" 
                             HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Button>

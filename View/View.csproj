@@ -12,7 +12,9 @@
     <None Remove="Resources\Images\kelvinsMain.png" />
     <None Remove="Resources\Images\maximize.png" />
     <None Remove="Resources\Images\pause.png" />
+    <None Remove="Resources\Images\pauseBlack.png" />
     <None Remove="Resources\Images\play-button.png" />
+    <None Remove="Resources\Images\play-buttonBlack.png" />
     <None Remove="Resources\Images\turnoffblack.png" />
   </ItemGroup>
 
@@ -80,7 +82,13 @@
     <Resource Include="Resources\Images\pause.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\pauseBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\play-button.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\play-buttonBlack.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Processes.png">
