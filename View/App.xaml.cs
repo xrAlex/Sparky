@@ -2,6 +2,8 @@
 using Common.Interfaces;
 using Model;
 using System;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using View.Localization;
@@ -15,6 +17,7 @@ public partial class App : Application
     private static readonly string ConfigurationFilepath
         = $"{Environment.CurrentDirectory}" + "\\Settings.json";
 
+    private Mutex? _mutex;
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
     public static TaskbarIcon? TaskBarIcon { get; private set; }
 
@@ -26,6 +29,13 @@ public partial class App
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        _mutex = new Mutex(true, ResourceAssembly.GetName().Name);
+
+        if (!_mutex.WaitOne())
+        {
+            Current.Shutdown();
+        }
+
         Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
         ConfigureIoC();
@@ -38,7 +48,12 @@ public partial class App
         ConfigureTaskBarIcon();
         ConfigureLocalizationProvider();
 
-        new MainWindow().Show();
+        var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
+
+        if (!silentLaunch)
+        {
+            new MainWindow().Show();
+        }
 
         _observer.RefreshAllScreensColorConfiguration();
         _observer.StartWatch();
@@ -53,6 +68,7 @@ public partial class App
     {
         _observer?.StopWatch();
         _observer?.ForceDefaultColorConfiguration();
+        _mutex?.ReleaseMutex();
 
         if (TaskBarIcon != null)
         {
@@ -92,6 +108,8 @@ public partial class App
     private static void ConfigureIoC()
     {
         var container = IoC.Instance;
+        container.Options.EnableAutoVerification = false;
+
         ModelRegistrator.Register(container, ConfigurationFilepath);
         ViewModelRegistrator.Register(container);
     }
