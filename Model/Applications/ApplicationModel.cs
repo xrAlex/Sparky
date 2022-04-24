@@ -24,6 +24,11 @@ internal sealed partial class ApplicationModel : IApplicationModel
         _appSettings.SettingsLoaded += SettingsLoaded;
         _appSettings.SettingsReset += SettingsReset;
         _applications.CollectionChanged += CollectionChanged;
+
+        if (_appSettings.Loaded)
+        {
+            FillApplicationsCollection();
+        }
     }
 
     private void SettingsReset(object? sender, System.EventArgs e) 

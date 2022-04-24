@@ -23,6 +23,9 @@ internal sealed partial class AppSettingsModel : IAppSettingsModel
     [JsonProperty("Localization")]
     public string? CurrentLocalizationKey { get; set; }
 
+    [JsonIgnore]
+    public bool Loaded { get; private set; }
+
     public AppSettingsModel(string configurationFilePath)
     {
         _filePath = configurationFilePath;

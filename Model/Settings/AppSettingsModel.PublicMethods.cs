@@ -70,6 +70,7 @@ internal partial class AppSettingsModel
         }
         finally
         {
+            Loaded = true;
             SettingsLoaded?.Invoke(this, EventArgs.Empty);
         }
     }

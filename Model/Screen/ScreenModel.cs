@@ -16,6 +16,11 @@ internal sealed partial class ScreenModel : IScreenModel
         _screenCollection.CollectionChanged += ScreenCollectionChanged;
         _appSettings.SettingsLoaded += SettingsLoaded;
         _appSettings.SettingsReset += SettingsReset;
+
+        if (_appSettings.Loaded)
+        {
+            LoadScreens();
+        }
     }
 
     private void SettingsReset(object? sender, System.EventArgs e) 
