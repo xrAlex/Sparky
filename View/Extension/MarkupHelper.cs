@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace View.Extension;
 
@@ -21,9 +23,46 @@ internal static class MarkupHelper
             if (owner != null)
             {
                 window.Owner = owner;
+                DeactivateWindow(owner);
             }
-            window.Show();
+            ShowWindowWithEffect(window);
         }
+    }
+
+    private static void DeactivateWindow(Window window)
+    {
+        var blur = new BlurEffect
+        {
+            Radius = 5
+        };
+
+        window.Effect = blur;
+        window.IsEnabled = false;
+    }
+
+    private static void ShowWindowWithEffect(Window window)
+    {
+        window.Opacity = 0.2;
+        window.Show();
+
+        var anim = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(30));
+        window.BeginAnimation(UIElement.OpacityProperty, anim);
+
+        window.Effect = null;
+        window.IsEnabled = true;
+        window.Focus();
+    }
+
+    private static void CloseWindowWithEffect(Window window)
+    {
+        if (window.Owner != null)
+        {
+            ShowWindowWithEffect(window.Owner);
+        }
+
+        var anim = new DoubleAnimation(0.0, TimeSpan.FromMilliseconds(70));
+        anim.Completed += (_, _) => window.Close();
+        window.BeginAnimation(UIElement.OpacityProperty, anim);
     }
 
     /// <summary>
@@ -32,7 +71,19 @@ internal static class MarkupHelper
     public static RoutedEventHandler CloseWindow { get; } = (sender, _) =>
     {
         var window = TryGetAncestor<Window>(sender as DependencyObject);
-        window?.Close();
+        if (window != null)
+        {
+            CloseWindowWithEffect(window);
+        }
+    };
+
+    /// <summary>
+    /// Обработчик закрытия окна
+    /// </summary>
+    public static MouseButtonEventHandler DragWindow { get; } = (sender, _) =>
+    {
+        var window = TryGetAncestor<Window>(sender as DependencyObject);
+        window?.DragMove();
     };
 
     /// <summary>
@@ -61,7 +112,7 @@ internal static class MarkupHelper
         }
     };
 
-    public static void OpenLinkExecute(string link)
+    private static void OpenLinkExecute(string link)
     {
         var pi = new ProcessStartInfo()
         {

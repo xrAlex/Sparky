@@ -12,6 +12,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        MouseDown="{ext:DragWindow}"
         Background="Transparent" 
         DataContext ="{Binding MainWindowViewModel, Source={StaticResource Locator}, Mode=OneWay}"
         Height="330" Width="440">
@@ -63,7 +64,7 @@
                     Style="{StaticResource ButtonAnimatedBackground}" 
                     Background="{StaticResource TDeepGray}"
                     HorizontalAlignment="Left"
-                    Command="{Binding StopObserver, Mode=OneWay}"
+                    Command="{Binding StartStopObserver, Mode=OneWay}"
                     Click="{ext:ShowWindow}"
                     Width="107" Height="40"
                     CommandParameter="{x:Type views:SettingsWindowView}">

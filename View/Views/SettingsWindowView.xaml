@@ -13,9 +13,9 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Topmost="True"
+        MouseDown="{ext:DragWindow}"
         DataContext ="{Binding SettingsViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        Background="Transparent" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Background="Transparent">
     <Window.Resources>
         <views:SettingsMainPageUserControl x:Key="SettingsUC"/>
         <views:ProcessesPageUserControl x:Key="ProcessesUC"/>

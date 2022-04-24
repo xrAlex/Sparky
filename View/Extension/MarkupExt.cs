@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace View.Extension;
@@ -28,6 +29,17 @@ internal sealed class ShowWindowExtension : MarkupExtension
 {
     public override object ProvideValue(IServiceProvider serviceProvider) 
         => MarkupHelper.ShowWindow;
+}
+
+
+/// <summary>
+/// Открывает указанную в параметре ссылку в браузере
+/// </summary>
+[MarkupExtensionReturnType(typeof(MouseButtonEventHandler))]
+internal sealed class DragWindowExtension : MarkupExtension
+{
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => MarkupHelper.DragWindow;
 }
 
 /// <summary>
