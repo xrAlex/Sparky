@@ -56,10 +56,10 @@
         Выход
     </system:String>
     <system:String x:Key="LocTrayPause">
-        Запуск
+        Пауза
     </system:String>
     <system:String x:Key="LocTrayUnPause">
-        Пауза
+        Запуск
     </system:String>
     <system:String x:Key="LocSettings">
         Настройки

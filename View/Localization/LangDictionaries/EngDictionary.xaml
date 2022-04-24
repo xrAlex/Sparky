@@ -60,7 +60,7 @@
         Pause
     </system:String>
     <system:String x:Key="LocTrayUnPause">
-        Unpause
+        Start
     </system:String>
     <system:String x:Key="LocSettings">
         Settings
