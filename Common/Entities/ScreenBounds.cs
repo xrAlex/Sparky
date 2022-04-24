@@ -1,5 +1,8 @@
 ﻿namespace Common.Entities;
 
+/// <summary>
+/// Разрешение экрана
+/// </summary>
 public readonly struct ScreenBounds
 {
     public int Width { get; }

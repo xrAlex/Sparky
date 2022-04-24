@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Model.Repository;
 
+/// <summary>
+/// Репозиторий данных для <see cref="Applications.ApplicationModel"/>
+/// </summary>
 internal sealed class ApplicationRepository
 {
     [JsonProperty("Applications path")]

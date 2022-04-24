@@ -78,7 +78,7 @@ internal static class MarkupHelper
     };
 
     /// <summary>
-    /// Обработчик закрытия окна
+    /// Перемещение окна мышкой.
     /// </summary>
     public static MouseButtonEventHandler DragWindow { get; } = (sender, _) =>
     {

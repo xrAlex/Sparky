@@ -12,6 +12,7 @@ internal sealed class ObserverStatusToImage : IValueConverter
     {
         var started = (bool)value;
         var flagsPath = "pack://application:,,,/Resources/Images/";
+
         if (parameter != null && parameter.ToString() == "Black")
         {
             if (started)

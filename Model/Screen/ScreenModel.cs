@@ -3,6 +3,9 @@ using Model.Settings;
 
 namespace Model.Screen;
 
+/// <summary>
+/// Модель устройств отображения
+/// </summary>
 internal sealed partial class ScreenModel : IScreenModel
 {
     private readonly ScreenCollection.ScreenCollection _screenCollection = new();

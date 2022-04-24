@@ -10,7 +10,7 @@ using Model.Entities.Domain;
 namespace Model.Repository;
 
 /// <summary>
-/// Хранилище данных ScreenModel
+/// Репозиторий данных для <see cref="Screen.ScreenModel"/>
 /// </summary>
 internal sealed class ScreenRepository
 {

@@ -7,10 +7,9 @@ namespace Model.Applications.ApplicationsCollection;
 internal sealed partial class ApplicationsCollection
 {
     /// <summary>
-    /// Создание источника отображения на основе DTO и добавление его в коллекцию.
+    /// Добавляет приложение в коллеккцию.
     /// </summary>
     /// <param name="application">Сформированная сущность приложения.</param>
-    /// <returns>Результат выполнения операции.</returns>
     public bool Add(Application application)
     {
         if (ContainsKey(application.Name))
@@ -30,7 +29,6 @@ internal sealed partial class ApplicationsCollection
     /// Удаление приложения из коллекции.
     /// </summary>
     /// <param name="key">Имя приложения</param>
-    /// <returns>Результат выполнения операции.</returns>
     public bool Remove(string key)
     {
         if (!TryGetValue(key, out var app))

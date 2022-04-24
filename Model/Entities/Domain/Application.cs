@@ -7,17 +7,12 @@ internal sealed class Application : INPCBase, IApplication
 {
     private bool _isIgnored;
     private bool _onFullScreen;
-    private string _executableFilePath;
 
     /// <inheritdoc cref="IApplication.Name"/>
     public string Name { get; }
 
     /// <inheritdoc cref="IApplication.ExecutableFilePath"/>
-    public string ExecutableFilePath
-    {
-        get => _executableFilePath;
-        set => Set(ref _executableFilePath!, value);
-    }
+    public string ExecutableFilePath { get; }
 
     /// <inheritdoc cref="IApplication.OnFullScreen"/>
     public bool OnFullScreen
@@ -39,6 +34,6 @@ internal sealed class Application : INPCBase, IApplication
     public Application(string name, string exeFilePath)
     {
         Name = name;
-        _executableFilePath = exeFilePath;
+        ExecutableFilePath = exeFilePath;
     }
 }

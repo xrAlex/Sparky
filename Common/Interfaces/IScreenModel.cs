@@ -7,7 +7,7 @@ namespace Common.Interfaces;
 public interface IScreenModel
 {
     /// <summary>
-    /// Событие оповещающее об изменении внутренней коллекции мониторов.
+    /// Событие оповещающее об изменении внутренней коллекции устройств отображения.
     /// </summary>
     /// <remarks>При подписке на событие возвращает все элементы коллекции.</remarks>
     event EventHandler<ScreensCollectionChangedArgs>? ScreensCollectionChanged;

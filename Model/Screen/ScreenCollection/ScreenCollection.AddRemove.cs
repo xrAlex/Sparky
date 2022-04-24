@@ -7,10 +7,9 @@ namespace Model.Screen.ScreenCollection;
 internal sealed partial class ScreenCollection
 {
     /// <summary>
-    /// Создание источника отображения на основе DTO и добавление его в коллекцию.
+    /// Добавление источника отображения в коллекцию.
     /// </summary>
     /// <param name="screen">Сформирвоанный объект класса ScreenContext.</param>
-    /// <returns><see langword="true"/>, если добавление произошло успешно.</returns>
     public bool Add(ScreenContext screen)
     {
         if (ContainsKey(screen.DisplayCode))
@@ -30,7 +29,6 @@ internal sealed partial class ScreenCollection
     /// Удаление источника отображения из коллекции.
     /// </summary>
     /// <param name="key">DisplayCode источника отображения.</param>
-    /// <returns><see langword="true"/>, если удаление произошло успешно.</returns>
     public bool Remove(int key)
     {
         if (!TryGetValue(key, out var screen))

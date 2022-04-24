@@ -8,7 +8,7 @@ namespace Model.Applications;
 /// </summary>
 /// <remarks>
 /// Модель используется для
-/// - Хранения/удалаения/добавления/получения сущностей <see cref="Entities.Domain.Application"/>
+/// - Хранения/удаления/добавления сущностей <see cref="Entities.Domain.Application"/>
 /// </remarks>
 internal sealed partial class ApplicationModel : IApplicationModel
 {

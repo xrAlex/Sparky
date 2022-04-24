@@ -82,14 +82,14 @@ public partial class App
 
 public partial class App
 {
-    public void ConfigureTaskBarIcon()
+    private void ConfigureTaskBarIcon()
     {
         TaskBarIcon = FindResource(nameof(TaskBarIcon)) as TaskbarIcon
                       ?? throw new InvalidOperationException("Task bar icon not founded");
         TaskBarIcon.NoLeftClickDelay = true;
     }
 
-    public void ConfigureLocalizationProvider()
+    private void ConfigureLocalizationProvider()
     {
         LocalizationProvider = FindResource(nameof(LocalizationProvider)) as LocalizationProvider
                                ?? throw new InvalidOperationException("Localization provider not founded");

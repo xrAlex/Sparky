@@ -9,7 +9,14 @@ namespace ViewModel.ViewModels.Settings;
 
 public partial class SettingsViewModel
 {
+    /// <summary>
+    /// Коллекция представлений источников отображения
+    /// </summary>
     public ObservableCollection<ScreenViewModel> Screens { get; } = new();
+
+    /// <summary>
+    /// Коллецкия представлений приложений
+    /// </summary>
     public ObservableCollection<ApplicationViewModel> Applications { get; } = new();
 
     private bool _checkFullScreensApps;
@@ -21,30 +28,45 @@ public partial class SettingsViewModel
     public int MinGammaRange => _registryModel.IsExtendedGammaRangeActive() ? 1000 : 4200;
     public int MinBrightnessRange => _registryModel.IsExtendedGammaRangeActive() ? 10 : 70;
 
+    /// <summary>
+    /// Выбранное представление источника отображения
+    /// </summary>
     public ScreenViewModel? SelectedScreen
     {
         get => _selectedScreen;
         set => Set(ref _selectedScreen, value);
     }
 
+    /// <summary>
+    /// Разрешена ли проверка полноэкранных приложений
+    /// </summary>
     public bool CheckFullScreensApps
     {
         get => _checkFullScreensApps;
         set => Set(ref _checkFullScreensApps, value);
     }
 
+    /// <summary>
+    /// Автозапуск приложения
+    /// </summary>
     public bool AutoLaunchOnStartup
     {
         get => _autoLaunchOnStartup;
         set => Set(ref _autoLaunchOnStartup, value);
     }
 
+    /// <summary>
+    /// Активен ли расширенный диапозон гаммы
+    /// </summary>
     public bool IsExtendedGammaRangeEnabled
     {
         get => _extendedGammaRangeEnabled;
         set => Set(ref _extendedGammaRangeEnabled, value);
     }
 
+    /// <summary>
+    /// Активно ли плавное изменение яркости
+    /// </summary>
     public bool IsGammaSmoothingEnabled
     {
         get => _gammaSmoothingEnabled;

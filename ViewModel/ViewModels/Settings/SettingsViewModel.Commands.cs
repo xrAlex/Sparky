@@ -9,9 +9,15 @@ public partial class SettingsViewModel
     public RelayCommand ResetValues { get; }
     public RelayCommand ResetSettings { get; }
 
+    /// <summary>
+    /// Команда обновления коллекции приложений
+    /// </summary>
     private void RefreshApplicationsListExecute()
         => _applicationModel.RefreshApplications();
 
+    /// <summary>
+    /// Команда сохранения настроек приложения
+    /// </summary>
     private void ApplyValuesExecute()
     {
         UnsubscribeEvents();
@@ -20,6 +26,9 @@ public partial class SettingsViewModel
         _periodObserverModel.StartWatch();
     }
 
+    /// <summary>
+    /// Команда сброса настроек и перезапуска цикла PeriodObserverModel
+    /// </summary>
     private void ResetValuesExecute()
     {
         UnsubscribeEvents();
@@ -28,6 +37,9 @@ public partial class SettingsViewModel
         _periodObserverModel.StartWatch();
     }
 
+    /// <summary>
+    /// Команда сброса настроек приложения
+    /// </summary>
     private void ResetSettingsExecute() 
         => _settingsModel.Reset();
 }

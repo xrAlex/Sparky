@@ -4,7 +4,7 @@ using Common.Interfaces;
 
 namespace Common.Extensions.CollectionChanged;
 
-public class ApplicationCollectionChangedArgs : EventArgs
+public sealed class ApplicationCollectionChangedArgs : EventArgs
 {
     public IApplication App { get; }
     public CollectionChangedAction Action { get; }

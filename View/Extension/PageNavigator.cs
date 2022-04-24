@@ -12,6 +12,9 @@ internal sealed partial class PageNavigator : Freezable
     }
 }
 
+/// <summary>
+/// Навигатор для UserControl внутри окна.
+/// </summary>
 internal sealed partial class PageNavigator
 {
 

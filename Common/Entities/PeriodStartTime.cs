@@ -1,5 +1,8 @@
 ﻿namespace Common.Entities;
 
+/// <summary>
+/// Время начала периода в 24 часовом формате
+/// </summary>
 public readonly struct PeriodStartTime
 {
     public byte Hour { get; }

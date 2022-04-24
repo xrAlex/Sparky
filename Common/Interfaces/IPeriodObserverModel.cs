@@ -25,12 +25,12 @@ public interface IPeriodObserverModel
     void StopWatch();
 
     /// <summary>
-    /// Событие оповещающее о начале работы цикла обсервера
+    /// Событие оповещающее о начале работы цикла обновления гаммы
     /// </summary>
     public event EventHandler ObserverStarted;
 
     /// <summary>
-    /// Событие оповещающее о остановке работы цикла обсервера
+    /// Событие оповещающее о остановке работы цикла обновления гаммы
     /// </summary>
     public event EventHandler ObserverStopped;
 }

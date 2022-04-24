@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace Model.Settings;
 
+/// <summary>
+/// Модель настроек приложения
+/// </summary>
 internal sealed partial class AppSettingsModel : IAppSettingsModel
 {
     private readonly string _filePath;

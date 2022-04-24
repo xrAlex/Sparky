@@ -7,11 +7,11 @@ namespace Common.Interfaces;
 public interface IApplicationModel
 {
     /// <summary>
-    /// Обновляет внутреннию коллекцию приложений.
+    /// Обновляет внутреннюю коллекцию приложений.
     /// </summary>
     void RefreshApplications();
 
-    /// <returns>Коллекцию имен приложений.</returns>
+    /// <returns>Коллекция имен приложений.</returns>
     IEnumerable<string> GetAllNames();
 
     /// <summary>

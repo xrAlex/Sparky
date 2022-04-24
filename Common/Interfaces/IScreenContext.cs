@@ -47,7 +47,7 @@ public interface IScreenContext : INotifyPropertyChanged
     string FriendlyName { get; }
 
     /// <summary>
-    /// Дескриптор контекста монитора
+    /// Дескриптор контекста устройства отображения (WinApi)
     /// </summary>
     nint SystemHandle { get; }
 

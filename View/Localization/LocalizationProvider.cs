@@ -6,6 +6,9 @@ using System.Windows.Markup;
 
 namespace View.Localization;
 
+/// <summary>
+/// Поставщик локализации приложения.
+/// </summary>
 [ContentProperty(nameof(LocalizationsDictionary))]
 public sealed class LocalizationProvider : Freezable
 {

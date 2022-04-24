@@ -12,12 +12,12 @@ public interface IApplication : INotifyPropertyChanged
     /// <summary>
     /// Путь до исполняемого файла приложения
     /// </summary>
-    string ExecutableFilePath { get; set; }
+    string ExecutableFilePath { get; }
 
     /// <summary>
     /// Работает ли приложение в полноэкранном режиме
     /// </summary>
-    bool OnFullScreen { get; set; }
+    bool OnFullScreen { get; }
 
     /// <summary>
     /// Игнорируется ли приложение пользователем

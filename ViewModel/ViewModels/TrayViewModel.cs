@@ -10,6 +10,9 @@ public sealed class TrayViewModel : ViewModelBase
     private readonly IPeriodObserverModel _observer;
     private bool _isObserverWorking;
 
+    /// <summary>
+    /// Статус работы цикла PeriodObserverModel
+    /// </summary>
     public bool IsObserverWorking
     {
         get => _isObserverWorking;
@@ -19,6 +22,9 @@ public sealed class TrayViewModel : ViewModelBase
     public RelayCommand StartStopObserver { get; }
     public RelayCommand UnSubscribeEvents { get; }
 
+    /// <summary>
+    /// Остановка и запуск цикла PeriodObserverModel
+    /// </summary>
     private void StartStopObserverExecute()
     {
         if (IsObserverWorking)

@@ -1,5 +1,8 @@
 ﻿namespace Common.Entities;
 
+/// <summary>
+/// Маска цветов в формате RGB
+/// </summary>
 public readonly struct RGBMask
 {
     public double Red { get; }

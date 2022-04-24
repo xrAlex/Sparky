@@ -9,6 +9,9 @@ using Common.Interfaces;
 
 namespace ViewModel.ViewModels;
 
+/// <summary>
+/// Модель представления данных для главного окна приложения
+/// </summary>
 public sealed class MainWindowViewModel : ViewModelBase
 {
     private readonly IScreenModel _screenModel;
@@ -18,18 +21,27 @@ public sealed class MainWindowViewModel : ViewModelBase
     private bool _isObserverWorking;
     private IScreenContext _selectedScreen;
 
+    /// <summary>
+    /// Выбранное устрйоство отображения
+    /// </summary>
     public IScreenContext? SelectedScreen
     {
         get => _selectedScreen;
         set => Set(ref _selectedScreen, value);
     }
 
+    /// <summary>
+    /// Статус работы цикла PeriodObserverModel
+    /// </summary>
     public bool IsObserverWorking
     {
         get => _isObserverWorking;
         private set => Set(ref _isObserverWorking, value);
     }
 
+    /// <summary>
+    /// Остановка и запуск цикла PeriodObserverModel
+    /// </summary>
     private void StartStopObserverExecute()
     {
         if (IsObserverWorking)

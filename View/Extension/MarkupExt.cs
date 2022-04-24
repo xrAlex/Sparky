@@ -33,7 +33,7 @@ internal sealed class ShowWindowExtension : MarkupExtension
 
 
 /// <summary>
-/// Открывает указанную в параметре ссылку в браузере
+/// Перемещение окна мышкой.
 /// </summary>
 [MarkupExtensionReturnType(typeof(MouseButtonEventHandler))]
 internal sealed class DragWindowExtension : MarkupExtension

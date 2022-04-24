@@ -67,7 +67,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Циклично проверяет настройки отображения устройств
+    /// В цикле обновляет цветовую конфигурацию источников отображения
     /// </summary>
     private void Cycle(CancellationToken token)
     {
@@ -86,7 +86,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Обновляет цветовую конфигурацию утсройства отображения для текущего периода времени
+    /// Обновляет цветовую конфигурацию устройства отображения
     /// </summary>
     private void RefreshColorConfiguration(IScreenContext screen)
     {
@@ -102,7 +102,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Подсчитывает значения цветовой конфигурации для текщуего период времени
+    /// Получает новые значения цветовой конфигурации для текщуего период времени
     /// </summary>
     private ColorConfiguration GetNewColorConfiguration(Period currentPeriod, IScreenContext screen, float remainingTime)
     {
@@ -128,7 +128,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Сглаживает переход цветовой конфигурации от периода к периоду
+    /// Сглаживает переход цветовой конфигурации между двумя значениями
     /// </summary>
     private static ColorConfiguration SmoothOutColorTransition(ColorConfiguration currentConfiguration, ColorConfiguration targetConfiguration)
     {
@@ -185,7 +185,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Возвращает текущий период со временем до его кончания
+    /// Возвращает текущий период со временем до его окончания
     /// </summary>
     private static (Period period, float remainingTime) GetCurrentPeriod(IScreenContext screen)
     {
@@ -239,7 +239,7 @@ internal sealed class PeriodObserverModel : IPeriodObserverModel
     }
 
     /// <summary>
-    /// Проверяет есть в в игрнориемых пользователем приложениях
+    /// Проверяет есть в в игнорируемых пользователем приложениях
     /// путь указанного приложения
     /// </summary>
     private bool IsAppExePathInIgnored(string? processExePath)

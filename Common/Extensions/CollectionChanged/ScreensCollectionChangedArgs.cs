@@ -4,7 +4,7 @@ using Common.Interfaces;
 
 namespace Common.Extensions.CollectionChanged;
 
-public class ScreensCollectionChangedArgs : EventArgs
+public sealed class ScreensCollectionChangedArgs : EventArgs
 {
     public IScreenContext Screen { get; }
     public CollectionChangedAction Action { get; }
