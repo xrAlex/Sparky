@@ -10,11 +10,11 @@ internal sealed class ObserverStatusToImage : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var status = (bool)value;
+        var started = (bool)value;
         var flagsPath = "pack://application:,,,/Resources/Images/";
         if (parameter != null && parameter.ToString() == "Black")
         {
-            if (status)
+            if (started)
             {
                 flagsPath += "pauseBlack.png";
             }
@@ -25,7 +25,7 @@ internal sealed class ObserverStatusToImage : IValueConverter
         }
         else
         {
-            if (status)
+            if (started)
             {
                 flagsPath += "pause.png";
             }

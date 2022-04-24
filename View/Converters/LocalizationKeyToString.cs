@@ -19,10 +19,10 @@ internal sealed class LocalizationKeyToString : IValueConverter
 
         if (started)
         {
-            return App.LocalizationProvider.GetLocalizedString("LocTrayUnPause");
+            return App.LocalizationProvider.GetLocalizedString("LocTrayPause");
         }
 
-        return App.LocalizationProvider.GetLocalizedString("LocTrayPause");
+        return App.LocalizationProvider.GetLocalizedString("LocTrayUnPause");
     }
 
 
