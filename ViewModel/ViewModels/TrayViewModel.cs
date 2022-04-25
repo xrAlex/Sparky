@@ -30,6 +30,7 @@ public sealed class TrayViewModel : ViewModelBase
         if (IsObserverWorking)
         {
             _observer.StopWatch();
+            _observer.ForceDefaultColorConfiguration();
         }
         else
         {

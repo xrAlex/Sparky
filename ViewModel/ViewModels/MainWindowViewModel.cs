@@ -47,6 +47,7 @@ public sealed class MainWindowViewModel : ViewModelBase
         if (IsObserverWorking)
         {
             _periodObserverModel.StopWatch();
+            _periodObserverModel.ForceDefaultColorConfiguration();
         }
         else
         {
