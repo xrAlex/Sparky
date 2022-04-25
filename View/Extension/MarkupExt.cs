@@ -5,7 +5,9 @@ using System.Windows.Markup;
 
 namespace View.Extension;
 
-/// <summary>Возвращает <see cref="MarkupHelper.CloseWindow"/>.</summary>
+/// <summary>
+/// Возвращает <see cref="MarkupHelper.CloseWindow"/>.
+/// </summary>
 [MarkupExtensionReturnType(typeof(RoutedEventHandler))]
 internal sealed class CloseWindowExtension : MarkupExtension
 {
@@ -13,7 +15,10 @@ internal sealed class CloseWindowExtension : MarkupExtension
         => MarkupHelper.CloseWindow;
 }
 
-/// <summary>Возвращает <see cref="MarkupHelper.CloseWindow"/>.</summary>
+
+/// <summary>
+/// Возвращает <see cref="string"/>.
+/// </summary>
 [MarkupExtensionReturnType(typeof(string))]
 internal sealed class GetAppVersionExtension : MarkupExtension
 {
@@ -33,7 +38,7 @@ internal sealed class ShowWindowExtension : MarkupExtension
 
 
 /// <summary>
-/// Перемещение окна мышкой.
+/// Возвращает <see cref="MarkupHelper.DragWindow"/>.
 /// </summary>
 [MarkupExtensionReturnType(typeof(MouseButtonEventHandler))]
 internal sealed class DragWindowExtension : MarkupExtension
@@ -43,7 +48,7 @@ internal sealed class DragWindowExtension : MarkupExtension
 }
 
 /// <summary>
-/// Открывает указанную в параметре ссылку в браузере
+/// Возвращает <see cref="MarkupHelper.OpenLink"/>.
 /// </summary>
 [MarkupExtensionReturnType(typeof(RoutedEventHandler))]
 internal sealed class OpenLinkExtension : MarkupExtension

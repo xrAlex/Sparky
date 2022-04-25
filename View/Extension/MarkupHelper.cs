@@ -45,7 +45,7 @@ internal static class MarkupHelper
         window.Opacity = 0.2;
         window.Show();
 
-        var anim = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(30));
+        var anim = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(10));
         window.BeginAnimation(UIElement.OpacityProperty, anim);
 
         window.Effect = null;
@@ -60,7 +60,7 @@ internal static class MarkupHelper
             ShowWindowWithEffect(window.Owner);
         }
 
-        var anim = new DoubleAnimation(0.0, TimeSpan.FromMilliseconds(70));
+        var anim = new DoubleAnimation(0.0, TimeSpan.FromMilliseconds(50));
         anim.Completed += (_, _) => window.Close();
         window.BeginAnimation(UIElement.OpacityProperty, anim);
     }
