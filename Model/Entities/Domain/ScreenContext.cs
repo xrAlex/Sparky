@@ -15,7 +15,6 @@ namespace Model.Entities.Domain;
 /// </summary>
 internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<ScreenContext>
 {
-    private bool _isActive = true;
     private ColorConfiguration _dayColorConfiguration = new(6600f, 1f);
     private ColorConfiguration _nightColorConfiguration = new(5400f, 0.8f);
     private PeriodStartTime _dayStartTime = new(7, 0);
@@ -102,12 +101,6 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
         => obj?.GetType() == typeof(ScreenContext)
            && Equals((ScreenContext)obj);
 
-    public static bool operator ==(ScreenContext sc1, ScreenContext sc2)
-        => sc1.Equals(sc2);
-
-    public static bool operator !=(ScreenContext sc1, ScreenContext sc2)
-        => !sc1.Equals(sc2);
-
     public override int GetHashCode()
         => HashCode.Combine(DisplayCode, FriendlyName);
 
@@ -155,7 +148,6 @@ internal sealed class ScreenContext : INPCBase, IScreenContext, IEquatable<Scree
         SystemHandle = systemParams.Handle;
         _dayColorConfiguration = screenSettings.DayColorConfiguration;
         _nightColorConfiguration = screenSettings.NightColorConfiguration;
-        _isActive = screenSettings.IsActive;
         _dayStartTime = screenSettings.DayStartTime;
         _nightStartTime = screenSettings.NightStartTime;
     }
