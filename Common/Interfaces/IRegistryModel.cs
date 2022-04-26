@@ -13,6 +13,12 @@ public interface IRegistryModel
     bool IsExtendedGammaRangeActive();
 
     /// <summary>
+    /// Проверяет актуальность пути автозапуска приложения в реестре,
+    /// исправляет его если оно не соответсвует текущей директории
+    /// </summary>
+    void ValidateStartupPath();
+
+    /// <summary>
     /// Добавляет в реестр ключ автозапуска приложения
     /// </summary>
     void AddAppStartupKey();

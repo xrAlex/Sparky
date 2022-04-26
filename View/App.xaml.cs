@@ -2,6 +2,7 @@
 using Common.Interfaces;
 using Model;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace View;
 public partial class App : Application
 {
     private static readonly string ConfigurationFilepath
-        = $"{Environment.CurrentDirectory}" + "\\Settings.json";
+        = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}" + "\\Settings.json";
 
     private Mutex? _mutex;
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
@@ -44,6 +45,8 @@ public partial class App
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
         _settings.Load();
+
+        IoC.GetInstance<IRegistryModel>().ValidateStartupPath();
 
         ConfigureTaskBarIcon();
         ConfigureLocalizationProvider();

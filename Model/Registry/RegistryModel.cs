@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Common.Extensions;
 using Common.Interfaces;
 
@@ -25,6 +26,26 @@ internal sealed class RegistryModel : IRegistryModel
         }
 
         return true;
+    }
+
+    /// <inheritdoc cref="IRegistryModel.ValidateStartupPath"/>
+    public void ValidateStartupPath()
+    {
+        var currentAppPath = $"{Environment.ProcessPath} {SilentLaunchKey}";
+        var registryObject = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
+
+        if (registryObject != null)
+        {
+            var pathInRegistry = registryObject.ToString();
+            if (!string.IsNullOrWhiteSpace(pathInRegistry) && !string.IsNullOrWhiteSpace(currentAppPath))
+            {
+                if (currentAppPath != pathInRegistry)
+                {
+                    DeleteAppStartupKey();
+                    AddAppStartupKey();
+                }
+            }
+        }
     }
 
     /// <inheritdoc cref="IRegistryModel.SetDefaultGammaRangeKey"/>
@@ -57,6 +78,6 @@ internal sealed class RegistryModel : IRegistryModel
     }
 
     /// <inheritdoc cref="IRegistryModel.DeleteAppStartupKey"/>
-    public void DeleteAppStartupKey() 
+    public void DeleteAppStartupKey()
         => RegistryEx.DeleteRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
 }
