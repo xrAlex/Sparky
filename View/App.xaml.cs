@@ -15,12 +15,10 @@ namespace View;
 
 public partial class App : Application
 {
-    private static readonly string ConfigurationFilepath
-        = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}" + "\\Settings.json";
-
-    private Mutex? _mutex;
+    private static string _configurationFilepath = null!;
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
     public static TaskbarIcon TaskBarIcon { get; private set; } = null!;
+    private Mutex? _mutex;
 
     private IAppSettingsModel? _settings;
     private IPeriodObserverModel? _observer;
@@ -39,12 +37,13 @@ public partial class App
 
         Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+        SetupSettingsPath();
         ConfigureIoC();
 
         _settings = IoC.GetInstance<IAppSettingsModel>();
         _observer = IoC.GetInstance<IPeriodObserverModel>();
 
-        _settings.Load();
+        _settings.LoadAsync();
 
         ConfigureTaskBarIcon();
         ConfigureLocalizationProvider();
@@ -83,6 +82,22 @@ public partial class App
 
 public partial class App
 {
+    private static void SetupSettingsPath()
+    {
+        const string appName = "Sparky";
+        const string configFileName = "Settings.json";
+
+        var localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var directoryPath = Path.Combine(localApplicationData, appName);
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        _configurationFilepath = Path.Combine(directoryPath, configFileName);
+    }
+
     private void ConfigureTaskBarIcon()
     {
         TaskBarIcon = FindResource(nameof(TaskBarIcon)) as TaskbarIcon
@@ -111,7 +126,7 @@ public partial class App
         var container = IoC.Instance;
         container.Options.EnableAutoVerification = false;
 
-        ModelRegistrator.Register(container, ConfigurationFilepath);
+        ModelRegistrator.Register(container, _configurationFilepath);
         ViewModelRegistrator.Register(container);
     }
 }
