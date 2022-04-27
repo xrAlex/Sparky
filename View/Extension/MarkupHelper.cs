@@ -42,7 +42,7 @@ internal static class MarkupHelper
 
     private static void ShowWindowWithEffect(Window window)
     {
-        window.Opacity = 0.2;
+        window.Opacity = 0.5;
         window.Show();
 
         var anim = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(10));
@@ -82,7 +82,7 @@ internal static class MarkupHelper
     /// </summary>
     public static MouseButtonEventHandler DragWindow { get; } = (sender, _) =>
     {
-        var window = TryGetAncestor<Window>(sender as DependencyObject);
+        var window = sender as Window;
         window?.DragMove();
     };
 
