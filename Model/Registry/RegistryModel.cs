@@ -28,26 +28,6 @@ internal sealed class RegistryModel : IRegistryModel
         return true;
     }
 
-    /// <inheritdoc cref="IRegistryModel.ValidateStartupPath"/>
-    public void ValidateStartupPath()
-    {
-        var currentAppPath = $"{Environment.ProcessPath} {SilentLaunchKey}";
-        var registryObject = RegistryEx.TryGetRegistryValue(RunPath, AppDomain.CurrentDomain.FriendlyName);
-
-        if (registryObject != null)
-        {
-            var pathInRegistry = registryObject.ToString();
-            if (!string.IsNullOrWhiteSpace(pathInRegistry) && !string.IsNullOrWhiteSpace(currentAppPath))
-            {
-                if (currentAppPath != pathInRegistry)
-                {
-                    DeleteAppStartupKey();
-                    AddAppStartupKey();
-                }
-            }
-        }
-    }
-
     /// <inheritdoc cref="IRegistryModel.SetDefaultGammaRangeKey"/>
     public void SetDefaultGammaRangeKey()
         => RegistryEx.SetRegistryValue(ICMPath, GammaParamName, 0);

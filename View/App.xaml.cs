@@ -46,8 +46,6 @@ public partial class App
 
         _settings.Load();
 
-        IoC.GetInstance<IRegistryModel>().ValidateStartupPath();
-
         ConfigureTaskBarIcon();
         ConfigureLocalizationProvider();
 
