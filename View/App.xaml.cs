@@ -20,7 +20,7 @@ public partial class App : Application
 
     private Mutex? _mutex;
     public static LocalizationProvider LocalizationProvider { get; private set; } = null!;
-    public static TaskbarIcon? TaskBarIcon { get; private set; }
+    public static TaskbarIcon TaskBarIcon { get; private set; } = null!;
 
     private IAppSettingsModel? _settings;
     private IPeriodObserverModel? _observer;
@@ -53,7 +53,11 @@ public partial class App
 
         var silentLaunch = Environment.GetCommandLineArgs().Contains("-silent");
 
-        if (!silentLaunch)
+        if (silentLaunch)
+        {
+            TaskBarIcon.Visibility = Visibility.Visible;
+        }
+        else
         {
             new MainWindow().Show();
         }
@@ -66,18 +70,14 @@ public partial class App
 }
 
 public partial class App
-{ 
+{
     protected override void OnExit(ExitEventArgs e)
     {
         _observer?.StopWatch();
         _observer?.ForceDefaultColorConfiguration();
         _mutex?.ReleaseMutex();
-
-        if (TaskBarIcon != null)
-        {
-            TaskBarIcon.Visibility = Visibility.Collapsed;
-            TaskBarIcon.Dispose();
-        }
+        TaskBarIcon.Visibility = Visibility.Collapsed;
+        TaskBarIcon.Dispose();
 
         base.OnExit(e);
     }
