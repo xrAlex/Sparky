@@ -20,6 +20,7 @@ Other operating systems are not supported.
 - Smooth gamma transitions
 - Minimal performance impact
 - Works without internet connection
+- Individual settings for each monitor
 
 ## Screenshots
 
